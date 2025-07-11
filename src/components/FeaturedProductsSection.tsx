@@ -1,5 +1,6 @@
 
 import { Eye } from 'lucide-react';
+import LuxuryCarousel from './LuxuryCarousel';
 
 const FeaturedProductsSection = () => {
   const products = [
@@ -30,9 +31,14 @@ const FeaturedProductsSection = () => {
           <h2 className="text-4xl md:text-5xl font-light text-gray-900 mb-4">
             Signature Collection
           </h2>
-          <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+          <p className="text-xl text-gray-600 max-w-2xl mx-auto mb-12">
             Each piece in our collection represents the pinnacle of design and craftsmanship
           </p>
+        </div>
+
+        {/* Luxury Carousel */}
+        <div className="mb-20">
+          <LuxuryCarousel />
         </div>
         
         <div className="grid md:grid-cols-3 gap-8">
