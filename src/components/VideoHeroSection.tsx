@@ -1,3 +1,4 @@
+
 import { ChevronDown, ChevronLeft, ChevronRight } from 'lucide-react';
 import { useEffect, useRef, useState } from 'react';
 import { ScrollVelocity } from '@/TextAnimations/ScrollVelocity/ScrollVelocity';
@@ -44,6 +45,10 @@ const VideoHeroSection = () => {
           />
         ))}
         <div className="video-overlay absolute inset-0 bg-black bg-opacity-40"></div>
+        
+        {/* Smooth transition gradient at bottom */}
+        <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-black/60 via-black/30 to-transparent z-20"></div>
+        
         {/* Carousel Controls */}
         <button onClick={goToPrev} className="absolute left-4 top-1/2 -translate-y-1/2 z-20 bg-black/30 hover:bg-black/60 text-white p-2 rounded-full">
           <ChevronLeft className="w-8 h-8" />

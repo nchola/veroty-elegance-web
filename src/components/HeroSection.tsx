@@ -25,7 +25,10 @@ const HeroSection = () => {
   };
 
   return (
-    <section className="hero-section h-screen mt-8 relative overflow-hidden">
+    <section className="hero-section min-h-[600px] relative overflow-hidden pt-16">
+      {/* Subtle fade-in overlay at top */}
+      <div className="absolute top-0 left-0 right-0 h-16 bg-gradient-to-b from-black/40 to-transparent z-20"></div>
+      
       {/* Background Image (fallback for video) */}
       <div className="hero-background absolute inset-0">
         <img 
@@ -37,7 +40,7 @@ const HeroSection = () => {
       </div>
       
       {/* Content */}
-      <div className="hero-content relative z-10 flex items-center justify-center h-full text-center text-white px-4">
+      <div className="hero-content relative z-10 flex items-center justify-center min-h-[600px] text-center text-white px-4">
         <div className="max-w-4xl animate-fadeInUp">
           <h1 className="text-5xl md:text-7xl font-light mb-6 tracking-wide">
             <span className="font-serif italic text-gold">Veroty</span>
