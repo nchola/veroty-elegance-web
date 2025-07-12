@@ -1,17 +1,34 @@
 
 const StoryIntroSection = () => {
   return (
-    <section className="story-intro-section py-16 bg-white">
-      <div className="section-container max-w-6xl mx-auto px-6">
-        <div className="flex items-center gap-12 md:gap-16">
-          {/* Left Column - Text Content */}
-          <div className="flex-1 pr-6">
-            <div className="m-2024-box">
-              <div className="tit text-4xl md:text-5xl font-light mb-6 text-gray-900 font-serif">
-                It all starts from the chair...
+    <section className="section m-2024-split py-16 bg-white">
+      <div className="split--1">
+        <div className="flex items-stretch min-h-[600px]">
+          {/* Video Section - Left Side */}
+          <figure className="flex-1 m-0 p-0">
+            <video 
+              width="100%" 
+              height="100%" 
+              autoPlay 
+              muted 
+              playsInline 
+              loop 
+              preload="auto"
+              className="w-full h-full object-cover"
+              style={{ display: 'block' }}
+            >
+              <source src="/foldablechair.mp4" type="video/mp4" />
+            </video>
+          </figure>
+          
+          {/* Text Content - Right Side */}
+          <div className="flex-1 flex items-center">
+            <div className="m-2024-box p-12 lg:p-16">
+              <div className="tit text-4xl lg:text-5xl font-light mb-6 text-gray-900 font-serif leading-tight">
+                must have: extendable tables
               </div>
               <div className="txt text-lg text-gray-600 leading-relaxed mb-8">
-                Since 1923, we have been producing functional and elegant furniture, because we believe that beauty, functionality, and quality can coexist in every product we make.
+                For a small home or a spacious living room, for a compact dining area or a significant open space: an extendable table is always an excellent choice.
               </div>
               <div className="cta-arr left">
                 <a 
@@ -24,22 +41,6 @@ const StoryIntroSection = () => {
                   </svg>
                 </a>
               </div>
-            </div>
-          </div>
-          
-          {/* Right Column - Video */}
-          <div className="flex-1">
-            <div className="relative rounded-lg overflow-hidden shadow-lg">
-              <video 
-                autoPlay 
-                muted 
-                loop 
-                playsInline
-                className="w-full h-auto object-cover"
-              >
-                <source src="/foldablechair.mp4" type="video/mp4" />
-                Your browser does not support the video tag.
-              </video>
             </div>
           </div>
         </div>
