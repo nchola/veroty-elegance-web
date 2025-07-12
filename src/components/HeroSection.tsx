@@ -6,12 +6,13 @@ const HeroSection = () => {
   const videoRef = useRef<HTMLVideoElement>(null);
 
   useEffect(() => {
-    // Parallax effect
+    // Adjusted parallax effect with reduced multiplier
     const handleScroll = () => {
       const scrolled = window.pageYOffset;
       const hero = document.querySelector('.hero-background');
       if (hero) {
-        (hero as HTMLElement).style.transform = `translateY(${scrolled * 0.5}px)`;
+        // Reduced parallax multiplier from 0.5 to 0.2 to prevent image from moving too fast
+        (hero as HTMLElement).style.transform = `translateY(${scrolled * 0.2}px)`;
       }
     };
 
@@ -25,22 +26,22 @@ const HeroSection = () => {
   };
 
   return (
-    <section className="hero-section min-h-[600px] relative overflow-hidden pt-16">
+    <section className="hero-section min-h-[800px] relative overflow-hidden">
       {/* Subtle fade-in overlay at top */}
-      <div className="absolute top-0 left-0 right-0 h-16 bg-gradient-to-b from-black/40 to-transparent z-20"></div>
+      <div className="absolute top-0 left-0 right-0 h-16 bg-gradient-to-b from-white/20 to-transparent z-20"></div>
       
-      {/* Background Image (fallback for video) */}
-      <div className="hero-background absolute inset-0">
+      {/* Background Image with better positioning */}
+      <div className="hero-background absolute inset-0 -top-20 -bottom-20">
         <img 
           src="https://images.unsplash.com/photo-1649972904349-6e44c42644a7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2340&q=80"
           alt="Luxury Interior"
-          className="w-full h-full object-cover"
+          className="w-full h-full object-cover object-center"
         />
         <div className="hero-gradient absolute inset-0"></div>
       </div>
       
       {/* Content */}
-      <div className="hero-content relative z-10 flex items-center justify-center min-h-[600px] text-center text-white px-4">
+      <div className="hero-content relative z-10 flex items-center justify-center min-h-[800px] text-center text-white px-4">
         <div className="max-w-4xl animate-fadeInUp">
           <h1 className="text-5xl md:text-7xl font-light mb-6 tracking-wide">
             <span className="font-serif italic text-gold">Veroty</span>
