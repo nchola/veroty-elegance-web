@@ -4,7 +4,6 @@ import VideoHeroSection from '@/components/VideoHeroSection';
 import HeroSection from '@/components/HeroSection';
 import BrandIntroSection from '@/components/BrandIntroSection';
 import FeaturedProductsSection from '@/components/FeaturedProductsSection';
-import CraftsmanshipSection from '@/components/CraftsmanshipSection';
 import TestimonialSection from '@/components/TestimonialSection';
 import CTASection from '@/components/CTASection';
 import FooterSection from '@/components/FooterSection';
