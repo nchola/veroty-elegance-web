@@ -1,9 +1,10 @@
 
+
 const StoryIntroSection = () => {
   return (
     <section className="section m-2024-split py-16 bg-white">
       <div className="split--1">
-        <div className="flex items-stretch min-h-[600px]">
+        <div className="flex">
           {/* Video Section - Left Side */}
           <figure className="flex-1 m-0 p-0">
             <video 
@@ -22,7 +23,7 @@ const StoryIntroSection = () => {
           </figure>
           
           {/* Text Content - Right Side */}
-          <div className="flex-1 flex items-center">
+          <div className="flex-1">
             <div className="m-2024-box p-12 lg:p-16">
               <div className="tit text-4xl lg:text-5xl font-light mb-6 text-gray-900 font-serif leading-tight">
                 must have: extendable tables
@@ -50,3 +51,4 @@ const StoryIntroSection = () => {
 };
 
 export default StoryIntroSection;
+
