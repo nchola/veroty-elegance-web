@@ -25,44 +25,46 @@ const FeaturedProductsSection = () => {
   ];
 
   return (
-    <section className="featured-products py-20 bg-gray-50 scroll-reveal">
-      <div className="container mx-auto px-4 max-w-7xl">
-        <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-light text-gray-900 mb-4">
-            Signature Collection
-          </h2>
-          <p className="text-xl text-gray-600 max-w-2xl mx-auto mb-12">
-            Each piece in our collection represents the pinnacle of design and craftsmanship
-          </p>
-        </div>
+    <section className="featured-products py-32 bg-white scroll-reveal">
+      <div className="max-w-none">
+        <div className="max-w-7xl mx-auto px-8">
+          <div className="text-center mb-20">
+            <h2 className="text-5xl md:text-6xl font-light text-gray-900 mb-6 leading-tight">
+              Signature Collection
+            </h2>
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
+              Each piece in our collection represents the pinnacle of design and craftsmanship
+            </p>
+          </div>
 
-        {/* Luxury Carousel */}
-        <div className="mb-20">
-          <LuxuryCarousel />
-        </div>
-        
-        <div className="grid md:grid-cols-3 gap-8">
-          {products.map((product) => (
-            <div key={product.id} className="product-card group cursor-pointer product-hover bg-white rounded-lg overflow-hidden shadow-lg">
-              <div className="product-image relative overflow-hidden">
-                <img 
-                  src={product.image}
-                  alt={product.name}
-                  className="w-full h-80 object-cover transition-transform duration-500 group-hover:scale-105"
-                />
-                <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-30 transition-all duration-300 flex items-center justify-center">
-                  <button className="btn-view opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-white text-black px-6 py-3 rounded-lg flex items-center space-x-2 font-light">
-                    <Eye className="w-4 h-4" />
-                    <span>View Details</span>
-                  </button>
+          {/* Luxury Carousel - Full Width */}
+          <div class="w-full -mx-8 mb-24">
+            <LuxuryCarousel />
+          </div>
+          
+          <div className="grid md:grid-cols-3 gap-12">
+            {products.map((product) => (
+              <div key={product.id} className="product-card group cursor-pointer product-hover bg-white overflow-hidden shadow-lg">
+                <div className="product-image relative overflow-hidden">
+                  <img 
+                    src={product.image}
+                    alt={product.name}
+                    className="w-full h-96 object-cover transition-transform duration-500 group-hover:scale-105"
+                  />
+                  <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-30 transition-all duration-300 flex items-center justify-center">
+                    <button className="btn-view opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-white text-black px-8 py-4 flex items-center space-x-2 font-light">
+                      <Eye className="w-4 h-4" />
+                      <span>View Details</span>
+                    </button>
+                  </div>
+                </div>
+                <div className="product-info p-8 text-center">
+                  <h3 className="text-2xl font-light text-gray-900 mb-3 font-serif">{product.name}</h3>
+                  <p className="text-gray-600 text-lg">{product.description}</p>
                 </div>
               </div>
-              <div className="product-info p-6 text-center">
-                <h3 className="text-xl font-light text-gray-900 mb-2 font-serif">{product.name}</h3>
-                <p className="text-gray-600">{product.description}</p>
-              </div>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
       </div>
     </section>
