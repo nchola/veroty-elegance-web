@@ -25,9 +25,9 @@ const FeaturedProductsSection = () => {
   ];
 
   return (
-    <section className="featured-products py-32 bg-white scroll-reveal">
+    <section className="featured-products bg-white">
       <div className="max-w-none">
-        <div className="max-w-7xl mx-auto px-8">
+        <div className="max-w-7xl mx-auto px-8 py-32">
           <div className="text-center mb-20">
             <h2 className="text-5xl md:text-6xl font-light text-gray-900 mb-6 leading-tight">
               Signature Collection
@@ -38,7 +38,7 @@ const FeaturedProductsSection = () => {
           </div>
 
           {/* Luxury Carousel - Full Width */}
-          <div class="w-full -mx-8 mb-24">
+          <div className="w-full -mx-8 mb-24">
             <LuxuryCarousel />
           </div>
           
