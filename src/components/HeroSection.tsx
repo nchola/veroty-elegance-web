@@ -1,6 +1,6 @@
+
 import { ChevronDown } from 'lucide-react';
 import { useEffect, useRef } from 'react';
-import { ScrollVelocity } from '@/TextAnimations/ScrollVelocity/ScrollVelocity';
 
 const HeroSection = () => {
   const videoRef = useRef<HTMLVideoElement>(null);
@@ -55,16 +55,6 @@ const HeroSection = () => {
             Discover Our Story
           </button>
         </div>
-      </div>
-
-      {/* Scroll Velocity Text Animation */}
-      <div className="absolute bottom-20 left-0 right-0 z-10">
-        <ScrollVelocity
-          texts={["Crafting Excellence", "Timeless Design", "Premium Quality", "Luxury Living"]}
-          velocity={-25}
-          className="text-white/30 font-light"
-          scrollerClassName="text-2xl md:text-4xl"
-        />
       </div>
       
       {/* Scroll Indicator */}
