@@ -10,7 +10,7 @@
 	"paths": {
 		"*": "./src/blocks",
 		"TextAnimations": "./src/Animations/TextAnimations",
-		"Backgrounds": "./src/BackgroundAnimations",
+		"Backgrounds": "./src/Animations/BackgroundAnimations",
 		"Animations": "./src/Animations",
 		"Components": "./src/Animations"
 	}
