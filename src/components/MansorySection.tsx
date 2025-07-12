@@ -2,17 +2,17 @@
 import { ChevronDown } from 'lucide-react';
 import { useEffect, useRef } from 'react';
 
-const HeroSection = () => {
+const MansorySection = () => {
   const videoRef = useRef<HTMLVideoElement>(null);
 
   useEffect(() => {
     // Adjusted parallax effect with reduced multiplier
     const handleScroll = () => {
       const scrolled = window.pageYOffset;
-      const mansory = document.querySelector('.mansory-background');
-      if (mansory) {
+      const hero = document.querySelector('.hero-background');
+      if (hero) {
         // Reduced parallax multiplier from 0.5 to 0.2 to prevent image from moving too fast
-        (mansory as HTMLElement).style.transform = `translateY(${scrolled * 0.2}px)`;
+        (hero as HTMLElement).style.transform = `translateY(${scrolled * 0.2}px)`;
       }
     };
 
@@ -26,12 +26,12 @@ const HeroSection = () => {
   };
 
   return (
-    <section className="mansory-section min-h-[480px] relative overflow-hidden">
+    <section className="hero-section min-h-[480px] relative overflow-hidden">
       {/* Subtle fade-in overlay at top */}
       <div className="absolute top-0 left-0 right-0 h-16 bg-gradient-to-b from-white/20 to-transparent z-20"></div>
       
       {/* Content */}
-      <div className="mansory-content relative z-10 flex items-center justify-center min-h-[480px] text-center text-white px-4">
+      <div className="hero-content relative z-10 flex items-center justify-center min-h-[480px] text-center text-white px-4">
         <div className="max-w-4xl animate-fadeInUp">
           <h1 className="text-5xl md:text-7xl font-light mb-6 tracking-wide">
             <span className="font-serif italic text-gold">Veroty</span>
@@ -62,4 +62,4 @@ const HeroSection = () => {
   );
 };
 
-export default HeroSection;
+export default MansorySection;
