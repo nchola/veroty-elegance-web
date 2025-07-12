@@ -1,7 +1,7 @@
 
 import { Eye } from 'lucide-react';
 import LuxuryCarousel from './LuxuryCarousel';
-import { ScrollVelocity } from '@/TextAnimations/ScrollVelocity/ScrollVelocity';
+import { ScrollVelocity } from '@/Animations/ScrollVelocity/ScrollVelocity';
 
 const FeaturedProductsSection = () => {
   const products = [

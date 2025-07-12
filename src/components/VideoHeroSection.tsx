@@ -1,7 +1,7 @@
 
 import { ChevronDown, ChevronLeft, ChevronRight } from 'lucide-react';
 import { useEffect, useRef, useState } from 'react';
-import { ScrollVelocity } from '@/TextAnimations/ScrollVelocity/ScrollVelocity';
+import { ScrollVelocity } from '@/Animations/ScrollVelocity/ScrollVelocity';
 
 const videos = [
   '/mainhero.mp4',

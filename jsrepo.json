@@ -9,9 +9,9 @@
 	"configFiles": {},
 	"paths": {
 		"*": "./src/blocks",
-		"TextAnimations": "./src/TextAnimations",
-		"Components": "./src/ComponentsAnimations",
+		"TextAnimations": "./src/Animations/TextAnimations",
 		"Backgrounds": "./src/BackgroundAnimations",
-		"Animations": "./src/Animations"
+		"Animations": "./src/Animations",
+		"Components": "./src/Animations"
 	}
 }

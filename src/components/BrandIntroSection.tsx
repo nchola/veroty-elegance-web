@@ -1,5 +1,5 @@
 
-import { ScrollVelocity } from '@/TextAnimations/ScrollVelocity/ScrollVelocity';
+import { ScrollVelocity } from '@/Animations/ScrollVelocity/ScrollVelocity';
 
 const BrandIntroSection = () => {
   return (
