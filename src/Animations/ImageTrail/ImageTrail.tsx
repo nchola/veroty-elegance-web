@@ -2,7 +2,7 @@
 	Installed from https://reactbits.dev/ts/tailwind/
 */
 
-import { useRef, useEffect } from "react";
+import { useRef, useEffect, useState } from "react";
 import { gsap } from "gsap";
 
 function lerp(a: number, b: number, n: number): number {
@@ -79,6 +79,7 @@ class ImageTrailVariant1 {
   private mousePos: { x: number; y: number };
   private lastMousePos: { x: number; y: number };
   private cacheMousePos: { x: number; y: number };
+  private lastTrailTime: number = 0;
 
   constructor(container: HTMLDivElement) {
     this.container = container;
@@ -131,6 +132,10 @@ class ImageTrailVariant1 {
   }
 
   private showNextImage() {
+    const now = Date.now();
+    if (now - this.lastTrailTime < 150) return;
+    this.lastTrailTime = now;
+
     ++this.zIndexVal;
     this.imgPosition =
       this.imgPosition < this.imagesTotal - 1 ? this.imgPosition + 1 : 0;
@@ -197,6 +202,7 @@ class ImageTrailVariant2 {
   private mousePos: { x: number; y: number };
   private lastMousePos: { x: number; y: number };
   private cacheMousePos: { x: number; y: number };
+  private lastTrailTime: number = 0;
 
   constructor(container: HTMLDivElement) {
     this.container = container;
@@ -249,6 +255,10 @@ class ImageTrailVariant2 {
   }
 
   private showNextImage() {
+    const now = Date.now();
+    if (now - this.lastTrailTime < 150) return;
+    this.lastTrailTime = now;
+
     ++this.zIndexVal;
     this.imgPosition =
       this.imgPosition < this.imagesTotal - 1 ? this.imgPosition + 1 : 0;
@@ -327,6 +337,7 @@ class ImageTrailVariant3 {
   private mousePos: { x: number; y: number };
   private lastMousePos: { x: number; y: number };
   private cacheMousePos: { x: number; y: number };
+  private lastTrailTime: number = 0;
 
   constructor(container: HTMLDivElement) {
     this.container = container;
@@ -379,6 +390,10 @@ class ImageTrailVariant3 {
   }
 
   private showNextImage() {
+    const now = Date.now();
+    if (now - this.lastTrailTime < 150) return;
+    this.lastTrailTime = now;
+
     ++this.zIndexVal;
     this.imgPosition =
       this.imgPosition < this.imagesTotal - 1 ? this.imgPosition + 1 : 0;
@@ -460,6 +475,7 @@ class ImageTrailVariant4 {
   private mousePos: { x: number; y: number };
   private lastMousePos: { x: number; y: number };
   private cacheMousePos: { x: number; y: number };
+  private lastTrailTime: number = 0;
 
   constructor(container: HTMLDivElement) {
     this.container = container;
@@ -498,18 +514,22 @@ class ImageTrailVariant4 {
 
   private render() {
     const distance = getMouseDistance(this.mousePos, this.lastMousePos);
+    this.cacheMousePos.x = lerp(this.cacheMousePos.x, this.mousePos.x, 0.1);
+    this.cacheMousePos.y = lerp(this.cacheMousePos.y, this.mousePos.y, 0.1);
+
     if (distance > this.threshold) {
       this.showNextImage();
       this.lastMousePos = { ...this.mousePos };
     }
-    this.cacheMousePos.x = lerp(this.cacheMousePos.x, this.mousePos.x, 0.1);
-    this.cacheMousePos.y = lerp(this.cacheMousePos.y, this.mousePos.y, 0.1);
-
     if (this.isIdle && this.zIndexVal !== 1) this.zIndexVal = 1;
     requestAnimationFrame(() => this.render());
   }
 
   private showNextImage() {
+    const now = Date.now();
+    if (now - this.lastTrailTime < 150) return;
+    this.lastTrailTime = now;
+
     ++this.zIndexVal;
     this.imgPosition =
       this.imgPosition < this.imagesTotal - 1 ? this.imgPosition + 1 : 0;
@@ -518,7 +538,7 @@ class ImageTrailVariant4 {
 
     let dx = this.mousePos.x - this.cacheMousePos.x;
     let dy = this.mousePos.y - this.cacheMousePos.y;
-    let distance = Math.sqrt(dx * dx + dy * dy);
+    const distance = Math.sqrt(dx * dx + dy * dy);
     if (distance !== 0) {
       dx /= distance;
       dy /= distance;
@@ -613,6 +633,7 @@ class ImageTrailVariant5 {
   private mousePos: { x: number; y: number };
   private lastMousePos: { x: number; y: number };
   private cacheMousePos: { x: number; y: number };
+  private lastTrailTime: number = 0;
   private lastAngle: number;
 
   constructor(container: HTMLDivElement) {
@@ -664,6 +685,10 @@ class ImageTrailVariant5 {
   }
 
   private showNextImage() {
+    const now = Date.now();
+    if (now - this.lastTrailTime < 150) return;
+    this.lastTrailTime = now;
+
     let dx = this.mousePos.x - this.cacheMousePos.x;
     let dy = this.mousePos.y - this.cacheMousePos.y;
     let angle = Math.atan2(dy, dx) * (180 / Math.PI);
@@ -671,7 +696,6 @@ class ImageTrailVariant5 {
     if (angle > 90 && angle <= 270) angle += 180;
     const isMovingClockwise = angle >= this.lastAngle;
     this.lastAngle = angle;
-    let startAngle = isMovingClockwise ? angle - 10 : angle + 10;
     const distance = Math.sqrt(dx * dx + dy * dy);
     if (distance !== 0) {
       dx /= distance;
@@ -685,6 +709,8 @@ class ImageTrailVariant5 {
       this.imgPosition < this.imagesTotal - 1 ? this.imgPosition + 1 : 0;
     const img = this.images[this.imgPosition];
     gsap.killTweensOf(img.DOM.el);
+
+    const startAngle = isMovingClockwise ? angle - 10 : angle + 10;
 
     gsap
       .timeline({
@@ -758,6 +784,7 @@ class ImageTrailVariant6 {
   private mousePos: { x: number; y: number };
   private lastMousePos: { x: number; y: number };
   private cacheMousePos: { x: number; y: number };
+  private lastTrailTime: number = 0;
 
   constructor(container: HTMLDivElement) {
     this.container = container;
@@ -830,6 +857,10 @@ class ImageTrailVariant6 {
   }
 
   private showNextImage() {
+    const now = Date.now();
+    if (now - this.lastTrailTime < 150) return;
+    this.lastTrailTime = now;
+
     const dx = this.mousePos.x - this.cacheMousePos.x;
     const dy = this.mousePos.y - this.cacheMousePos.y;
     const speed = Math.sqrt(dx * dx + dy * dy);
@@ -930,6 +961,7 @@ class ImageTrailVariant7 {
   private cacheMousePos: { x: number; y: number };
   private visibleImagesCount: number;
   private visibleImagesTotal: number;
+  private lastTrailTime: number = 0;
 
   constructor(container: HTMLDivElement) {
     this.container = container;
@@ -987,6 +1019,10 @@ class ImageTrailVariant7 {
   }
 
   private showNextImage() {
+    const now = Date.now();
+    if (now - this.lastTrailTime < 150) return;
+    this.lastTrailTime = now;
+
     ++this.zIndexVal;
     this.imgPosition =
       this.imgPosition < this.imagesTotal - 1 ? this.imgPosition + 1 : 0;
@@ -1070,6 +1106,7 @@ class ImageTrailVariant8 {
   private cachedRotation: { x: number; y: number };
   private zValue: number;
   private cachedZValue: number;
+  private lastTrailTime: number = 0;
 
   constructor(container: HTMLDivElement) {
     this.container = container;
@@ -1126,6 +1163,10 @@ class ImageTrailVariant8 {
   }
 
   private showNextImage() {
+    const now = Date.now();
+    if (now - this.lastTrailTime < 150) return;
+    this.lastTrailTime = now;
+
     const rect = this.container.getBoundingClientRect();
     const centerX = rect.width / 2;
     const centerY = rect.height / 2;
@@ -1236,18 +1277,50 @@ export default function ImageTrail({
   variant = 1,
 }: ImageTrailProps): JSX.Element {
   const containerRef = useRef<HTMLDivElement>(null);
+  const [isHovered, setIsHovered] = useState(false);
 
   useEffect(() => {
     if (!containerRef.current) return;
     const Cls = variantMap[variant] || variantMap[1];
-    new Cls(containerRef.current);
+    const instance = new Cls(containerRef.current);
+
+    let autoTrailId: number | null = null;
+    let t = 0;
+    function autoTrail() {
+      if (isHovered) return;
+      // Buat gerakan mouse virtual melingkar di tengah area
+      const rect = containerRef.current!.getBoundingClientRect();
+      const r = Math.min(rect.width, rect.height) * 0.3;
+      const cx = rect.width / 2;
+      const cy = rect.height / 2;
+      const x = cx + r * Math.cos(t);
+      const y = cy + r * Math.sin(t);
+      // Update posisi mouse virtual
+      const mousePos = getMousePos(instance);
+      if (mousePos) {
+        mousePos.x = x;
+        mousePos.y = y;
+      }
+      t += 0.04;
+      autoTrailId = requestAnimationFrame(autoTrail);
+    }
+
+    if (!isHovered) {
+      autoTrail();
+    }
+
+    return () => {
+      if (autoTrailId) cancelAnimationFrame(autoTrailId);
+    };
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [variant, items]);
+  }, [variant, items, isHovered]);
 
   return (
     <div
       className="w-full h-full relative z-[100] rounded-lg bg-transparent overflow-visible"
       ref={containerRef}
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
     >
       {items.map((url, i) => (
         <div
@@ -1262,4 +1335,12 @@ export default function ImageTrail({
       ))}
     </div>
   );
+}
+
+// Tambahkan fungsi util untuk akses mousePos
+function getMousePos(instance: unknown): { x: number; y: number } | null {
+  if (instance && typeof instance === 'object' && 'mousePos' in instance && (instance as Record<string, unknown>).mousePos) {
+    return (instance as Record<string, unknown>).mousePos as { x: number; y: number };
+  }
+  return null;
 }

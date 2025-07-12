@@ -1,24 +1,16 @@
-# Welcome to your Lovable project
+# Veroty
 
 ## Project info
 
-**URL**: https://lovable.dev/projects/015256d6-39a4-4e44-8599-96303067e2af
+**URL**: https://veroty.com
 
 ## How can I edit this code?
 
-There are several ways of editing your application.
-
-**Use Lovable**
-
-Simply visit the [Lovable Project](https://lovable.dev/projects/015256d6-39a4-4e44-8599-96303067e2af) and start prompting.
-
-Changes made via Lovable will be committed automatically to this repo.
+You can edit this application using your preferred IDE or directly in GitHub. See below for instructions.
 
 **Use your preferred IDE**
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
-
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+Clone this repo and push changes. The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
 
 Follow these steps:
 
@@ -62,12 +54,8 @@ This project is built with:
 
 ## How can I deploy this project?
 
-Simply open [Lovable](https://lovable.dev/projects/015256d6-39a4-4e44-8599-96303067e2af) and click on Share -> Publish.
+You can deploy this project using your preferred hosting provider (Vercel, Netlify, etc).
 
-## Can I connect a custom domain to my Lovable project?
+## Can I connect a custom domain to my Veroty project?
 
-Yes, you can!
-
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
-
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/tips-tricks/custom-domain#step-by-step-guide)
+Yes, you can! Configure your DNS and hosting provider as needed.
