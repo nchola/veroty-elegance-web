@@ -1,10 +1,9 @@
 
 import { ChevronDown } from 'lucide-react';
-import { useEffect, useRef } from 'react';
+import { useEffect } from 'react';
+import Masonry from '@/Animations/Masonry/Masonry';
 
 const MansorySection = () => {
-  const videoRef = useRef<HTMLVideoElement>(null);
-
   useEffect(() => {
     // Adjusted parallax effect with reduced multiplier
     const handleScroll = () => {
@@ -25,38 +24,167 @@ const MansorySection = () => {
     nextSection?.scrollIntoView({ behavior: 'smooth' });
   };
 
+  // Luxury furniture images data
+  const luxuryFurnitureItems = [
+    {
+      id: '1',
+      img: 'https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=800&q=80',
+      url: '#',
+      height: 600
+    },
+    {
+      id: '2',
+      img: 'https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=800&q=80',
+      url: '#',
+      height: 800
+    },
+    {
+      id: '3',
+      img: 'https://images.unsplash.com/photo-1506439773649-6e0eb8cfb237?w=800&q=80',
+      url: '#',
+      height: 700
+    },
+    {
+      id: '4',
+      img: 'https://images.unsplash.com/photo-1567538096630-e0c55bd6374c?w=800&q=80',
+      url: '#',
+      height: 650
+    },
+    {
+      id: '5',
+      img: 'https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=800&q=80',
+      url: '#',
+      height: 750
+    },
+    {
+      id: '6',
+      img: 'https://images.unsplash.com/photo-1631679706909-1844bbd07221?w=800&q=80',
+      url: '#',
+      height: 600
+    },
+    {
+      id: '7',
+      img: 'https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=800&q=80',
+      url: '#',
+      height: 850
+    },
+    {
+      id: '8',
+      img: 'https://images.unsplash.com/photo-1540932239986-30128078f3c5?w=800&q=80',
+      url: '#',
+      height: 700
+    },
+    {
+      id: '9',
+      img: 'https://images.unsplash.com/photo-1506439773649-6e0eb8cfb237?w=800&q=80',
+      url: '#',
+      height: 650
+    },
+    {
+      id: '10',
+      img: 'https://images.unsplash.com/photo-1567538096630-e0c55bd6374c?w=800&q=80',
+      url: '#',
+      height: 800
+    },
+    {
+      id: '11',
+      img: 'https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=800&q=80',
+      url: '#',
+      height: 600
+    },
+    {
+      id: '12',
+      img: 'https://images.unsplash.com/photo-1631679706909-1844bbd07221?w=800&q=80',
+      url: '#',
+      height: 750
+    },
+    {
+      id: '13',
+      img: 'https://images.unsplash.com/photo-1540932239986-30128078f3c5?w=800&q=80',
+      url: '#',
+      height: 650
+    },
+    {
+      id: '14',
+      img: 'https://images.unsplash.com/photo-1506439773649-6e0eb8cfb237?w=800&q=80',
+      url: '#',
+      height: 700
+    },
+    {
+      id: '15',
+      img: 'https://images.unsplash.com/photo-1567538096630-e0c55bd6374c?w=800&q=80',
+      url: '#',
+      height: 800
+    },
+    {
+      id: '16',
+      img: 'https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=800&q=80',
+      url: '#',
+      height: 650
+    },
+    {
+      id: '17',
+      img: 'https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=800&q=80',
+      url: '#',
+      height: 750
+    },
+    {
+      id: '18',
+      img: 'https://images.unsplash.com/photo-1631679706909-1844bbd07221?w=800&q=80',
+      url: '#',
+      height: 600
+    },
+    {
+      id: '19',
+      img: 'https://images.unsplash.com/photo-1540932239986-30128078f3c5?w=800&q=80',
+      url: '#',
+      height: 850
+    },
+    {
+      id: '20',
+      img: 'https://images.unsplash.com/photo-1506439773649-6e0eb8cfb237?w=800&q=80',
+      url: '#',
+      height: 700
+    }
+  ];
+
   return (
-    <section className="hero-section min-h-[480px] relative overflow-hidden">
-      {/* Subtle fade-in overlay at top */}
-      <div className="absolute top-0 left-0 right-0 h-16 bg-gradient-to-b from-white/20 to-transparent z-20"></div>
-      
-      {/* Content */}
-      <div className="hero-content relative z-10 flex items-center justify-center min-h-[480px] text-center text-white px-4">
-        <div className="max-w-4xl animate-fadeInUp">
-          <h1 className="text-5xl md:text-7xl font-light mb-6 tracking-wide">
-            <span className="font-serif italic text-gold">Veroty</span>
-          </h1>
-          <h2 className="text-5xl md:text-7xl text-gold font-light mb-6 tracking-wide">
-            Crafting Excellence
-          </h2>
-          <p className="text-xl md:text-2xl mb-8 opacity-90 font-light max-w-2xl mx-auto">
-            Where timeless design meets uncompromising quality
-          </p>
-          <button 
-            onClick={scrollToNext}
-            className="btn-luxury inline-flex items-center px-8 py-4 border-2 border-white text-white hover:bg-white hover:text-black transition-all duration-300 rounded-lg font-light tracking-wide"
-          >
-            Discover Our Story
-          </button>
+    <section className="masonry-section py-16 bg-gradient-to-b from-white to-gray-50" id="masonry">
+      {/* Section Header */}
+      <div className="container mx-auto px-4 mb-12 text-center">
+        <h2 className="text-4xl md:text-5xl font-light mb-6 text-primary">
+          <span className="font-serif italic text-gold">Our Collection</span>
+        </h2>
+        <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
+          Discover our curated selection of luxury furniture pieces, each crafted with precision and timeless elegance
+        </p>
+      </div>
+
+      {/* Masonry Grid */}
+      <div className="container mx-auto px-4">
+        <div className="h-[800px] w-full">
+          <Masonry
+            items={luxuryFurnitureItems}
+            ease="power3.out"
+            duration={0.8}
+            stagger={0.08}
+            animateFrom="bottom"
+            scaleOnHover={true}
+            hoverScale={1.05}
+            blurToFocus={true}
+            colorShiftOnHover={false}
+          />
         </div>
       </div>
-      
+
       {/* Scroll Indicator */}
       <div 
-        className="absolute bottom-8 left-1/2 transform -translate-x-1/2 text-white animate-bounce cursor-pointer"
+        className="flex justify-center mt-12"
         onClick={scrollToNext}
       >
-        <ChevronDown className="w-8 h-8" />
+        <div className="text-primary animate-bounce cursor-pointer hover:text-gold transition-colors">
+          <ChevronDown className="w-8 h-8" />
+        </div>
       </div>
     </section>
   );
