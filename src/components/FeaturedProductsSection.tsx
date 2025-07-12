@@ -27,18 +27,13 @@ const FeaturedProductsSection = () => {
 
   return (
     <section className="featured-products bg-white">
-      <div className="max-w-none">
+      <div className="max-w-none pt-0">
         {/* Scroll Velocity Text Animation */}
         <div className="py-8">
-          <ScrollVelocity
-            texts={["Signature Collection", "Premium Design", "Luxury Living", "Timeless Elegance"]}
-            velocity={-40}
-            className="text-gold/20 font-serif italic"
-            scrollerClassName="text-5xl md:text-7xl"
-          />
+          
         </div>
 
-        <div className="max-w-7xl mx-auto px-8 py-32">
+        <div className="max-w-7xl mx-auto px-8 py-4">
           <div className="text-center mb-20">
             <h2 className="text-5xl md:text-6xl font-light text-gray-900 mb-6 leading-tight scroll-float-subtle">
               Signature Collection

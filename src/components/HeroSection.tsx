@@ -25,7 +25,7 @@ const HeroSection = () => {
   };
 
   return (
-    <section className="hero-section h-screen relative overflow-hidden">
+    <section className="hero-section h-screen mt-8 relative overflow-hidden">
       {/* Background Image (fallback for video) */}
       <div className="hero-background absolute inset-0">
         <img 
