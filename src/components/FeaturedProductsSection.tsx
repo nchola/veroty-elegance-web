@@ -29,22 +29,22 @@ const FeaturedProductsSection = () => {
       <div className="max-w-none">
         <div className="max-w-7xl mx-auto px-8 py-32">
           <div className="text-center mb-20">
-            <h2 className="text-5xl md:text-6xl font-light text-gray-900 mb-6 leading-tight">
+            <h2 className="text-5xl md:text-6xl font-light text-gray-900 mb-6 leading-tight scroll-float-subtle">
               Signature Collection
             </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed scroll-float-slow">
               Each piece in our collection represents the pinnacle of design and craftsmanship
             </p>
           </div>
 
           {/* Luxury Carousel - Full Width */}
-          <div className="w-full -mx-8 mb-24">
+          <div className="w-full -mx-8 mb-24 scroll-float">
             <LuxuryCarousel />
           </div>
           
           <div className="grid md:grid-cols-3 gap-12">
-            {products.map((product) => (
-              <div key={product.id} className="product-card group cursor-pointer product-hover bg-white overflow-hidden shadow-lg">
+            {products.map((product, index) => (
+              <div key={product.id} className={`product-card group cursor-pointer product-hover bg-white overflow-hidden shadow-lg scroll-float-${index % 2 === 0 ? 'slow' : 'subtle'}`}>
                 <div className="product-image relative overflow-hidden">
                   <img 
                     src={product.image}

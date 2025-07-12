@@ -1,3 +1,4 @@
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -189,6 +190,33 @@
   }
 }
 
+@keyframes scrollFloat {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes scrollFloatSlow {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-5px);
+  }
+}
+
+@keyframes scrollFloatSubtle {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-3px);
+  }
+}
+
 .animate-fadeInUp {
   animation: fadeInUp 0.8s ease-out;
 }
@@ -205,6 +233,18 @@
   animation: slideInRight 0.8s ease-out;
 }
 
+.animate-scroll-float {
+  animation: scrollFloat 3s ease-in-out infinite;
+}
+
+.animate-scroll-float-slow {
+  animation: scrollFloatSlow 4s ease-in-out infinite;
+}
+
+.animate-scroll-float-subtle {
+  animation: scrollFloatSubtle 5s ease-in-out infinite;
+}
+
 /* Scroll Reveal */
 .scroll-reveal {
   opacity: 0;
@@ -215,6 +255,31 @@
 .scroll-reveal.active {
   opacity: 1;
   transform: translateY(0);
+}
+
+/* Scroll Float Effects */
+.scroll-float {
+  transition: transform 0.3s ease-out;
+}
+
+.scroll-float.active {
+  animation: scrollFloat 3s ease-in-out infinite;
+}
+
+.scroll-float-slow {
+  transition: transform 0.3s ease-out;
+}
+
+.scroll-float-slow.active {
+  animation: scrollFloatSlow 4s ease-in-out infinite;
+}
+
+.scroll-float-subtle {
+  transition: transform 0.3s ease-out;
+}
+
+.scroll-float-subtle.active {
+  animation: scrollFloatSubtle 5s ease-in-out infinite;
 }
 
 /* Button Styles */

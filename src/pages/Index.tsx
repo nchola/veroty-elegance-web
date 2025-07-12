@@ -25,9 +25,30 @@ const Index = () => {
       });
     }, observerOptions);
 
+    // Float Animation Observer
+    const floatObserverOptions = {
+      threshold: 0.3,
+      rootMargin: '0px 0px -100px 0px'
+    };
+
+    const floatObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('active');
+        } else {
+          entry.target.classList.remove('active');
+        }
+      });
+    }, floatObserverOptions);
+
     // Observe all scroll-reveal elements
     document.querySelectorAll('.scroll-reveal').forEach(el => {
       observer.observe(el);
+    });
+
+    // Observe all scroll-float elements
+    document.querySelectorAll('.scroll-float, .scroll-float-slow, .scroll-float-subtle').forEach(el => {
+      floatObserver.observe(el);
     });
 
     // Smooth scroll for navigation
@@ -46,6 +67,7 @@ const Index = () => {
     // Cleanup
     return () => {
       observer.disconnect();
+      floatObserver.disconnect();
     };
   }, []);
 
