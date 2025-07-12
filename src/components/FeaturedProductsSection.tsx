@@ -1,6 +1,7 @@
 
 import { Eye } from 'lucide-react';
 import LuxuryCarousel from './LuxuryCarousel';
+import ScrollFloat from '@/Animations/TextAnimations/ScrollFloat/ScrollFloat';
 
 const FeaturedProductsSection = () => {
   const products = [

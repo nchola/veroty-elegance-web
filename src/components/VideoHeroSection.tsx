@@ -50,21 +50,9 @@ const VideoHeroSection = () => {
         <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-black/60 via-black/30 to-transparent z-20"></div>
         
         {/* Carousel Controls */}
-        <button onClick={goToPrev} className="absolute left-4 top-1/2 -translate-y-1/2 z-20 bg-black/30 hover:bg-black/60 text-white p-2 rounded-full">
-          <ChevronLeft className="w-8 h-8" />
-        </button>
-        <button onClick={goToNext} className="absolute right-4 top-1/2 -translate-y-1/2 z-20 bg-black/30 hover:bg-black/60 text-white p-2 rounded-full">
-          <ChevronRight className="w-8 h-8" />
-        </button>
+        
         {/* Indicators */}
-        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex gap-2 z-20">
-          {videos.map((_, idx) => (
-            <span
-              key={idx}
-              className={`w-3 h-3 rounded-full ${idx === activeIndex ? 'bg-white' : 'bg-white/40'} block`}
-            />
-          ))}
-        </div>
+        
       </div>
 
       {/* Minimal Content Overlay */}
@@ -89,13 +77,7 @@ const VideoHeroSection = () => {
         />
       </div>
       
-      {/* Scroll Indicator */}
-      <div 
-        className="absolute bottom-8 left-1/2 transform -translate-x-1/2 text-white animate-bounce cursor-pointer z-30"
-        onClick={scrollToNext}
-      >
-        <ChevronDown className="w-8 h-8" />
-      </div>
+      
     </section>
   );
 };

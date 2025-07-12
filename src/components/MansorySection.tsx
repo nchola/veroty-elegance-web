@@ -1,6 +1,12 @@
 import { ChevronDown } from 'lucide-react';
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import Masonry from '@/Animations/Masonry/Masonry';
+
+// Fungsi untuk tinggi random antara 180–400px
+function getRandomHeight() {
+  return Math.floor(Math.random() * 220) + 180;
+}
+
 const MansorySection = () => {
   useEffect(() => {
     // Adjusted parallax effect with reduced multiplier
@@ -22,109 +28,172 @@ const MansorySection = () => {
     });
   };
 
-  // Luxury furniture images data - reduced heights by 60%
-  const luxuryFurnitureItems = [{
-    id: '1',
-    img: 'https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=800&q=80',
-    url: '#',
-    height: 240 // reduced from 600
-  }, {
-    id: '2',
-    img: 'https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=800&q=80',
-    url: '#',
-    height: 320 // reduced from 800
-  }, {
-    id: '3',
-    img: 'https://images.unsplash.com/photo-1506439773649-6e0eb8cfb237?w=800&q=80',
-    url: '#',
-    height: 280 // reduced from 700
-  }, {
-    id: '4',
-    img: 'https://images.unsplash.com/photo-1567538096630-e0c55bd6374c?w=800&q=80',
-    url: '#',
-    height: 260 // reduced from 650
-  }, {
-    id: '5',
-    img: 'https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=800&q=80',
-    url: '#',
-    height: 300 // reduced from 750
-  }, {
-    id: '6',
-    img: 'https://images.unsplash.com/photo-1631679706909-1844bbd07221?w=800&q=80',
-    url: '#',
-    height: 240 // reduced from 600
-  }, {
-    id: '7',
-    img: 'https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=800&q=80',
-    url: '#',
-    height: 340 // reduced from 850
-  }, {
-    id: '8',
-    img: 'https://images.unsplash.com/photo-1540932239986-30128078f3c5?w=800&q=80',
-    url: '#',
-    height: 280 // reduced from 700
-  }, {
-    id: '9',
-    img: 'https://images.unsplash.com/photo-1506439773649-6e0eb8cfb237?w=800&q=80',
-    url: '#',
-    height: 260 // reduced from 650
-  }, {
-    id: '10',
-    img: 'https://images.unsplash.com/photo-1567538096630-e0c55bd6374c?w=800&q=80',
-    url: '#',
-    height: 320 // reduced from 800
-  }, {
-    id: '11',
-    img: 'https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=800&q=80',
-    url: '#',
-    height: 240 // reduced from 600
-  }, {
-    id: '12',
-    img: 'https://images.unsplash.com/photo-1631679706909-1844bbd07221?w=800&q=80',
-    url: '#',
-    height: 300 // reduced from 750
-  }, {
-    id: '13',
-    img: 'https://images.unsplash.com/photo-1540932239986-30128078f3c5?w=800&q=80',
-    url: '#',
-    height: 260 // reduced from 650
-  }, {
-    id: '14',
-    img: 'https://images.unsplash.com/photo-1506439773649-6e0eb8cfb237?w=800&q=80',
-    url: '#',
-    height: 280 // reduced from 700
-  }, {
-    id: '15',
-    img: 'https://images.unsplash.com/photo-1567538096630-e0c55bd6374c?w=800&q=80',
-    url: '#',
-    height: 320 // reduced from 800
-  }, {
-    id: '16',
-    img: 'https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=800&q=80',
-    url: '#',
-    height: 260 // reduced from 650
-  }, {
-    id: '17',
-    img: 'https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=800&q=80',
-    url: '#',
-    height: 300 // reduced from 750
-  }, {
-    id: '18',
-    img: 'https://images.unsplash.com/photo-1631679706909-1844bbd07221?w=800&q=80',
-    url: '#',
-    height: 240 // reduced from 600
-  }, {
-    id: '19',
-    img: 'https://images.unsplash.com/photo-1540932239986-30128078f3c5?w=800&q=80',
-    url: '#',
-    height: 340 // reduced from 850
-  }, {
-    id: '20',
-    img: 'https://images.unsplash.com/photo-1506439773649-6e0eb8cfb237?w=800&q=80',
-    url: '#',
-    height: 280 // reduced from 700
-  }];
-  return <section id="masonry" className="masonry-section bg-gradient-to-b from-white to-gray-50 py-[6px]">
+  // Luxury furniture images data - tinggi random
+  const luxuryFurnitureItems = [
+    {
+      id: '1',
+      img: 'https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=800&q=80',
+      url: '#',
+      height: getRandomHeight()
+    },
+    {
+      id: '2',
+      img: 'https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=800&q=80',
+      url: '#',
+      height: getRandomHeight()
+    },
+    {
+      id: '3',
+      img: 'https://images.unsplash.com/photo-1506439773649-6e0eb8cfb237?w=800&q=80',
+      url: '#',
+      height: getRandomHeight()
+    },
+    {
+      id: '4',
+      img: 'https://images.unsplash.com/photo-1567538096630-e0c55bd6374c?w=800&q=80',
+      url: '#',
+      height: getRandomHeight()
+    },
+    {
+      id: '5',
+      img: 'https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=800&q=80',
+      url: '#',
+      height: getRandomHeight()
+    },
+    {
+      id: '6',
+      img: 'https://images.unsplash.com/photo-1631679706909-1844bbd07221?w=800&q=80',
+      url: '#',
+      height: getRandomHeight()
+    },
+    {
+      id: '7',
+      img: 'https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=800&q=80',
+      url: '#',
+      height: getRandomHeight()
+    },
+    {
+      id: '8',
+      img: 'https://images.unsplash.com/photo-1540932239986-30128078f3c5?w=800&q=80',
+      url: '#',
+      height: getRandomHeight()
+    },
+    {
+      id: '9',
+      img: 'https://images.unsplash.com/photo-1506439773649-6e0eb8cfb237?w=800&q=80',
+      url: '#',
+      height: getRandomHeight()
+    },
+    {
+      id: '10',
+      img: 'https://images.unsplash.com/photo-1567538096630-e0c55bd6374c?w=800&q=80',
+      url: '#',
+      height: getRandomHeight()
+    },
+    {
+      id: '11',
+      img: 'https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=800&q=80',
+      url: '#',
+      height: getRandomHeight()
+    },
+    {
+      id: '12',
+      img: 'https://images.unsplash.com/photo-1631679706909-1844bbd07221?w=800&q=80',
+      url: '#',
+      height: getRandomHeight()
+    },
+    {
+      id: '13',
+      img: 'https://images.unsplash.com/photo-1540932239986-30128078f3c5?w=800&q=80',
+      url: '#',
+      height: getRandomHeight()
+    },
+    {
+      id: '14',
+      img: 'https://images.unsplash.com/photo-1506439773649-6e0eb8cfb237?w=800&q=80',
+      url: '#',
+      height: getRandomHeight()
+    },
+    {
+      id: '15',
+      img: 'https://images.unsplash.com/photo-1567538096630-e0c55bd6374c?w=800&q=80',
+      url: '#',
+      height: getRandomHeight()
+    },
+    {
+      id: '16',
+      img: 'https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=800&q=80',
+      url: '#',
+      height: getRandomHeight()
+    },
+    {
+      id: '17',
+      img: 'https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=800&q=80',
+      url: '#',
+      height: getRandomHeight()
+    },
+    {
+      id: '18',
+      img: 'https://images.unsplash.com/photo-1631679706909-1844bbd07221?w=800&q=80',
+      url: '#',
+      height: getRandomHeight()
+    },
+    {
+      id: '19',
+      img: 'https://images.unsplash.com/photo-1540932239986-30128078f3c5?w=800&q=80',
+      url: '#',
+      height: getRandomHeight()
+    },
+    {
+      id: '20',
+      img: 'https://images.unsplash.com/photo-1506439773649-6e0eb8cfb237?w=800&q=80',
+      url: '#',
+      height: getRandomHeight()
+    }
+  ];
+
+  // Auto-scroll on hover logic
+  const scrollRef = useRef<HTMLDivElement>(null);
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+    const container = scrollRef.current;
+    if (!container) return;
+    const { top, height } = container.getBoundingClientRect();
+    const mouseY = e.clientY - top;
+    const threshold = 60; // px dari atas/bawah untuk trigger scroll
+    const scrollSpeed = 10; // px per event
+    if (mouseY < threshold) {
+      container.scrollBy({ top: -scrollSpeed, behavior: 'smooth' });
+    } else if (mouseY > height - threshold) {
+      container.scrollBy({ top: scrollSpeed, behavior: 'smooth' });
+    }
+  };
+
+  // Auto-scroll loop logic
+  useEffect(() => {
+    const container = scrollRef.current;
+    if (!container) return;
+    let direction = 1; // 1: down, -1: up
+    const scrollStep = 1; // px per interval
+    const interval = setInterval(() => {
+      if (!container) return;
+      if (direction === 1) {
+        if (container.scrollTop + container.clientHeight >= container.scrollHeight) {
+          direction = -1;
+        } else {
+          container.scrollBy({ top: scrollStep, behavior: 'smooth' });
+        }
+      } else {
+        if (container.scrollTop <= 0) {
+          direction = 1;
+        } else {
+          container.scrollBy({ top: -scrollStep, behavior: 'smooth' });
+        }
+      }
+    }, 20);
+    return () => clearInterval(interval);
+  }, []);
+
+  return <section id="masonry" className="masonry-section bg-white py-6">
       {/* Section Header */}
       <div className="container mx-auto px-4 mb-12 text-center">
         <h2 className="text-4xl md:text-5xl font-light mb-6 text-primary">
@@ -137,8 +206,15 @@ const MansorySection = () => {
 
       {/* Masonry Grid */}
       <div className="container mx-auto px-4">
-        <div className="h-[500px] w-full">
-          <Masonry items={luxuryFurnitureItems} ease="power3.out" duration={0.8} stagger={0.08} animateFrom="random" scaleOnHover={true} hoverScale={1.05} blurToFocus={true} colorShiftOnHover={false} />
+        <div
+          ref={scrollRef}
+          className="max-h-[80vh] overflow-y-auto w-full scrollbar-none bg-white rounded-[30px]"
+          onMouseMove={handleMouseMove}
+          style={{ scrollbarWidth: 'none' }}
+        >
+          <div className="h-[900px] w-full bg-white rounded-[30px]">
+            <Masonry items={luxuryFurnitureItems} ease="power3.out" duration={1.0} stagger={0.2} animateFrom="random" scaleOnHover={true} hoverScale={1.05} blurToFocus={true} colorShiftOnHover={true} />
+          </div>
         </div>
       </div>
 
@@ -150,4 +226,5 @@ const MansorySection = () => {
       </div>
     </section>;
 };
+
 export default MansorySection;
