@@ -26,27 +26,17 @@ const HeroSection = () => {
   };
 
   return (
-    <section className="hero-section min-h-[800px] relative overflow-hidden">
+    <section className="hero-section min-h-[480px] relative overflow-hidden">
       {/* Subtle fade-in overlay at top */}
       <div className="absolute top-0 left-0 right-0 h-16 bg-gradient-to-b from-white/20 to-transparent z-20"></div>
       
-      {/* Background Image with better positioning */}
-      <div className="hero-background absolute inset-0 -top-20 -bottom-20">
-        <img 
-          src="https://images.unsplash.com/photo-1649972904349-6e44c42644a7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2340&q=80"
-          alt="Luxury Interior"
-          className="w-full h-full object-cover object-center"
-        />
-        <div className="hero-gradient absolute inset-0"></div>
-      </div>
-      
       {/* Content */}
-      <div className="hero-content relative z-10 flex items-center justify-center min-h-[800px] text-center text-white px-4">
+      <div className="hero-content relative z-10 flex items-center justify-center min-h-[480px] text-center text-white px-4">
         <div className="max-w-4xl animate-fadeInUp">
           <h1 className="text-5xl md:text-7xl font-light mb-6 tracking-wide">
             <span className="font-serif italic text-gold">Veroty</span>
           </h1>
-          <h2 className="text-3xl md:text-5xl font-light mb-6 tracking-wide">
+          <h2 className="text-5xl md:text-7xl text-gold font-light mb-6 tracking-wide">
             Crafting Excellence
           </h2>
           <p className="text-xl md:text-2xl mb-8 opacity-90 font-light max-w-2xl mx-auto">

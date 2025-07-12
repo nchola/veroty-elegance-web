@@ -7,30 +7,13 @@ const BrandIntroSection = () => {
       <div className="max-w-7xl mx-auto px-8 py-32">
         <div className="grid md:grid-cols-2 gap-20 items-center">
           <div className="space-y-8">
-            <h2 className="text-5xl md:text-6xl font-light text-gray-900 leading-tight scroll-float-subtle">
-              It All Starts From 
-              <span className="italic font-serif text-gold block mt-2">The Vision</span>
+            <h2 className="text-4xl md:text-5xl font-serif font-semibold mb-4 text-gray-900 tracking-tight uppercase">
+              must have: <span className="text-gold lowercase font-serif font-bold">extendable tables</span>
             </h2>
-            <p className="text-xl text-gray-600 leading-relaxed scroll-float-slow">
-              For over five decades, we have been at the forefront of innovation, 
-              creating masterpieces that transcend mere functionality to become 
-              works of art. Every piece tells a story of dedication, craftsmanship, 
-              and unwavering commitment to excellence.
+            <p className="text-lg md:text-xl text-gray-600 leading-relaxed font-light italic mb-2">
+              For a small home or a spacious living room, for a compact dining area or a significant open space: an extendable table is always an excellent choice.
             </p>
-            <div className="grid grid-cols-3 gap-12 pt-12 scroll-float">
-              <div className="text-center">
-                <div className="text-4xl font-light text-gray-900 font-serif mb-2">50+</div>
-                <div className="text-sm text-gray-500 uppercase tracking-wide">Years Excellence</div>
-              </div>
-              <div className="text-center">
-                <div className="text-4xl font-light text-gray-900 font-serif mb-2">1000+</div>
-                <div className="text-sm text-gray-500 uppercase tracking-wide">Masterpieces</div>
-              </div>
-              <div className="text-center">
-                <div className="text-4xl font-light text-gray-900 font-serif mb-2">50</div>
-                <div className="text-sm text-gray-500 uppercase tracking-wide">Countries</div>
-              </div>
-            </div>
+            
           </div>
           <div className="relative scroll-float-slow">
             <video 
