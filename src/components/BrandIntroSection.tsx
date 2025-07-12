@@ -3,7 +3,7 @@ import { ScrollVelocity } from '@/Animations/ScrollVelocity/ScrollVelocity';
 
 const BrandIntroSection = () => {
   return (
-    <section id="brand-intro" className="bg-white py-16 md:py-24">
+    <section id="brand-intro" className="bg-white py-16 md:py-24 relative z-10">
       <div className="max-w-7xl mx-auto px-4 md:px-8">
         <div className="grid md:grid-cols-2 gap-8 md:gap-16 items-center">
           <div className="space-y-6 md:space-y-8">
@@ -24,7 +24,7 @@ const BrandIntroSection = () => {
               playsInline 
               className="w-full h-64 md:h-80 lg:h-96 object-cover shadow-2xl image-hover rounded-lg" 
             />
-            <div className="absolute -bottom-4 -right-4 md:-bottom-6 md:-right-6 lg:-bottom-8 lg:-right-8 w-20 h-20 md:w-28 md:h-28 lg:w-36 lg:h-36 bg-gold flex items-center justify-center shadow-xl scroll-float rounded-lg">
+            <div className="absolute -bottom-4 -right-4 md:-bottom-6 md:-right-6 lg:-bottom-8 lg:-right-8 w-20 h-20 md:w-28 md:h-28 lg:w-36 lg:h-36 bg-gold flex items-center justify-center shadow-xl scroll-float rounded-lg z-10">
               <span className="text-white font-serif text-sm md:text-lg lg:text-xl text-center leading-tight">Since<br />2000</span>
             </div>
           </div>
