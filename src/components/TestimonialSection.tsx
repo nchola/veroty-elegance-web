@@ -1,9 +1,6 @@
-
 import { Quote } from 'lucide-react';
-
 const TestimonialSection = () => {
-  return (
-    <section className="testimonials bg-white text-gray-900 scroll-reveal border-t border-gray-100">
+  return <section className="testimonials bg-white text-gray-900 scroll-reveal border-t border-gray-100 my-[100px] py-0">
       <div className="max-w-5xl mx-auto px-8 py-32 text-center">
         <h2 className="text-5xl md:text-6xl font-light mb-20 leading-tight scroll-float-subtle">What Our Clients Say</h2>
         <div className="testimonial-slider">
@@ -21,8 +18,6 @@ const TestimonialSection = () => {
           </div>
         </div>
       </div>
-    </section>
-  );
+    </section>;
 };
-
 export default TestimonialSection;

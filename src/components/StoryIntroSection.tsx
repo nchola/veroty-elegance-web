@@ -1,7 +1,5 @@
-
 const StoryIntroSection = () => {
-  return (
-    <section className="story-intro-section py-16 bg-white">
+  return <section className="story-intro-section bg-white py-[20px] my-[30px] mx-0 px-[300px]">
       <div className="section-container max-w-4xl mx-auto px-4">
         <div className="single text-center">
           <div className="tit text-4xl md:text-5xl font-light mb-6 text-gray-900 font-serif">
@@ -26,8 +24,6 @@ const StoryIntroSection = () => {
           </div>
         </div>
       </div>
-    </section>
-  );
+    </section>;
 };
-
 export default StoryIntroSection;
