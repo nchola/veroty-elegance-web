@@ -1,62 +1,75 @@
+
 import { Eye } from 'lucide-react';
 import LuxuryCarousel from './LuxuryCarousel';
-import { ScrollVelocity } from '@/Animations/ScrollVelocity/ScrollVelocity';
+
 const FeaturedProductsSection = () => {
-  const products = [{
-    id: 1,
-    name: "Elegance Chair",
-    description: "Modern comfort meets timeless design",
-    image: "https://images.unsplash.com/photo-1721322800607-8c38375eef04?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2340&q=80"
-  }, {
-    id: 2,
-    name: "Heritage Collection",
-    description: "Crafted with traditional techniques",
-    image: "https://images.unsplash.com/photo-1487252665478-49b61b47f302?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2340&q=80"
-  }, {
-    id: 3,
-    name: "Contemporary Series",
-    description: "Bold designs for modern living",
-    image: "https://images.unsplash.com/photo-1465146344425-f00d5f5c8f07?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2340&q=80"
-  }];
-  return <section className="featured-products bg-white">
-      <div className="max-w-none pt-0 py-px my-[200px]">
-        {/* Scroll Velocity Text Animation */}
+  const products = [
+    {
+      id: 1,
+      name: "Elegance Chair",
+      description: "Modern comfort meets timeless design",
+      image: "https://images.unsplash.com/photo-1721322800607-8c38375eef04?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2340&q=80"
+    },
+    {
+      id: 2,
+      name: "Heritage Collection",
+      description: "Crafted with traditional techniques",
+      image: "https://images.unsplash.com/photo-1487252665478-49b61b47f302?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2340&q=80"
+    },
+    {
+      id: 3,
+      name: "Contemporary Series",
+      description: "Bold designs for modern living",
+      image: "https://images.unsplash.com/photo-1465146344425-f00d5f5c8f07?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2340&q=80"
+    }
+  ];
+
+  return (
+    <section className="bg-white py-16 md:py-24">
+      <div className="max-w-7xl mx-auto px-4 md:px-8">
+        <div className="text-center mb-12 md:mb-16 lg:mb-20">
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-light text-gray-900 mb-4 md:mb-6 leading-tight scroll-float-subtle font-serif">
+            Signature Collection
+          </h2>
+          <p className="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed scroll-float-slow">
+            Each piece in our collection represents the pinnacle of design and craftsmanship
+          </p>
+        </div>
+
+        {/* Luxury Carousel - Full Width */}
+        <div className="w-full mb-16 md:mb-20 lg:mb-24 scroll-float -mx-4 md:-mx-8">
+          <LuxuryCarousel />
+        </div>
         
-
-        <div className="max-w-7xl mx-auto px-8 py-0 my-0">
-          <div className="text-center mb-20">
-            <h2 className="text-5xl md:text-6xl font-light text-gray-900 mb-6 leading-tight scroll-float-subtle">
-              Signature Collection
-            </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed scroll-float-slow">
-              Each piece in our collection represents the pinnacle of design and craftsmanship
-            </p>
-          </div>
-
-          {/* Luxury Carousel - Full Width */}
-          <div className="w-full -mx-8 mb-24 scroll-float">
-            <LuxuryCarousel />
-          </div>
-          
-          <div className="grid md:grid-cols-3 gap-12">
-            {products.map((product, index) => <div key={product.id} className={`product-card group cursor-pointer product-hover bg-white overflow-hidden shadow-lg scroll-float-${index % 2 === 0 ? 'slow' : 'subtle'}`}>
-                <div className="product-image relative overflow-hidden">
-                  <img src={product.image} alt={product.name} className="w-full h-96 object-cover transition-transform duration-500 group-hover:scale-105" />
-                  <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-30 transition-all duration-300 flex items-center justify-center">
-                    <button className="btn-view opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-white text-black px-8 py-4 flex items-center space-x-2 font-light">
-                      <Eye className="w-4 h-4" />
-                      <span>View Details</span>
-                    </button>
-                  </div>
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 lg:gap-12">
+          {products.map((product, index) => (
+            <div 
+              key={product.id} 
+              className={`product-card group cursor-pointer product-hover bg-white overflow-hidden shadow-lg scroll-float-${index % 2 === 0 ? 'slow' : 'subtle'} rounded-lg`}
+            >
+              <div className="product-image relative overflow-hidden">
+                <img 
+                  src={product.image} 
+                  alt={product.name} 
+                  className="w-full h-64 md:h-80 lg:h-96 object-cover transition-transform duration-500 group-hover:scale-105" 
+                />
+                <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-30 transition-all duration-300 flex items-center justify-center">
+                  <button className="btn-view opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-white text-black px-6 py-3 md:px-8 md:py-4 flex items-center space-x-2 font-light rounded">
+                    <Eye className="w-4 h-4" />
+                    <span>View Details</span>
+                  </button>
                 </div>
-                <div className="product-info p-8 text-center">
-                  <h3 className="text-2xl font-light text-gray-900 mb-3 font-serif">{product.name}</h3>
-                  <p className="text-gray-600 text-lg">{product.description}</p>
-                </div>
-              </div>)}
-          </div>
+              </div>
+              <div className="product-info p-6 md:p-8 text-center">
+                <h3 className="text-xl md:text-2xl font-light text-gray-900 mb-2 md:mb-3 font-serif">{product.name}</h3>
+                <p className="text-gray-600 text-base md:text-lg">{product.description}</p>
+              </div>
+            </div>
+          ))}
         </div>
       </div>
-    </section>;
+    </section>
+  );
 };
+
 export default FeaturedProductsSection;
