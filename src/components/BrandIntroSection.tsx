@@ -1,8 +1,20 @@
 
+import { ScrollVelocity } from '@/TextAnimations/ScrollVelocity/ScrollVelocity';
+
 const BrandIntroSection = () => {
   return (
     <section id="brand-intro" className="brand-intro bg-white scroll-reveal">
       <div className="max-w-none">
+        {/* Scroll Velocity Text Animation */}
+        <div className="py-8 border-t border-gray-100">
+          <ScrollVelocity
+            texts={["Excellence", "Craftsmanship", "Innovation", "Quality"]}
+            velocity={50}
+            className="text-gray-200 font-light"
+            scrollerClassName="text-6xl md:text-8xl"
+          />
+        </div>
+        
         <div className="max-w-7xl mx-auto px-8 py-32">
           <div className="grid md:grid-cols-2 gap-20 items-center">
             <div className="space-y-8">

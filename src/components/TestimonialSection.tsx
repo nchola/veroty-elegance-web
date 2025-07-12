@@ -1,5 +1,6 @@
 
 import { Quote } from 'lucide-react';
+import { ScrollVelocity } from '@/TextAnimations/ScrollVelocity/ScrollVelocity';
 
 const TestimonialSection = () => {
   return (
@@ -21,6 +22,16 @@ const TestimonialSection = () => {
               </div>
             </div>
           </div>
+        </div>
+
+        {/* Scroll Velocity Text Animation at bottom */}
+        <div className="py-8 border-t border-gray-100">
+          <ScrollVelocity
+            texts={["Client Stories", "Testimonials", "Reviews", "Experiences"]}
+            velocity={-35}
+            className="text-gray-200 font-serif italic"
+            scrollerClassName="text-3xl md:text-5xl"
+          />
         </div>
       </div>
     </section>

@@ -1,5 +1,6 @@
 
 import { Check } from 'lucide-react';
+import { ScrollVelocity } from '@/TextAnimations/ScrollVelocity/ScrollVelocity';
 
 const CraftsmanshipSection = () => {
   const features = [
@@ -12,6 +13,16 @@ const CraftsmanshipSection = () => {
   return (
     <section className="craftsmanship bg-white scroll-reveal">
       <div className="max-w-none">
+        {/* Scroll Velocity Text Animation */}
+        <div className="py-8 bg-gray-50">
+          <ScrollVelocity
+            texts={["Handcrafted", "Artisan Made", "Master Quality", "Perfection"]}
+            velocity={60}
+            className="text-gray-300 font-light"
+            scrollerClassName="text-4xl md:text-6xl"
+          />
+        </div>
+
         <div className="max-w-7xl mx-auto px-8 py-32">
           <div className="grid md:grid-cols-2 gap-20 items-center">
             <div className="order-2 md:order-1 scroll-float-slow">

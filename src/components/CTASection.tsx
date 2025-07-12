@@ -1,10 +1,21 @@
 
 import { Calendar, Eye } from 'lucide-react';
+import { ScrollVelocity } from '@/TextAnimations/ScrollVelocity/ScrollVelocity';
 
 const CTASection = () => {
   return (
     <section className="cta bg-white scroll-reveal">
       <div className="max-w-none">
+        {/* Scroll Velocity Text Animation at top */}
+        <div className="py-8 bg-gray-50">
+          <ScrollVelocity
+            texts={["Get Started", "Contact Us", "Begin Journey", "Create Together"]}
+            velocity={45}
+            className="text-gold/30 font-light"
+            scrollerClassName="text-4xl md:text-6xl"
+          />
+        </div>
+
         <div className="max-w-5xl mx-auto px-8 py-32 text-center">
           <h2 className="text-5xl md:text-6xl font-light text-gray-900 mb-8 leading-tight scroll-float-subtle">
             Ready to Create Your 
