@@ -1,6 +1,7 @@
 import { ChevronDown } from 'lucide-react';
 import { useEffect, useRef } from 'react';
 import Masonry from '@/Animations/Masonry/Masonry';
+import ScrollReveal from '@/Animations/TextAnimations/ScrollReveal/ScrollReveal';
 
 // Fungsi untuk tinggi random antara 180–400px
 function getRandomHeight() {
@@ -21,6 +22,7 @@ const MansorySection = () => {
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+  
   const scrollToNext = () => {
     const nextSection = document.querySelector('#brand-intro');
     nextSection?.scrollIntoView({
@@ -193,15 +195,33 @@ const MansorySection = () => {
     return () => clearInterval(interval);
   }, []);
 
-  return <section id="masonry" className="masonry-section bg-white py-6">
+  return (
+    <section id="masonry" className="masonry-section bg-white py-6">
       {/* Section Header */}
       <div className="container mx-auto px-4 mb-12 text-center">
-        <h2 className="text-4xl md:text-5xl font-light mb-6 text-primary">
-          <span className="font-serif italic text-gold">Our Collection</span>
-        </h2>
-        <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
+        <ScrollReveal 
+          baseOpacity={0.2}
+          baseRotation={2}
+          blurStrength={3}
+          containerClassName="mb-6"
+          textClassName="text-4xl md:text-5xl font-light text-primary font-serif italic text-gold"
+          rotationEnd="bottom top"
+          wordAnimationEnd="bottom top"
+        >
+          Our Collection
+        </ScrollReveal>
+        
+        <ScrollReveal 
+          baseOpacity={0.1}
+          baseRotation={1}
+          blurStrength={2}
+          containerClassName=""
+          textClassName="text-xl text-muted-foreground max-w-2xl mx-auto"
+          rotationEnd="bottom center"
+          wordAnimationEnd="bottom center"
+        >
           Discover our curated selection of luxury furniture pieces, each crafted with precision and timeless elegance
-        </p>
+        </ScrollReveal>
       </div>
 
       {/* Masonry Grid */}
@@ -221,10 +241,11 @@ const MansorySection = () => {
       {/* Scroll Indicator */}
       <div className="flex justify-center mt-12" onClick={scrollToNext}>
         <div className="text-primary animate-bounce cursor-pointer hover:text-gold transition-colors">
-          
+          <ChevronDown className="w-8 h-8" />
         </div>
       </div>
-    </section>;
+    </section>
+  );
 };
 
 export default MansorySection;
