@@ -1,7 +1,7 @@
 
 import { Eye } from 'lucide-react';
 import LuxuryCarousel from './LuxuryCarousel';
-import ScrollReveal from '@/Animations/TextAnimations/ScrollReveal/ScrollReveal';
+import ScrollFloat from '@/Animations/TextAnimations/ScrollFloat/ScrollFloat';
 
 const FeaturedProductsSection = () => {
   const products = [
@@ -29,29 +29,12 @@ const FeaturedProductsSection = () => {
     <section className="bg-white py-16 md:py-24 relative z-0">
       <div className="max-w-7xl mx-auto px-4 md:px-8">
         <div className="text-center mb-12 md:mb-16 lg:mb-20">
-          <ScrollReveal 
-            baseOpacity={0.2}
-            baseRotation={2.5}
-            blurStrength={4}
-            containerClassName="mb-6"
-            textClassName="text-4xl md:text-5xl lg:text-6xl font-light text-gray-900 leading-tight font-serif"
-            rotationEnd="bottom top"
-            wordAnimationEnd="bottom top"
-          >
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-light text-gray-900 mb-4 md:mb-6 leading-tight scroll-float-subtle font-serif">
             Signature Collection
-          </ScrollReveal>
-          
-          <ScrollReveal 
-            baseOpacity={0.1}
-            baseRotation={1}
-            blurStrength={2}
-            containerClassName="mt-4"
-            textClassName="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed"
-            rotationEnd="bottom center"
-            wordAnimationEnd="bottom center"
-          >
+          </h2>
+          <p className="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed scroll-float-slow">
             Each piece in our collection represents the pinnacle of design and craftsmanship
-          </ScrollReveal>
+          </p>
         </div>
 
         <div className="w-full mb-16 md:mb-20 lg:mb-24 scroll-float -mx-4 md:-mx-8">
@@ -78,29 +61,8 @@ const FeaturedProductsSection = () => {
                 </div>
               </div>
               <div className="product-info p-6 md:p-8 text-center">
-                <ScrollReveal 
-                  baseOpacity={0.15}
-                  baseRotation={1.5}
-                  blurStrength={2}
-                  containerClassName="mb-2"
-                  textClassName="text-xl md:text-2xl font-light text-gray-900 font-serif"
-                  rotationEnd="bottom center"
-                  wordAnimationEnd="bottom center"
-                >
-                  {product.name}
-                </ScrollReveal>
-                
-                <ScrollReveal 
-                  baseOpacity={0.1}
-                  baseRotation={0.5}
-                  blurStrength={1}
-                  containerClassName=""
-                  textClassName="text-gray-600 text-base md:text-lg"
-                  rotationEnd="bottom center"
-                  wordAnimationEnd="bottom center"
-                >
-                  {product.description}
-                </ScrollReveal>
+                <h3 className="text-xl md:text-2xl font-light text-gray-900 mb-2 md:mb-3 font-serif">{product.name}</h3>
+                <p className="text-gray-600 text-base md:text-lg">{product.description}</p>
               </div>
             </div>
           ))}

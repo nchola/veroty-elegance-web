@@ -1,5 +1,5 @@
 
-import ScrollReveal from '@/Animations/TextAnimations/ScrollReveal/ScrollReveal';
+import { ScrollVelocity } from '@/Animations/ScrollVelocity/ScrollVelocity';
 
 const BrandIntroSection = () => {
   return (
@@ -7,29 +7,12 @@ const BrandIntroSection = () => {
       <div className="max-w-7xl mx-auto px-4 md:px-8">
         <div className="grid md:grid-cols-2 gap-8 md:gap-16 items-center">
           <div className="space-y-6 md:space-y-8">
-            <ScrollReveal 
-              baseOpacity={0.15}
-              baseRotation={3}
-              blurStrength={4}
-              containerClassName="mb-6"
-              textClassName="text-3xl md:text-4xl lg:text-5xl font-serif font-semibold text-gray-900 tracking-tight uppercase leading-tight"
-              rotationEnd="bottom top"
-              wordAnimationEnd="bottom top"
-            >
-              must have: extendable tables
-            </ScrollReveal>
-            
-            <ScrollReveal 
-              baseOpacity={0.1}
-              baseRotation={1.5}
-              blurStrength={2}
-              containerClassName="mt-4"
-              textClassName="text-base md:text-lg lg:text-xl text-gray-600 leading-relaxed font-light italic"
-              rotationEnd="bottom center"
-              wordAnimationEnd="bottom center"
-            >
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-serif font-semibold text-gray-900 tracking-tight uppercase leading-tight">
+              must have: <span className="text-gold lowercase font-serif font-bold">extendable tables</span>
+            </h2>
+            <p className="text-base md:text-lg lg:text-xl text-gray-600 leading-relaxed font-light italic">
               For a small home or a spacious living room, for a compact dining area or a significant open space: an extendable table is always an excellent choice.
-            </ScrollReveal>
+            </p>
           </div>
           
           <div className="relative scroll-float-slow">
