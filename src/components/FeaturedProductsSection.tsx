@@ -1,9 +1,12 @@
-
 import { Eye } from 'lucide-react';
 import LuxuryCarousel from './LuxuryCarousel';
 import ScrollFloat from '@/Animations/TextAnimations/ScrollFloat/ScrollFloat';
+import { useEffect, useRef } from 'react';
 
 const FeaturedProductsSection = () => {
+  const scrollTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const sectionRef = useRef<HTMLElement>(null);
+
   const products = [
     {
       id: 1,
@@ -25,8 +28,58 @@ const FeaturedProductsSection = () => {
     }
   ];
 
+  // Auto-scroll functionality
+  useEffect(() => {
+    const section = sectionRef.current;
+    if (!section) return;
+
+    const resetScrollTimeout = () => {
+      if (scrollTimeoutRef.current) {
+        clearTimeout(scrollTimeoutRef.current);
+      }
+      
+      scrollTimeoutRef.current = setTimeout(() => {
+        section.scrollBy({
+          top: window.innerHeight * 0.3,
+          behavior: 'smooth'
+        });
+      }, 2000);
+    };
+
+    const handleUserScroll = () => {
+      resetScrollTimeout();
+    };
+
+    const handleMouseMove = () => {
+      resetScrollTimeout();
+    };
+
+    const handleKeyDown = () => {
+      resetScrollTimeout();
+    };
+
+    // Start the initial timeout
+    resetScrollTimeout();
+
+    // Add event listeners for user activity
+    window.addEventListener('scroll', handleUserScroll);
+    window.addEventListener('mousemove', handleMouseMove);
+    window.addEventListener('keydown', handleKeyDown);
+    section.addEventListener('scroll', handleUserScroll);
+
+    return () => {
+      if (scrollTimeoutRef.current) {
+        clearTimeout(scrollTimeoutRef.current);
+      }
+      window.removeEventListener('scroll', handleUserScroll);
+      window.removeEventListener('mousemove', handleMouseMove);
+      window.removeEventListener('keydown', handleKeyDown);
+      section.removeEventListener('scroll', handleUserScroll);
+    };
+  }, []);
+
   return (
-    <section className="bg-white py-16 md:py-24 relative z-0">
+    <section ref={sectionRef} className="bg-white py-16 md:py-24 relative z-0">
       <div className="max-w-7xl mx-auto px-4 md:px-8">
         <div className="text-center mb-12 md:mb-16 lg:mb-20">
           <h2 className="text-4xl md:text-5xl lg:text-6xl font-light text-gray-900 mb-4 md:mb-6 leading-tight scroll-float-subtle font-serif">

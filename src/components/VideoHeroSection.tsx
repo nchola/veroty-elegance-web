@@ -2,6 +2,7 @@
 import { ChevronDown, ChevronLeft, ChevronRight } from 'lucide-react';
 import { useEffect, useRef, useState } from 'react';
 import { ScrollVelocity } from '@/Animations/ScrollVelocity/ScrollVelocity';
+import ShinyText from '@/Animations/TextAnimations/ShinyText/ShinyText';
 
 const videos = [
   '/mainhero.mp4',
@@ -59,10 +60,18 @@ const VideoHeroSection = () => {
       <div className="video-content relative z-30 flex items-center justify-center h-full text-center text-white">
         <div className="max-w-6xl px-4">
           <h1 className="text-6xl md:text-8xl font-light mb-8 tracking-wider">
-            <span className="font-serif italic text-gold">Veroty</span>
+            <ShinyText 
+              text="Veroty" 
+              speed={3}
+              className="font-serif italic text-gold text-6xl md:text-8xl font-light tracking-wider"
+            />
           </h1>
           <p className="text-2xl text-white/40 md:text-3xl mb-12 opacity-90 font-serif italic tracking-wide">
-            Luxury Redefined
+            <ShinyText 
+              text="Luxury Redefined" 
+              speed={4}
+              className="text-2xl md:text-3xl text-white/40 opacity-90 font-serif italic tracking-wide"
+            />
           </p>
         </div>
       </div>
