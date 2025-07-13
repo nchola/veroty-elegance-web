@@ -1,6 +1,8 @@
 import { ChevronDown } from 'lucide-react';
 import { useEffect, useRef } from 'react';
 import Masonry from '@/Animations/Masonry/Masonry';
+import ScrollVelocity from '@/Animations/ScrollVelocity/ScrollVelocity';
+
 
 // Fungsi untuk tinggi random antara 180–400px
 function getRandomHeight() {
@@ -202,7 +204,21 @@ const MansorySection = () => {
         <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
           Discover our curated selection of luxury furniture pieces, each crafted with precision and timeless elegance
         </p>
+        <ScrollVelocity
+          texts={["Luxury Premium Elegance Excellence"]}
+          velocity={30}
+          className="text-black/15 font-serif italic mt-4"
+          scrollerClassName="text-2xl md:text-4xl"
+        />
       </div>
+      {/* <div className="absolute bottom-20 left-0 right-0 z-30">
+        <ScrollVelocity
+          texts={["Luxury Premium Elegance Excellence"]}
+          velocity={30}
+          className="text-white/30 font-serif italic"
+          scrollerClassName="text-3xl md:text-5xl"
+        />
+      </div> */}
 
       {/* Masonry Grid */}
       <div className="container mx-auto px-4">

@@ -8,7 +8,7 @@ const StoryIntroSection = () => {
             <h2 className="text-3xl md:text-4xl lg:text-5xl font-light text-gray-900 font-serif leading-tight">
               It all starts from the chair...
             </h2>
-            <p className="text-base md:text-lg text-gray-600 leading-relaxed">
+            <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
               Since 1923, we have been producing functional and elegant furniture, because we believe that beauty, functionality, and quality can coexist in every product we make.
             </p>
           </div>
