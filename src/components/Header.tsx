@@ -140,7 +140,6 @@ const Header = () => {
               <span className={`text-xs font-light tracking-wide transition-colors mt-1 hidden sm:block ${
                 isScrolled ? 'text-gray-600' : 'text-white/80'
               }`}>
-                The furniture that defines you
               </span>
             </div>
 
