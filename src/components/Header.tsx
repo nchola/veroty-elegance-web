@@ -80,16 +80,16 @@ const Header = () => {
     <>
       <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         isScrolled 
-          ? 'bg-white/95 backdrop-blur-md shadow-lg py-4' 
-          : 'bg-transparent py-6'
+          ? 'bg-white/95 backdrop-blur-md shadow-lg py-3' 
+          : 'bg-transparent py-4'
       }`}>
         <div className="max-w-7xl mx-auto px-4 md:px-8">
-          <div className="flex items-center justify-between">
+          <div className="flex items-center justify-between relative">
             {/* Left Menu */}
-            <div className="flex items-center space-x-6">
+            <div className="flex items-center space-x-4 md:space-x-6 flex-1">
               <button
                 onClick={toggleMenu}
-                className="flex flex-col space-y-1 group"
+                className="flex flex-col space-y-1 group z-10"
                 aria-label="Menu"
               >
                 <span className={`w-6 h-0.5 transition-all duration-300 ${
@@ -128,15 +128,32 @@ const Header = () => {
               </nav>
             </div>
 
-            {/* Logo Tengah */}
-            <div className="absolute left-1/2 transform -translate-x-1/2">
-              <a href="/">
-                <img src="./logo.png" height="66" alt="Veroty Logo" style={{ maxHeight: 66 }} />
-              </a>
+            {/* Logo Tengah - Adjusted for mobile */}
+            <div className="absolute left-1/2 transform -translate-x-1/2 flex flex-col items-center">
+              <div className="flex items-center">
+                <span className={`font-serif text-xl md:text-2xl lg:text-3xl font-bold tracking-wider transition-all duration-300 ${
+                  isScrolled ? 'text-gray-900' : 'text-white'
+                }`} 
+                style={{
+                  background: isScrolled 
+                    ? 'linear-gradient(135deg, #2D5A3D 0%, #4A7C59 100%)' 
+                    : 'linear-gradient(135deg, #2D5A3D 0%, #4A7C59 100%)',
+                  WebkitBackgroundClip: 'text',
+                  WebkitTextFillColor: 'transparent',
+                  backgroundClip: 'text'
+                }}>
+                  VEROTY
+                </span>
+              </div>
+              <span className={`text-xs font-light tracking-wide transition-colors mt-1 hidden sm:block ${
+                isScrolled ? 'text-gray-600' : 'text-white/80'
+              }`}>
+                The furniture that defines you
+              </span>
             </div>
 
-            {/* Right Service Menu */}
-            <div className="flex items-center space-x-4">
+            {/* Right Service Menu - Adjusted spacing for mobile */}
+            <div className="flex items-center space-x-2 md:space-x-4 flex-1 justify-end">
               <button 
                 className={`p-2 transition-colors ${
                   isScrolled 
@@ -145,7 +162,7 @@ const Header = () => {
                 }`}
                 aria-label="Search"
               >
-                <Search className="w-5 h-5" />
+                <Search className="w-4 h-4 md:w-5 md:h-5" />
               </button>
               <button 
                 className={`p-2 transition-colors ${
@@ -155,17 +172,17 @@ const Header = () => {
                 }`}
                 aria-label="Store locator"
               >
-                <MapPin className="w-5 h-5" />
+                <MapPin className="w-4 h-4 md:w-5 md:h-5" />
               </button>
               <button 
-                className={`p-2 transition-colors hidden md:block ${
+                className={`p-2 transition-colors hidden sm:block ${
                   isScrolled 
                     ? 'text-gray-900 hover:text-gold' 
                     : 'text-white hover:text-gold'
                 }`}
                 aria-label="Login"
               >
-                <User className="w-5 h-5" />
+                <User className="w-4 h-4 md:w-5 md:h-5" />
               </button>
               <button 
                 className={`p-2 transition-colors ${
@@ -175,7 +192,7 @@ const Header = () => {
                 }`}
                 aria-label="Wishlist"
               >
-                <Heart className="w-5 h-5" />
+                <Heart className="w-4 h-4 md:w-5 md:h-5" />
               </button>
             </div>
           </div>
@@ -218,7 +235,20 @@ const Header = () => {
           <div className="absolute top-0 left-0 bottom-0 w-80 bg-white overflow-y-auto">
             <div className="p-6">
               <div className="flex items-center justify-between mb-8">
-                <span className="font-serif text-2xl text-gold">Veroty</span>
+                <div className="flex flex-col">
+                  <span className="font-serif text-2xl font-bold" 
+                    style={{
+                      background: 'linear-gradient(135deg, #2D5A3D 0%, #4A7C59 100%)',
+                      WebkitBackgroundClip: 'text',
+                      WebkitTextFillColor: 'transparent',
+                      backgroundClip: 'text'
+                    }}>
+                    VEROTY
+                  </span>
+                  <span className="text-xs text-gray-600 mt-1">
+                    The furniture that defines you
+                  </span>
+                </div>
                 <button onClick={toggleMenu} className="text-gray-900">
                   <X className="w-6 h-6" />
                 </button>
@@ -277,4 +307,3 @@ const Header = () => {
 };
 
 export default Header;
- 
