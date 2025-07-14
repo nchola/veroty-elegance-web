@@ -63,9 +63,9 @@ const VideoHeroSection = () => {
             <TextPressure 
               text="Veroty" 
               fontFamily="Playfair Display, serif" 
-              textColor="#d4af37" 
-              className="font-serif italic text-gold"
-              minFontSize={60} // mobile
+              textColor="#ffffff99" 
+              className="font-serif italic"
+              minFontSize={40} // mobile
             />
             <style>{`
               @media (min-width: 768px) {

@@ -128,14 +128,12 @@ const Header = () => {
               </nav>
             </div>
 
-            {/* Logo
+            {/* Logo Tengah */}
             <div className="absolute left-1/2 transform -translate-x-1/2">
-              <a href="/" className="font-serif text-2xl md:text-3xl font-light tracking-wider">
-                <span className={`transition-colors ${
-                  isScrolled ? 'text-gold' : 'text-gold'
-                }`}>Veroty</span>
+              <a href="/">
+                <img src="./logo.png" height="66" alt="Veroty Logo" style={{ maxHeight: 66 }} />
               </a>
-            </div> */}
+            </div>
 
             {/* Right Service Menu */}
             <div className="flex items-center space-x-4">

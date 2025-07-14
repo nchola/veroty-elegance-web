@@ -85,8 +85,8 @@ interface MasonryProps {
 const Masonry: React.FC<MasonryProps> = ({
   items,
   ease = "power3.out",
-  duration = 0.6,
-  stagger = 0.05,
+  duration = 3,
+  stagger = 0.08,
   animateFrom = "bottom",
   scaleOnHover = true,
   hoverScale = 0.95,
@@ -106,6 +106,7 @@ const Masonry: React.FC<MasonryProps> = ({
 
   const [containerRef, { width }] = useMeasure<HTMLDivElement>();
   const [imagesReady, setImagesReady] = useState(false);
+  const [isRevealed, setIsRevealed] = useState(false);
 
   const getInitialPosition = (item: any) => {
     const containerRect = containerRef.current?.getBoundingClientRect();
@@ -142,6 +143,20 @@ const Masonry: React.FC<MasonryProps> = ({
     preloadImages(items.map((i) => i.img)).then(() => setImagesReady(true));
   }, [items]);
 
+  // IntersectionObserver untuk reveal saat section masuk viewport
+  useEffect(() => {
+    const node = containerRef.current;
+    if (!node) return;
+    const observer = new window.IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) setIsRevealed(true);
+      },
+      { threshold: 0.2 }
+    );
+    observer.observe(node);
+    return () => observer.disconnect();
+  }, [containerRef]);
+
   const grid = useMemo(() => {
     if (!width) return [];
     const colHeights = new Array(columns).fill(0);
@@ -163,7 +178,7 @@ const Masonry: React.FC<MasonryProps> = ({
   const hasMounted = useRef(false);
 
   useLayoutEffect(() => {
-    if (!imagesReady) return;
+    if (!imagesReady || !isRevealed) return;
 
     grid.forEach((item, index) => {
       const selector = `[data-key="${item.id}"]`;
@@ -185,7 +200,7 @@ const Masonry: React.FC<MasonryProps> = ({
             opacity: 1,
             ...animProps,
             ...(blurToFocus && { filter: "blur(0px)" }),
-            duration: 0.8,
+            duration: 0.7,
             ease: "power3.out",
             delay: index * stagger,
           }
@@ -201,7 +216,7 @@ const Masonry: React.FC<MasonryProps> = ({
     });
 
     hasMounted.current = true;
-  }, [grid, imagesReady, stagger, animateFrom, blurToFocus, duration, ease]);
+  }, [grid, imagesReady, isRevealed, stagger, animateFrom, blurToFocus, duration, ease]);
 
   const handleMouseEnter = (id: string, element: HTMLElement) => {
     if (scaleOnHover) {
