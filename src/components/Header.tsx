@@ -39,6 +39,10 @@ const Header = () => {
 
   const productCategories = [
     {
+      title: 'All Products',
+      subcategories: []
+    },
+    {
       title: 'chairs',
       subcategories: [
         'All chairs',
@@ -231,16 +235,23 @@ const Header = () => {
                       {category.title}
                     </h3>
                     <ul className="space-y-2">
-                      {category.subcategories.map((sub) => (
-                        <li key={sub}>
-                          <a 
-                            href="#" 
-                            className="text-gray-600 hover:text-gold transition-colors text-sm block py-1"
-                          >
-                            {sub}
-                          </a>
+                      {/* Jika All Products, tampilkan link langsung */}
+                      {category.title === 'All Products' ? (
+                        <li>
+                          <a href="/all-products" className="text-gray-600 hover:text-gold transition-colors text-sm">All Products</a>
                         </li>
-                      ))}
+                      ) : (
+                        category.subcategories.map((sub) => (
+                          <li key={sub}>
+                            <a 
+                              href="#" 
+                              className="text-gray-600 hover:text-gold transition-colors text-sm block py-1"
+                            >
+                              {sub}
+                            </a>
+                          </li>
+                        ))
+                      )}
                     </ul>
                   </div>
                 ))}
@@ -297,17 +308,23 @@ const Header = () => {
                           <h4 className="text-sm font-medium text-gray-900 capitalize mb-2 hover:text-gold transition-colors cursor-pointer">
                             {category.title}
                           </h4>
-                          <ul className="ml-3 space-y-1">
-                            {category.subcategories.map((sub) => (
-                              <li key={sub}>
-                                <a 
-                                  href="#" 
-                                  className="text-xs text-gray-600 hover:text-gold transition-colors block py-1"
-                                >
-                                  {sub}
-                                </a>
+                          <ul className="ml-4 space-y-1">
+                            {category.title === 'All Products' ? (
+                              <li>
+                                <a href="/all-products" className="text-sm text-gray-600 hover:text-gold transition-colors block py-1">All Products</a>
                               </li>
-                            ))}
+                            ) : (
+                              category.subcategories.map((sub) => (
+                                <li key={sub}>
+                                  <a 
+                                    href="#" 
+                                    className="text-sm text-gray-600 hover:text-gold transition-colors block py-1"
+                                  >
+                                    {sub}
+                                  </a>
+                                </li>
+                              ))
+                            )}
                           </ul>
                         </div>
                       ))}
