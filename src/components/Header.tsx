@@ -19,6 +19,18 @@ const Header = () => {
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
     setActiveSubmenu(null);
+    // Prevent body scroll when menu is open
+    if (!isMenuOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'unset';
+    }
+  };
+
+  const closeMenu = () => {
+    setIsMenuOpen(false);
+    setActiveSubmenu(null);
+    document.body.style.overflow = 'unset';
   };
 
   const toggleSubmenu = (menu: string) => {
@@ -210,7 +222,7 @@ const Header = () => {
 
         {/* Products Submenu - Desktop */}
         {activeSubmenu === 'products' && (
-          <div className="hidden lg:block absolute top-full left-0 right-0 bg-white shadow-2xl border-t z-[60] animate-fadeInUp">
+          <div className="hidden lg:block absolute top-full left-0 right-0 bg-white shadow-2xl border-t z-[100] animate-fadeInUp">
             <div className="max-w-7xl mx-auto px-8 py-8">
               <div className="grid grid-cols-3 gap-8">
                 {productCategories.map((category, index) => (
@@ -238,115 +250,119 @@ const Header = () => {
         )}
       </header>
 
-      {/* Mobile Menu Overlay - Positioned below header */}
+      {/* Overlay Background */}
       {isMenuOpen && (
-        <div className="fixed inset-0 z-[45] lg:hidden">
-          {/* Background overlay */}
-          <div className="absolute inset-0 bg-black bg-opacity-50" onClick={toggleMenu}></div>
-          
-          {/* Menu panel - starts below header */}
-          <div className="fixed top-[72px] right-0 bottom-0 w-[85vw] min-w-[300px] max-w-[400px] bg-white shadow-2xl transform transition-transform duration-300 ease-in-out">
-            {/* Close button - positioned at top right of menu */}
-            <div className="flex justify-end p-4 border-b">
-              <button 
-                onClick={toggleMenu} 
-                className="text-gray-900 hover:text-gold transition-colors"
-                aria-label="Close menu"
-              >
-                <X className="w-6 h-6" />
-              </button>
+        <div 
+          className="fixed inset-0 bg-black bg-opacity-50 z-[90]"
+          onClick={closeMenu}
+        />
+      )}
+
+      {/* Side Panel Menu - Mobile & Desktop */}
+      <div className={`fixed top-0 right-0 h-full w-full max-w-md bg-white shadow-2xl transform transition-transform duration-300 ease-in-out z-[95] ${
+        isMenuOpen ? 'translate-x-0' : 'translate-x-full'
+      }`}>
+        {/* Close Button */}
+        <div className="absolute top-4 right-4 z-10">
+          <button
+            onClick={closeMenu}
+            className="p-2 text-gray-900 hover:text-gold transition-colors"
+            aria-label="Close menu"
+          >
+            <X className="w-6 h-6" />
+          </button>
+        </div>
+
+        {/* Menu Content */}
+        <div className="h-full overflow-y-auto pt-16 pb-6">
+          <div className="px-6">
+            {/* Mobile Navigation */}
+            <div className="lg:hidden mb-8">
+              <nav className="space-y-2">
+                <div className="border-b pb-4">
+                  <button
+                    onClick={() => toggleSubmenu('mobile-products')}
+                    className="flex items-center justify-between w-full py-3 text-gray-900 hover:text-gold transition-colors"
+                  >
+                    <span className="font-light text-base tracking-wide">products</span>
+                    <ChevronRight className={`w-4 h-4 transition-transform duration-200 ${
+                      activeSubmenu === 'mobile-products' ? 'rotate-90' : ''
+                    }`} />
+                  </button>
+                  
+                  {activeSubmenu === 'mobile-products' && (
+                    <div className="ml-4 mt-3 space-y-4 animate-fadeIn">
+                      {productCategories.map((category) => (
+                        <div key={category.title}>
+                          <h4 className="text-sm font-medium text-gray-900 capitalize mb-2 hover:text-gold transition-colors cursor-pointer">
+                            {category.title}
+                          </h4>
+                          <ul className="ml-3 space-y-1">
+                            {category.subcategories.map((sub) => (
+                              <li key={sub}>
+                                <a 
+                                  href="#" 
+                                  className="text-xs text-gray-600 hover:text-gold transition-colors block py-1"
+                                >
+                                  {sub}
+                                </a>
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+                      ))}
+                    </div>
+                  )}
+                </div>
+
+                <a 
+                  href="#inspiration" 
+                  className="block py-3 text-gray-900 hover:text-gold transition-colors font-light text-base tracking-wide border-b"
+                >
+                  inspiration
+                </a>
+              </nav>
             </div>
 
-            {/* Scrollable menu content */}
-            <div className="h-full overflow-y-auto pb-20">
-              <div className="p-6">
-                {/* Main Navigation */}
-                <nav className="space-y-2 mb-8">
-                  <div className="border-b pb-4">
-                    <button
-                      onClick={() => toggleSubmenu('mobile-products')}
-                      className="flex items-center justify-between w-full py-3 text-gray-900 hover:text-gold transition-colors"
-                    >
-                      <span className="font-light text-sm tracking-wide">products</span>
-                      <ChevronRight className={`w-4 h-4 transition-transform duration-200 ${
-                        activeSubmenu === 'mobile-products' ? 'rotate-90' : ''
-                      }`} />
-                    </button>
-                    
-                    {activeSubmenu === 'mobile-products' && (
-                      <div className="ml-4 mt-3 space-y-4 animate-fadeIn">
-                        {productCategories.map((category) => (
-                          <div key={category.title}>
-                            <h4 className="text-sm font-medium text-gray-900 capitalize mb-2 hover:text-gold transition-colors cursor-pointer">
-                              {category.title}
-                            </h4>
-                            <ul className="ml-3 space-y-1">
-                              {category.subcategories.map((sub) => (
-                                <li key={sub}>
-                                  <a 
-                                    href="#" 
-                                    className="text-xs text-gray-600 hover:text-gold transition-colors block py-1"
-                                  >
-                                    {sub}
-                                  </a>
-                                </li>
-                              ))}
-                            </ul>
-                          </div>
-                        ))}
-                      </div>
-                    )}
-                  </div>
-
+            {/* Menu Items */}
+            <ul className="space-y-2 mb-8">
+              {menuItems.map((item, index) => (
+                <li key={index} className={item.isCountry ? "border-b pb-2 mb-2" : ""}>
                   <a 
-                    href="#inspiration" 
-                    className="block py-3 text-gray-900 hover:text-gold transition-colors font-light text-sm tracking-wide border-b"
+                    href={item.href} 
+                    className={`block py-2 text-sm transition-colors ${
+                      item.isCountry 
+                        ? "text-gray-900 font-medium hover:text-gold" 
+                        : "text-gray-600 hover:text-gold"
+                    }`}
                   >
-                    inspiration
+                    {item.name}
                   </a>
-                </nav>
+                </li>
+              ))}
+            </ul>
 
-                {/* Menu Items */}
-                <ul className="space-y-2 mb-8">
-                  {menuItems.map((item, index) => (
-                    <li key={index} className={item.isCountry ? "border-b pb-2 mb-2" : ""}>
-                      <a 
-                        href={item.href} 
-                        className={`block py-2 text-sm transition-colors ${
-                          item.isCountry 
-                            ? "text-gray-900 font-medium hover:text-gold" 
-                            : "text-gray-600 hover:text-gold"
-                        }`}
-                      >
-                        {item.name}
-                      </a>
-                    </li>
-                  ))}
-                </ul>
-
-                {/* Social Links */}
-                <div className="border-t pt-6">
-                  <span className="text-sm text-gray-500 mb-4 block">follow us</span>
-                  <ul className="flex flex-wrap gap-4">
-                    {socialLinks.map((social) => (
-                      <li key={social.name}>
-                        <a 
-                          href={social.href} 
-                          className="text-sm text-gray-600 hover:text-gold transition-colors"
-                          target="_blank"
-                          rel="noopener noreferrer"
-                        >
-                          {social.name}
-                        </a>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              </div>
+            {/* Social Links */}
+            <div className="border-t pt-6">
+              <span className="text-sm text-gray-500 mb-4 block">follow us</span>
+              <ul className="flex flex-wrap gap-4">
+                {socialLinks.map((social) => (
+                  <li key={social.name}>
+                    <a 
+                      href={social.href} 
+                      className="text-sm text-gray-600 hover:text-gold transition-colors"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      {social.name}
+                    </a>
+                  </li>
+                ))}
+              </ul>
             </div>
           </div>
         </div>
-      )}
+      </div>
     </>
   );
 };
