@@ -173,7 +173,7 @@ const Header = () => {
                 <img 
                   src="/logo.png" 
                   alt="VEROTY" 
-                  className="h-6 md:h-8 lg:h-10 w-auto transition-all duration-300"
+                  className="h-8 md:h-10 lg:h-12 w-auto transition-all duration-300"
                 />
               </div>
             </div>
