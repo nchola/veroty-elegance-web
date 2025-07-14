@@ -63,8 +63,8 @@ const VideoHeroSection = () => {
             <TextPressure 
               text="Veroty" 
               fontFamily="Playfair Display, serif" 
-              textColor="#ffffff99" // atau "rgba(255,255,255,0.6)"
-              className="font-serif italic"
+              textColor="#d4af37" 
+              className="font-serif italic text-gold"
               minFontSize={60} // mobile
             />
             <style>{`
@@ -75,7 +75,7 @@ const VideoHeroSection = () => {
               }
             `}</style>
           </h1>
-          <p className="text-2xl text-white/55 md:text-3xl mb-12 opacity-90 font-serif italic tracking-wide">
+          <p className="text-2xl text-white/40 md:text-3xl mb-12 opacity-90 font-serif italic tracking-wide">
             Luxury Redefined
           </p>
         </div>
