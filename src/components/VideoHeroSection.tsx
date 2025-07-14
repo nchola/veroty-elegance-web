@@ -56,40 +56,25 @@ const VideoHeroSection = () => {
         
       </div>
 
-      {/* Minimal Content Overlay */}
-      <div className="video-content relative z-30 flex items-center justify-center h-full text-center text-white">
-        <div className="max-w-6xl px-4">
-          <h1 className="text-6xl md:text-8xl font-light mb-8 tracking-wider">
-            <TextPressure 
-              text="Veroty" 
-              fontFamily="Playfair Display, serif" 
-              textColor="#ffffff99" 
-              className="font-serif italic"
-              minFontSize={40} // mobile
-            />
-            <style>{`
-              @media (min-width: 768px) {
-                .text-pressure-title {
-                  font-size: 96px !important;
-                }
-              }
-            `}</style>
-          </h1>
-          <p className="text-2xl text-white/40 md:text-3xl mb-12 opacity-90 font-serif italic tracking-wide">
-            Luxury Redefined
-          </p>
-        </div>
-      </div>
+      
 
-      {/* Scroll Velocity Text Animation at bottom */}
-      {/* <div className="absolute bottom-20 left-0 right-0 z-30">
-        <ScrollVelocity
-          texts={["Luxury Premium Elegance Excellence"]}
-          velocity={30}
-          className="text-white/30 font-serif italic"
-          scrollerClassName="text-3xl md:text-5xl"
+      {/* TextPressure di bawah-tengah section */}
+      <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-40">
+        <TextPressure 
+          text="Veroty" 
+          fontFamily="Playfair Display, serif" 
+          textColor="#ffffff39" 
+          className="font-serif italic"
+          minFontSize={40} // mobile
         />
-      </div> */}
+        <style>{`
+          @media (min-width: 768px) {
+            .text-pressure-title {
+              font-size: 96px !important;
+            }
+          }
+        `}</style>
+      </div>
       
       
     </section>

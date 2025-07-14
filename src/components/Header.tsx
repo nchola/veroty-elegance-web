@@ -135,7 +135,7 @@ const Header = () => {
               </a>
             </div>
 
-            {/* Right Service Menu */}
+            Right Service Menu
             <div className="flex items-center space-x-4">
               <button 
                 className={`p-2 transition-colors ${
