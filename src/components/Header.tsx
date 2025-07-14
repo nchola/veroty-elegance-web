@@ -104,17 +104,19 @@ const Header = () => {
               </button>
 
               <nav className="hidden lg:flex items-center space-x-8">
-                <button 
-                  onClick={() => toggleSubmenu('products')}
-                  className={`flex items-center space-x-1 text-sm font-light tracking-wide transition-colors ${
-                    isScrolled 
-                      ? 'text-gray-900 hover:text-gold' 
-                      : 'text-white hover:text-gold'
-                  }`}
-                >
-                  <span>products</span>
-                  <ChevronDown className="w-3 h-3" />
-                </button>
+                <div className="relative">
+                  <button 
+                    onClick={() => toggleSubmenu('products')}
+                    className={`flex items-center space-x-1 text-sm font-light tracking-wide transition-colors ${
+                      isScrolled 
+                        ? 'text-gray-900 hover:text-gold' 
+                        : 'text-white hover:text-gold'
+                    }`}
+                  >
+                    <span>products</span>
+                    <ChevronDown className="w-3 h-3" />
+                  </button>
+                </div>
                 <a 
                   href="#inspiration" 
                   className={`text-sm font-light tracking-wide transition-colors ${
@@ -191,7 +193,7 @@ const Header = () => {
 
         {/* Products Submenu - Desktop */}
         {activeSubmenu === 'products' && (
-          <div className="hidden lg:block absolute top-full left-0 right-0 bg-white shadow-xl border-t">
+          <div className="hidden lg:block absolute top-full left-0 right-0 bg-white shadow-xl border-t z-50">
             <div className="max-w-7xl mx-auto px-4 md:px-8 py-8">
               <div className="grid grid-cols-3 gap-8">
                 {productCategories.map((category, index) => (
@@ -226,16 +228,7 @@ const Header = () => {
           <div className="absolute top-0 left-0 bottom-0 w-80 bg-white overflow-y-auto">
             <div className="p-6">
               <div className="flex items-center justify-between mb-8">
-                <div className="flex flex-col items-center">
-                  <img 
-                    src="/logo.png" 
-                    alt="VEROTY" 
-                    className="h-8 w-auto"
-                  />
-                  <span className="text-xs text-gray-600 mt-2">
-                    The furniture that defines you
-                  </span>
-                </div>
+                <span className="text-lg font-serif text-gray-900">VEROTY</span>
                 <button onClick={toggleMenu} className="text-gray-900">
                   <X className="w-6 h-6" />
                 </button>
