@@ -80,25 +80,25 @@ const Header = () => {
     <>
       <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         isScrolled 
-          ? 'bg-white/95 backdrop-blur-md shadow-lg py-3' 
-          : 'bg-transparent py-4'
+          ? 'bg-white/95 backdrop-blur-md shadow-lg py-2' 
+          : 'bg-transparent py-3'
       }`}>
-        <div className="max-w-7xl mx-auto px-4 md:px-8">
+        <div className="max-w-7xl mx-auto px-3 md:px-8">
           <div className="flex items-center justify-between relative">
             {/* Left Menu */}
-            <div className="flex items-center space-x-4 md:space-x-6 flex-1">
+            <div className="flex items-center space-x-3 md:space-x-6 flex-1">
               <button
                 onClick={toggleMenu}
                 className="flex flex-col space-y-1 group z-10"
                 aria-label="Menu"
               >
-                <span className={`w-6 h-0.5 transition-all duration-300 ${
+                <span className={`w-5 h-0.5 transition-all duration-300 ${
                   isScrolled ? 'bg-gray-900' : 'bg-white'
                 } ${isMenuOpen ? 'rotate-45 translate-y-1.5' : ''}`}></span>
-                <span className={`w-6 h-0.5 transition-all duration-300 ${
+                <span className={`w-5 h-0.5 transition-all duration-300 ${
                   isScrolled ? 'bg-gray-900' : 'bg-white'
                 } ${isMenuOpen ? 'opacity-0' : ''}`}></span>
-                <span className={`w-6 h-0.5 transition-all duration-300 ${
+                <span className={`w-5 h-0.5 transition-all duration-300 ${
                   isScrolled ? 'bg-gray-900' : 'bg-white'
                 } ${isMenuOpen ? '-rotate-45 -translate-y-1.5' : ''}`}></span>
               </button>
@@ -128,22 +128,14 @@ const Header = () => {
               </nav>
             </div>
 
-            {/* Logo Tengah - Adjusted for mobile */}
+            {/* Logo Tengah - Using the provided logo image */}
             <div className="absolute left-1/2 transform -translate-x-1/2 flex flex-col items-center">
               <div className="flex items-center">
-                <span className={`font-serif text-xl md:text-2xl lg:text-3xl font-bold tracking-wider transition-all duration-300 ${
-                  isScrolled ? 'text-gray-900' : 'text-white'
-                }`} 
-                style={{
-                  background: isScrolled 
-                    ? 'linear-gradient(135deg, #2D5A3D 0%, #4A7C59 100%)' 
-                    : 'linear-gradient(135deg, #2D5A3D 0%, #4A7C59 100%)',
-                  WebkitBackgroundClip: 'text',
-                  WebkitTextFillColor: 'transparent',
-                  backgroundClip: 'text'
-                }}>
-                  VEROTY
-                </span>
+                <img 
+                  src="/logo.png" 
+                  alt="VEROTY" 
+                  className="h-8 md:h-10 lg:h-12 w-auto transition-all duration-300"
+                />
               </div>
               <span className={`text-xs font-light tracking-wide transition-colors mt-1 hidden sm:block ${
                 isScrolled ? 'text-gray-600' : 'text-white/80'
@@ -152,8 +144,8 @@ const Header = () => {
               </span>
             </div>
 
-            {/* Right Service Menu - Adjusted spacing for mobile */}
-            <div className="flex items-center space-x-2 md:space-x-4 flex-1 justify-end">
+            {/* Right Service Menu */}
+            <div className="flex items-center space-x-1 md:space-x-3 flex-1 justify-end">
               <button 
                 className={`p-2 transition-colors ${
                   isScrolled 
@@ -235,17 +227,13 @@ const Header = () => {
           <div className="absolute top-0 left-0 bottom-0 w-80 bg-white overflow-y-auto">
             <div className="p-6">
               <div className="flex items-center justify-between mb-8">
-                <div className="flex flex-col">
-                  <span className="font-serif text-2xl font-bold" 
-                    style={{
-                      background: 'linear-gradient(135deg, #2D5A3D 0%, #4A7C59 100%)',
-                      WebkitBackgroundClip: 'text',
-                      WebkitTextFillColor: 'transparent',
-                      backgroundClip: 'text'
-                    }}>
-                    VEROTY
-                  </span>
-                  <span className="text-xs text-gray-600 mt-1">
+                <div className="flex flex-col items-center">
+                  <img 
+                    src="/logo.png" 
+                    alt="VEROTY" 
+                    className="h-8 w-auto"
+                  />
+                  <span className="text-xs text-gray-600 mt-2">
                     The furniture that defines you
                   </span>
                 </div>
