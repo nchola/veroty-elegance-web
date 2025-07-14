@@ -89,7 +89,7 @@ const Header = () => {
             <div className="flex items-center space-x-3 md:space-x-6 flex-1">
               <button
                 onClick={toggleMenu}
-                className="flex flex-col space-y-1 group z-10"
+                className="flex flex-col space-y-1 group z-0"
                 aria-label="Menu"
               >
                 <span className={`w-5 h-0.5 transition-all duration-300 ${
@@ -129,7 +129,7 @@ const Header = () => {
             </div>
 
             {/* Logo Tengah - Using the provided logo image */}
-            <div className="absolute left-1/2 transform -translate-x-1/2 flex flex-col items-center">
+            <div className="absolute left-1/2 transform -translate-x-1/2 z-20">
               <div className="flex items-center">
                 <img 
                   src="/logo.png" 
