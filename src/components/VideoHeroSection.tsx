@@ -33,6 +33,8 @@ const VideoHeroSection = () => {
   return (
     <section className="video-hero-section h-screen relative overflow-hidden">
       {/* Video Carousel */}
+      <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-black/65 via-black/80 to-transparent pointer-events-none z-20" />
+        <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-transparent to-black/60 pointer-events-none" />
       <div className="video-background absolute inset-0 bg-black">
         {videos.map((src, idx) => (
           <video
