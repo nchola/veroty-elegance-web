@@ -33,8 +33,47 @@ const VideoHeroSection = () => {
   return (
     <section className="video-hero-section h-screen relative overflow-hidden">
       {/* Video Carousel */}
-      <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-black/65 via-black/80 to-transparent pointer-events-none z-20" />
-        <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-transparent to-black/60 pointer-events-none" />
+      
+      {/* Strong dark overlay to handle white video content */}
+      <div 
+        className="absolute inset-0 pointer-events-none z-10"
+        style={{
+          background: 'linear-gradient(to bottom, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.6) 30%, rgba(0,0,0,0.8) 100%)'
+        }}
+      />
+      
+      {/* Additional solid dark overlay for header area */}
+      <div 
+        className="absolute top-0 left-0 right-0 h-32 pointer-events-none z-15"
+        style={{
+          background: 'linear-gradient(to bottom, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0.9) 50%, rgba(0,0,0,0.7) 100%)'
+        }}
+      />
+      
+      {/* Top header gradient - very strong */}
+      <div className="absolute top-0 left-0 right-0 h-20 bg-gradient-to-t from-black/99 via-black/98 to-transparent pointer-events-none z-20" />
+      
+      {/* Main dark overlay with subtle texture effect */}
+      <div 
+        className="absolute inset-0 pointer-events-none z-25"
+        style={{
+          background: 'linear-gradient(to bottom, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.7) 50%, rgba(0,0,0,0.9) 100%)'
+        }}
+      />
+      
+      {/* Additional texture layer for depth */}
+      <div 
+        className="absolute inset-0 pointer-events-none z-30"
+        style={{
+          background: 'radial-gradient(circle at center, transparent 0%, rgba(0,0,0,0.3) 50%, rgba(0,0,0,0.6) 100%)'
+        }}
+      />
+
+      <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-black/85 via-black/95 to-transparent pointer-events-none z-20" />
+      
+      {/* Additional top overlay to eliminate white areas */}
+      <div className="absolute top-0 left-0 right-0 h-40 bg-gradient-to-b from-black/99 via-black/95 to-transparent pointer-events-none z-35" />
+
       <div className="video-background absolute inset-0 bg-black">
         {videos.map((src, idx) => (
           <video
@@ -47,10 +86,10 @@ const VideoHeroSection = () => {
             className={`w-full h-full object-cover absolute inset-0 transition-opacity duration-700 ${idx === activeIndex ? 'opacity-100 z-10' : 'opacity-0 z-0'}`}
           />
         ))}
-        <div className="video-overlay absolute inset-0 bg-black bg-opacity-40"></div>
+        <div className="video-overlay absolute inset-0 bg-black bg-opacity-60"></div>
         
         {/* Smooth transition gradient at bottom */}
-        <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-black/60 via-black/30 to-transparent z-20"></div>
+        <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-black/80 via-black/50 to-transparent z-20"></div>
         
         {/* Carousel Controls */}
         
