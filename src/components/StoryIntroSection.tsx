@@ -6,16 +6,17 @@ const StoryIntroSection = () => {
     fontSize: '16px',
     lineHeight: 1.7,
     color: '#525459',
-    WebkitFontSmoothing: 'antialiased',
-    boxSizing: 'border-box',
+    WebkitFontSmoothing: 'antialiased' as const,
+    boxSizing: 'border-box' as const,
     WebkitTapHighlightColor: 'transparent',
-    visibility: 'visible'
+    visibility: 'visible' as const
   };
 
   const imageWrapperStyle = {
-    width: '611px',
-    height: '345px',
-    aspectRatio: '611/345'
+    width: '100%',
+    aspectRatio: '16/9',
+    maxWidth: '100%',
+    overflow: 'hidden'
   };
 
   const arrowIcon = (
@@ -33,19 +34,24 @@ const StoryIntroSection = () => {
   );
 
   const PromotionalBox = ({ imageSrc, imageAlt, title, description, linkText, linkHref }) => (
-    <div className="m-2024-box flex-1">
-      <div className="image-wrapper" style={imageWrapperStyle}>
+    <div className="m-2024-box flex-1 min-w-0">
+      <div className="image-wrapper relative overflow-hidden rounded-lg" style={imageWrapperStyle}>
         <img 
           src={imageSrc}
           alt={imageAlt}
-          className="w-full h-full object-cover"
+          className="w-full h-full object-cover object-center transition-transform duration-300 hover:scale-105"
+          style={{
+            maxWidth: '100%',
+            height: 'auto',
+            display: 'block'
+          }}
         />
       </div>
-      <div className="padding bg-white p-8">
-        <div className="tit fs30 text-3xl font-bold text-gray-900 mb-4">
+      <div className="padding bg-white p-6 md:p-8 mt-4">
+        <div className="tit fs30 text-2xl md:text-3xl font-bold text-gray-900 mb-3 md:mb-4">
           {title}
         </div>
-        <div className="txt fs16 text-base text-gray-700 mb-6">
+        <div className="txt fs16 text-sm md:text-base text-gray-700 mb-4 md:mb-6">
           {description}
         </div>
         <div className="cta-arr left">
@@ -64,16 +70,16 @@ const StoryIntroSection = () => {
   return (
     <>
       {/* Original Story Intro Section */}
-      <section className="bg-white py-16 md:py-24" style={commonStyles}>
-        <div className="max-w-7xl mx-auto px-4 md:px-8">
+      <section className="bg-white py-12 md:py-16 lg:py-24" style={commonStyles}>
+        <div className="max-w-7xl mx-auto px-4 md:px-6 lg:px-8">
           <div className="max-w-4xl mx-auto text-center">
-            <div className="space-y-6">
-              <h2 className="text-3xl md:text-4xl lg:text-5xl font-light text-gray-900 leading-tight" style={{
+            <div className="space-y-4 md:space-y-6">
+              <h2 className="text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-light text-gray-900 leading-tight" style={{
                 fontFamily: 'calligarisregular'
               }}>
                 It all starts from the chair...
               </h2>
-              <p className="text-xl text-muted-foreground max-w-2xl mx-auto" style={{
+              <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto" style={{
                 fontFamily: 'calligarisregular',
                 color: '#525459'
               }}>
@@ -85,12 +91,12 @@ const StoryIntroSection = () => {
       </section>
 
       {/* New Promotional Sections */}
-      <section className="section m-2024-columns" style={{
+      <section className="section m-2024-columns -mt-8" style={{
         ...commonStyles,
         padding: '0px 0'
       }}>
         <div className="columns--2">
-          <div className="flex flex-col md:flex-row gap-8 max-w-7xl mx-auto px-4 md:px-8">
+          <div className="flex flex-col lg:flex-row gap-6 md:gap-8 lg:gap-10 max-w-7xl mx-auto px-4 md:px-6 lg:px-8">
             <PromotionalBox
               imageSrc="https://i.pinimg.com/736x/b8/86/cc/b886cc4fcee55f2bf89d1a57c8cd2a7d.jpg"
               imageAlt="Salone del Mobile 2025"
