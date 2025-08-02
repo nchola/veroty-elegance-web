@@ -1,68 +1,180 @@
 
-import { Eye } from 'lucide-react';
-import LuxuryCarousel from './LuxuryCarousel';
-import ScrollFloat from '@/Animations/TextAnimations/ScrollFloat/ScrollFloat';
+import { useState, useEffect } from 'react';
+import { ChevronLeft, ChevronRight, ArrowRight } from 'lucide-react';
+
+// Random height generator for masonry effect
+function getRandomHeight() {
+  return Math.floor(Math.random() * 120) + 280; // 280-400px
+}
 
 const FeaturedProductsSection = () => {
-  const products = [
+  const [currentSlide, setCurrentSlide] = useState(0);
+
+  // Featured furniture products with random heights
+  const featuredProducts = [
     {
       id: 1,
-      name: "Elegance Chair",
-      description: "Modern comfort meets timeless design",
-      image: "https://images.unsplash.com/photo-1721322800607-8c38375eef04?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2340&q=80"
+      name: "sophia",
+      subtitle: "Find out more",
+      image: "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=800&q=80",
+      height: getRandomHeight()
     },
     {
       id: 2,
-      name: "Heritage Collection",
-      description: "Crafted with traditional techniques",
-      image: "https://images.unsplash.com/photo-1487252665478-49b61b47f302?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2340&q=80"
+      name: "oleandro chair",
+      subtitle: "Design: Archirivolto",
+      description: "Find out more",
+      image: "https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=800&q=80",
+      height: getRandomHeight()
     },
     {
       id: 3,
-      name: "Contemporary Series",
-      description: "Bold designs for modern living",
-      image: "https://images.unsplash.com/photo-1465146344425-f00d5f5c8f07?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2340&q=80"
+      name: "oleandro",
+      subtitle: "create your version",
+      description: "Find out more",
+      image: "https://images.unsplash.com/photo-1506439773649-6e0eb8cfb237?w=800&q=80",
+      height: getRandomHeight()
+    },
+    {
+      id: 4,
+      name: "kitchen collection",
+      subtitle: "Modern sophistication",
+      description: "Find out more",
+      image: "https://images.unsplash.com/photo-1567538096630-e0c55bd6374c?w=800&q=80",
+      height: getRandomHeight()
+    },
+    {
+      id: 5,
+      name: "dining essence",
+      subtitle: "Elegant compositions",
+      description: "Find out more", 
+      image: "https://images.unsplash.com/photo-1631679706909-1844bbd07221?w=800&q=80",
+      height: getRandomHeight()
+    },
+    {
+      id: 6,
+      name: "contemporary living",
+      subtitle: "Timeless design",
+      description: "Find out more",
+      image: "https://images.unsplash.com/photo-1540932239986-30128078f3c5?w=800&q=80",
+      height: getRandomHeight()
     }
   ];
 
-  return (
-    <section className="section-seamless bg-white py-16 md:py-24 relative z-0">
-      <div className="max-w-7xl mx-auto px-4 md:px-8">
-        <div className="text-center mb-12 md:mb-16 lg:mb-20">
-          <h2 className="text-heading-1 text-gray-900 mb-4 md:mb-6 leading-tight scroll-float-subtle font-serif">
-            Signature Collection
-          </h2>
-          <p className="text-body-large text-gray-600 max-w-3xl mx-auto leading-relaxed scroll-float-slow">
-            Each piece in our collection represents the pinnacle of design and craftsmanship
-          </p>
-        </div>
+  // Auto-slide functionality
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrentSlide((prev) => (prev + 1) % featuredProducts.length);
+    }, 5000);
+    return () => clearInterval(timer);
+  }, [featuredProducts.length]);
 
-        <div className="w-full mb-16 md:mb-20 lg:mb-24 scroll-float -mx-4 md:-mx-8">
-          <LuxuryCarousel />
-        </div>
-        
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 lg:gap-12">
-          {products.map((product, index) => (
-            <div 
-              key={product.id} 
-              className={`product-card group cursor-pointer product-hover bg-white overflow-hidden shadow-lg scroll-float-${index % 2 === 0 ? 'slow' : 'subtle'} rounded-lg`}
-            >
-              <div className="product-image relative overflow-hidden">
-                <img 
-                  src={product.image} 
-                  alt={product.name} 
-                  className="w-full h-64 md:h-80 lg:h-96 object-cover transition-transform duration-500 group-hover:scale-105" 
+  const nextSlide = () => {
+    setCurrentSlide((prev) => (prev + 1) % featuredProducts.length);
+  };
+
+  const prevSlide = () => {
+    setCurrentSlide((prev) => (prev - 1 + featuredProducts.length) % featuredProducts.length);
+  };
+
+  return (
+    <section className="section-seamless bg-white py-0 full-bleed">
+      {/* Hero Slider Section */}
+      <div className="relative h-screen w-full overflow-hidden">
+        {featuredProducts.map((product, index) => (
+          <div
+            key={product.id}
+            className={`absolute inset-0 transition-transform duration-1000 ease-in-out ${
+              index === currentSlide ? 'translate-x-0' : 
+              index < currentSlide ? '-translate-x-full' : 'translate-x-full'
+            }`}
+          >
+            <div className="grid grid-cols-1 lg:grid-cols-2 h-full">
+              {/* Image Section */}
+              <div className="relative overflow-hidden">
+                <img
+                  src={product.image}
+                  alt={product.name}
+                  className="w-full h-full object-cover"
                 />
-                <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-30 transition-all duration-300 flex items-center justify-center">
-                  <button className="btn-view opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-white text-black px-6 py-3 md:px-8 md:py-4 flex items-center space-x-2 font-light rounded">
-                    <Eye className="w-4 h-4" />
-                    <span>View Details</span>
+                <div className="absolute inset-0 bg-gradient-to-r from-black/20 to-transparent lg:hidden"></div>
+              </div>
+              
+              {/* Content Section */}
+              <div className="flex items-center justify-center p-8 lg:p-16 bg-white">
+                <div className="text-center lg:text-left max-w-md">
+                  <h1 className="font-primary text-5xl lg:text-7xl font-light mb-4 text-foreground">
+                    {product.name}
+                  </h1>
+                  {product.subtitle && (
+                    <p className="font-primary text-lg lg:text-xl text-muted-foreground mb-6">
+                      {product.subtitle}
+                    </p>
+                  )}
+                  <button className="group inline-flex items-center text-lg font-primary text-foreground hover:text-primary transition-colors">
+                    {product.description || "Find out more"}
+                    <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform text-accent" />
                   </button>
                 </div>
               </div>
-              <div className="product-info p-6 md:p-8 text-center">
-                <h3 className="text-xl md:text-2xl font-light text-gray-900 mb-2 md:mb-3 font-serif">{product.name}</h3>
-                <p className="text-gray-600 text-base md:text-lg">{product.description}</p>
+            </div>
+          </div>
+        ))}
+
+        {/* Navigation Arrows */}
+        <button
+          onClick={prevSlide}
+          className="absolute left-4 lg:left-8 top-1/2 -translate-y-1/2 w-12 h-12 bg-white/80 hover:bg-white rounded-full flex items-center justify-center transition-all shadow-lg z-10"
+        >
+          <ChevronLeft className="w-6 h-6 text-foreground" />
+        </button>
+        <button
+          onClick={nextSlide}
+          className="absolute right-4 lg:right-8 top-1/2 -translate-y-1/2 w-12 h-12 bg-white/80 hover:bg-white rounded-full flex items-center justify-center transition-all shadow-lg z-10"
+        >
+          <ChevronRight className="w-6 h-6 text-foreground" />
+        </button>
+
+        {/* Slide Indicators */}
+        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex space-x-2">
+          {featuredProducts.map((_, index) => (
+            <button
+              key={index}
+              onClick={() => setCurrentSlide(index)}
+              className={`w-3 h-3 rounded-full transition-all ${
+                index === currentSlide ? 'bg-primary' : 'bg-white/50'
+              }`}
+            />
+          ))}
+        </div>
+      </div>
+
+      {/* Additional Products Grid - Mobile First */}
+      <div className="px-4 lg:px-8 py-12 lg:py-20">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-8">
+          {featuredProducts.slice(0, 6).map((product, index) => (
+            <div
+              key={`grid-${product.id}`}
+              className="group cursor-pointer"
+              style={{ height: `${product.height}px` }}
+            >
+              <div className="relative h-full overflow-hidden rounded-lg bg-white shadow-sm hover:shadow-xl transition-all duration-300">
+                <img
+                  src={product.image}
+                  alt={product.name}
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                  <div className="absolute bottom-6 left-6 right-6 text-white">
+                    <h3 className="font-primary text-xl lg:text-2xl font-light mb-2">
+                      {product.name}
+                    </h3>
+                    <button className="inline-flex items-center text-sm font-primary hover:text-accent transition-colors">
+                      Find out more
+                      <ArrowRight className="ml-2 w-4 h-4" />
+                    </button>
+                  </div>
+                </div>
               </div>
             </div>
           ))}

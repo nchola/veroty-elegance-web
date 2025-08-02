@@ -170,29 +170,72 @@ const MansorySection = () => {
     }
   };
 
-  // Auto-scroll loop logic
+  // Mobile-first auto-scroll with 3-second idle detection
   useEffect(() => {
     const container = scrollRef.current;
     if (!container) return;
+    
     let direction = 1; // 1: down, -1: up
     const scrollStep = 1; // px per interval
-    const interval = setInterval(() => {
-      if (!container) return;
-      if (direction === 1) {
-        if (container.scrollTop + container.clientHeight >= container.scrollHeight) {
-          direction = -1;
+    let idleTimer: NodeJS.Timeout;
+    let scrollInterval: NodeJS.Timeout;
+    let isUserInteracting = false;
+    
+    const startAutoScroll = () => {
+      if (scrollInterval) clearInterval(scrollInterval);
+      scrollInterval = setInterval(() => {
+        if (!container || isUserInteracting) return;
+        
+        if (direction === 1) {
+          if (container.scrollTop + container.clientHeight >= container.scrollHeight - 10) {
+            direction = -1;
+          } else {
+            container.scrollBy({ top: scrollStep, behavior: 'smooth' });
+          }
         } else {
-          container.scrollBy({ top: scrollStep, behavior: 'smooth' });
+          if (container.scrollTop <= 10) {
+            direction = 1;
+          } else {
+            container.scrollBy({ top: -scrollStep, behavior: 'smooth' });
+          }
         }
-      } else {
-        if (container.scrollTop <= 0) {
-          direction = 1;
-        } else {
-          container.scrollBy({ top: -scrollStep, behavior: 'smooth' });
-        }
-      }
-    }, 20);
-    return () => clearInterval(interval);
+      }, 30);
+    };
+    
+    const stopAutoScroll = () => {
+      if (scrollInterval) clearInterval(scrollInterval);
+    };
+    
+    const resetIdleTimer = () => {
+      isUserInteracting = true;
+      stopAutoScroll();
+      
+      if (idleTimer) clearTimeout(idleTimer);
+      idleTimer = setTimeout(() => {
+        isUserInteracting = false;
+        startAutoScroll();
+      }, 3000); // 3 seconds idle
+    };
+    
+    // Event listeners for user interaction
+    const events = ['touchstart', 'touchmove', 'touchend', 'scroll', 'mouseenter', 'mousemove'];
+    events.forEach(event => {
+      container.addEventListener(event, resetIdleTimer, { passive: true });
+    });
+    
+    // Start auto scroll initially after 3 seconds
+    idleTimer = setTimeout(() => {
+      isUserInteracting = false;
+      startAutoScroll();
+    }, 3000);
+    
+    return () => {
+      if (idleTimer) clearTimeout(idleTimer);
+      if (scrollInterval) clearInterval(scrollInterval);
+      events.forEach(event => {
+        container.removeEventListener(event, resetIdleTimer);
+      });
+    };
   }, []);
 
   return <section id="masonry" className="section-seamless bg-white py-6">

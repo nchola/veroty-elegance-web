@@ -6,7 +6,7 @@ import MansorySection from '@/components/MansorySection';
 import BrandIntroSection from '@/components/BrandIntroSection';
 import FeaturedProductsSection from '@/components/FeaturedProductsSection';
 import TestimonialSection from '@/components/TestimonialSection';
-import CTASection from '@/components/CTASection';
+import InspirationSection from '@/components/CTASection';
 import FooterSection from '@/components/FooterSection';
 
 const Index = () => {
@@ -81,7 +81,7 @@ const Index = () => {
         <BrandIntroSection />
         <FeaturedProductsSection />
         <TestimonialSection />
-        <CTASection />
+        <InspirationSection />
         <FooterSection />
       </div>
     </div>
