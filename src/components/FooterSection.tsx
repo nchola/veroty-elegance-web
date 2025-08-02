@@ -3,7 +3,7 @@ import { Heart } from 'lucide-react';
 
 const FooterSection = () => {
   return (
-    <footer className="bg-[#F5F2F0] text-[#525459] pt-12 pb-0 px-4 font-sans">
+    <footer className="section-seamless bg-[#F5F2F0] text-[#525459] pt-12 pb-0 px-4 font-sans">
       <div className="max-w-7xl mx-auto">
         {/* Logo & Menu */}
         <div className="grid md:grid-cols-4 gap-12 pb-8 border-b border-gray-300">

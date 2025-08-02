@@ -1,8 +1,8 @@
 import { Quote } from 'lucide-react';
 const TestimonialSection = () => {
-  return <section className="testimonials bg-white text-gray-900 scroll-reveal border-t border-gray-100 my-[100px] py-0">
-      <div className="max-w-5xl mx-auto px-8 py-32 text-center">
-        <h2 className="text-5xl md:text-6xl font-light mb-20 leading-tight scroll-float-subtle">What Our Clients Say</h2>
+  return <section className="section-seamless bg-white text-gray-900 scroll-reveal py-16 md:py-24">
+      <div className="max-w-5xl mx-auto px-8 text-center">
+        <h2 className="text-heading-1 mb-20 leading-tight scroll-float-subtle">What Our Clients Say</h2>
         <div className="testimonial-slider">
           <div className="testimonial-slide scroll-float-slow">
             <Quote className="w-16 h-16 text-gold mx-auto mb-12 scroll-float" />

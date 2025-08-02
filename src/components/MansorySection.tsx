@@ -195,13 +195,13 @@ const MansorySection = () => {
     return () => clearInterval(interval);
   }, []);
 
-  return <section id="masonry" className="masonry-section bg-white py-6">
+  return <section id="masonry" className="section-seamless bg-white py-6">
       {/* Section Header */}
       <div className="container mx-auto px-4 mb-12 text-center">
-        <h2 className="text-4xl md:text-5xl font-light mb-6 text-primary">
+        <h2 className="text-heading-1 mb-6 text-primary">
           <span className="font-serif italic text-gold">Our Collection</span>
         </h2>
-        <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
+        <p className="text-body-large text-muted-foreground max-w-2xl mx-auto">
           Discover our curated selection of luxury furniture pieces, each crafted with precision and timeless elegance
         </p>
         <ScrollVelocity

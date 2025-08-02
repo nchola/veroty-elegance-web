@@ -72,16 +72,18 @@ const Index = () => {
   }, []);
 
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen bg-white">
       <Header />
-      <VideoHeroSection />
-      <StoryIntroSection />
-      <MansorySection />
-      <BrandIntroSection />
-      <FeaturedProductsSection />
-      <TestimonialSection />
-      <CTASection />
-      <FooterSection />
+      <div className="full-bleed section-seamless">
+        <VideoHeroSection />
+        <StoryIntroSection />
+        <MansorySection />
+        <BrandIntroSection />
+        <FeaturedProductsSection />
+        <TestimonialSection />
+        <CTASection />
+        <FooterSection />
+      </div>
     </div>
   );
 };

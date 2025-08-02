@@ -26,13 +26,13 @@ const FeaturedProductsSection = () => {
   ];
 
   return (
-    <section className="bg-white py-16 md:py-24 relative z-0">
+    <section className="section-seamless bg-white py-16 md:py-24 relative z-0">
       <div className="max-w-7xl mx-auto px-4 md:px-8">
         <div className="text-center mb-12 md:mb-16 lg:mb-20">
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-light text-gray-900 mb-4 md:mb-6 leading-tight scroll-float-subtle font-serif">
+          <h2 className="text-heading-1 text-gray-900 mb-4 md:mb-6 leading-tight scroll-float-subtle font-serif">
             Signature Collection
           </h2>
-          <p className="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed scroll-float-slow">
+          <p className="text-body-large text-gray-600 max-w-3xl mx-auto leading-relaxed scroll-float-slow">
             Each piece in our collection represents the pinnacle of design and craftsmanship
           </p>
         </div>

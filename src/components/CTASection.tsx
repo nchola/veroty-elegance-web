@@ -3,13 +3,13 @@ import { Calendar, Eye } from 'lucide-react';
 
 const CTASection = () => {
   return (
-    <section className="cta bg-white scroll-reveal">
-      <div className="max-w-5xl mx-auto px-8 py-32 text-center">
-        <h2 className="text-5xl md:text-6xl font-light text-gray-900 mb-8 leading-tight scroll-float-subtle">
+    <section className="section-seamless bg-white scroll-reveal py-16 md:py-24">
+      <div className="max-w-5xl mx-auto px-8 text-center">
+        <h2 className="text-heading-1 text-gray-900 mb-8 leading-tight scroll-float-subtle">
           Ready to Create Your 
           <span className="italic font-serif text-gold block mt-2">Masterpiece?</span>
         </h2>
-        <p className="text-xl text-gray-600 mb-12 max-w-3xl mx-auto leading-relaxed scroll-float-slow">
+        <p className="text-body-large text-gray-600 mb-12 max-w-3xl mx-auto leading-relaxed scroll-float-slow">
           Let our experts help you find the perfect pieces that reflect your unique style and vision. 
           Experience the Veroty difference today.
         </p>

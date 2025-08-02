@@ -2,7 +2,7 @@
 const StoryIntroSection = () => {
   // Common styles to avoid repetition
   const commonStyles = {
-    fontFamily: 'calligarisregular',
+    fontFamily: 'Inter, sans-serif',
     fontSize: '16px',
     lineHeight: 1.7,
     color: '#525459',
