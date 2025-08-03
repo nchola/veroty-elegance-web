@@ -4,6 +4,7 @@ import VideoHeroSection from '@/components/VideoHeroSection';
 import StoryIntroSection from '@/components/StoryIntroSection';
 import MansorySection from '@/components/MansorySection';
 import BrandIntroSection from '@/components/BrandIntroSection';
+import ProductShowcaseSection from '@/components/ProductShowcaseSection';
 import FeaturedProductsSection from '@/components/FeaturedProductsSection';
 import TestimonialSection from '@/components/TestimonialSection';
 import InspirationSection from '@/components/CTASection';
@@ -79,9 +80,10 @@ const Index = () => {
         <StoryIntroSection />
         <MansorySection />
         <BrandIntroSection />
+        <ProductShowcaseSection />
         <FeaturedProductsSection />
-        <TestimonialSection />
         <InspirationSection />
+        <TestimonialSection />
         <FooterSection />
       </div>
     </div>
