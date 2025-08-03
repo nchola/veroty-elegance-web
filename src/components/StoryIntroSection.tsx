@@ -35,29 +35,36 @@ const StoryIntroSection = () => {
 
   const PromotionalBox = ({ imageSrc, imageAlt, title, description, linkText, linkHref }) => (
     <div className="m-2024-box flex-1 min-w-0">
-      <div className="image-wrapper relative overflow-hidden rounded-lg" style={imageWrapperStyle}>
+      <div className="relative overflow-hidden" style={{ aspectRatio: '16/10' }}>
         <img 
           src={imageSrc}
           alt={imageAlt}
-          className="w-full h-full object-cover object-center transition-transform duration-300 hover:scale-105"
-          style={{
-            maxWidth: '100%',
-            height: 'auto',
-            display: 'block'
-          }}
+          className="furniture-image-wide h-full transition-transform duration-300 hover:scale-105"
         />
       </div>
-      <div className="padding bg-white p-6 md:p-8 mt-4">
-        <div className="tit fs30 text-2xl md:text-3xl font-bold text-gray-900 mb-3 md:mb-4">
+      <div className="padding p-6 md:p-8">
+        <div className="tit text-2xl md:text-3xl font-normal text-gray-900 mb-3 md:mb-4" style={{
+          fontFamily: 'Inter, sans-serif',
+          fontWeight: 400
+        }}>
           {title}
         </div>
-        <div className="txt fs16 text-sm md:text-base text-gray-700 mb-4 md:mb-6">
+        <div className="txt text-base text-gray-700 mb-4 md:mb-6 leading-relaxed" style={{
+          fontFamily: 'Inter, sans-serif',
+          fontSize: '16px',
+          lineHeight: 1.7,
+          color: '#525459'
+        }}>
           {description}
         </div>
         <div className="cta-arr left">
           <a 
             href={linkHref}
             className="text-black hover:text-gray-700 transition-colors duration-200 flex items-center group"
+            style={{
+              fontFamily: 'Inter, sans-serif',
+              fontSize: '16px'
+            }}
           >
             {linkText}
             {arrowIcon}
@@ -91,28 +98,28 @@ const StoryIntroSection = () => {
       </section>
 
       {/* New Promotional Sections */}
-      <section className="section m-2024-columns -mt-8" style={{
+      <section className="section m-2024-columns bg-white" style={{
         ...commonStyles,
-        padding: '0px 0'
+        padding: '64px 0'
       }}>
         <div className="columns--2">
-          <div className="flex flex-col lg:flex-row gap-6 md:gap-8 lg:gap-10 max-w-7xl mx-auto px-4 md:px-6 lg:px-8">
+          <div className="flex flex-col lg:flex-row gap-8 max-w-7xl mx-auto px-4 md:px-6 lg:px-8">
             <PromotionalBox
-              imageSrc="https://i.pinimg.com/736x/b8/86/cc/b886cc4fcee55f2bf89d1a57c8cd2a7d.jpg"
+              imageSrc="/src/assets/furniture/table-1.jpg"
               imageAlt="Salone del Mobile 2025"
-              title="Salone del Mobile 2025"
+              title="salone del mobile 2025"
               description="Discover the new design for your living space at Salone del Mobile."
               linkText="Find out more"
-              linkHref="/AS/en/salone-del-mobile-2025"
+              linkHref="/salone-del-mobile-2025"
             />
             
             <PromotionalBox
-              imageSrc="https://i.pinimg.com/736x/0b/c6/cd/0bc6cd7d7a3b5273c20609ab7a31d547.jpg"
+              imageSrc="/src/assets/furniture/chair-1.jpg"
               imageAlt="Borbonese x Calligaris"
-              title="Borbonese x Calligaris"
+              title="borbonese x calligaris"
               description="An exclusive collaboration: the iconic OP suede by Borbonese meets Calligaris design."
               linkText="Discover more"
-              linkHref="/AS/en/calligaris-x-borbonese"
+              linkHref="/calligaris-x-borbonese"
             />
           </div>
         </div>

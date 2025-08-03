@@ -169,13 +169,13 @@ const Header = () => {
 
             {/* Logo Tengah */}
             <div className="absolute left-1/2 transform -translate-x-1/2 z-20">
-              <div className="flex items-center">
+              <a href="/" className="flex items-center">
                 <img 
                   src="/logo.png" 
                   alt="VEROTY" 
-                  className="h-8 md:h-10 lg:h-12 w-auto transition-all duration-300"
+                  className="h-8 md:h-10 lg:h-12 w-auto transition-all duration-300 hover:opacity-80"
                 />
-              </div>
+              </a>
             </div>
 
             {/* Right Service Menu */}
