@@ -28,24 +28,6 @@ const InspirationSection = () => {
   return (
     <section className="section-seamless bg-white full-bleed py-0">
       <div className="grid grid-cols-1 lg:grid-cols-2 min-h-screen">
-        {/* Images Grid */}
-        <div className="grid grid-cols-2 gap-0">
-          {inspirationImages.map((item, index) => (
-            <div key={item.id} className="relative group overflow-hidden">
-              <img
-                src={item.image}
-                alt={item.alt}
-                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                style={{ 
-                  height: index < 2 ? '50vh' : '50vh',
-                  minHeight: '300px'
-                }}
-              />
-              <div className="absolute inset-0 bg-black/10 group-hover:bg-black/30 transition-all duration-300"></div>
-            </div>
-          ))}
-        </div>
-
         {/* Content Section */}
         <div className="flex items-center justify-center p-8 lg:p-16 xl:p-24">
           <div className="max-w-lg">
@@ -62,6 +44,23 @@ const InspirationSection = () => {
               <ArrowRight className="ml-3 w-5 h-5 group-hover:translate-x-2 transition-transform text-accent" />
             </button>
           </div>
+        </div>
+        {/* Images Grid */}
+        <div className="grid grid-cols-2 gap-0">
+          {inspirationImages.map((item, index) => (
+            <div key={item.id} className="relative group overflow-hidden">
+              <img
+                src={item.image}
+                alt={item.alt}
+                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                style={{ 
+                  height: index < 2 ? '50vh' : '50vh',
+                  minHeight: '300px'
+                }}
+              />
+              <div className="absolute inset-0 bg-black/10 group-hover:bg-black/30 transition-all duration-300"></div>
+            </div>
+          ))}
         </div>
       </div>
     </section>

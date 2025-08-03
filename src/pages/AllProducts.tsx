@@ -113,11 +113,35 @@ const AllProducts = () => {
                     </div>
                   )}
                   
-                  <div className="aspect-[436/320] bg-gray-100 overflow-hidden">
+                  <div className="aspect-[4/3] bg-gradient-to-br from-gray-50 to-gray-100 overflow-hidden">
                     <img 
                       src={product.image}
                       alt={`${product.model} ${product.family}`}
-                      className="furniture-image h-full transition-transform duration-500 group-hover:scale-105"
+                      className="furniture-image w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                      style={{
+                        objectPosition: 'center 30%', // Fokus ke bagian atas gambar
+                        minHeight: '100%',
+                        minWidth: '100%'
+                      }}
+                      onLoad={(e) => {
+                        const img = e.target as HTMLImageElement;
+                        const container = img.parentElement;
+                        if (container) {
+                          const imgRatio = img.naturalHeight / img.naturalWidth;
+                          const containerRatio = 4/3; // aspect-[4/3]
+                          
+                          // Jika gambar lebih tinggi dari container, gunakan object-contain
+                          if (imgRatio > containerRatio) {
+                            img.style.objectFit = 'contain';
+                            img.style.objectPosition = 'center center';
+                            container.style.background = 'linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%)';
+                          } else {
+                            // Jika gambar lebih lebar, gunakan object-cover dengan positioning yang tepat
+                            img.style.objectFit = 'cover';
+                            img.style.objectPosition = 'center 25%';
+                          }
+                        }
+                      }}
                     />
                   </div>
                   

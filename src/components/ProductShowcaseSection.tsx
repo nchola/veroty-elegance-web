@@ -45,36 +45,42 @@ const ProductShowcaseSection = () => {
   const renderProductCard = (product, index) => (
     <div 
       key={`product-${index}`}
-      className="min-w-[280px] sm:min-w-[320px] md:min-w-[400px] lg:min-w-[480px] xl:min-w-[520px] mr-4"
+      className="min-w-[200px] sm:min-w-[240px] md:min-w-[280px] lg:min-w-[320px] xl:min-w-[360px] mr-6"
     >
-      <div className="relative aspect-[3/4] overflow-hidden rounded-lg shadow-lg group">
+      <div className="relative aspect-[3/4] overflow-hidden rounded-lg shadow-lg group" style={{
+        maxHeight: '450px',
+        maxWidth: '100%'
+      }}>
         <img 
           src={product.image}
           alt={product.name}
           className="furniture-image w-full h-full object-cover object-center transition-transform duration-300 hover:scale-105"
+          loading="lazy"
           style={{
-            minHeight: '350px',
-            objectPosition: 'center top'
+            objectPosition: 'center top',
+            maxHeight: '450px',
+            width: '100%',
+            height: '100%'
           }}
         />
-        <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-4 md:p-6 lg:p-8">
+        <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-4 md:p-5 lg:p-6">
           <div className="text-white">
-            <div className="text-xl md:text-2xl lg:text-3xl font-normal mb-2" style={{
+            <div className="text-lg md:text-xl lg:text-2xl xl:text-3xl font-normal mb-2" style={{
               fontFamily: 'Inter, sans-serif',
               fontWeight: 400
             }}>
               {product.name}
             </div>
-            <div className="text-sm md:text-base text-white/80 mb-3 md:mb-4" style={{
+            <div className="text-sm md:text-base text-white/80 mb-2 md:mb-3" style={{
               fontFamily: 'Inter, sans-serif',
-              fontSize: '16px'
+              fontSize: '14px'
             }}>
               designed by {product.designer}
             </div>
-            <div className="text-xs md:text-sm lg:text-base text-white/90 leading-relaxed" style={{
+            <div className="text-sm md:text-base text-white/90 leading-relaxed" style={{
               fontFamily: 'Inter, sans-serif',
-              fontSize: 'clamp(14px, 1.5vw, 16px)',
-              lineHeight: 1.7
+              fontSize: 'clamp(13px, 1.1vw, 16px)',
+              lineHeight: 1.5
             }}>
               {product.description}
             </div>
@@ -87,42 +93,49 @@ const ProductShowcaseSection = () => {
   const renderDesignerCard = (product, index) => (
     <div 
       key={`designer-${index}`}
-      className="min-w-[280px] sm:min-w-[320px] md:min-w-[400px] lg:min-w-[480px] xl:min-w-[520px] mr-4"
+      className="min-w-[200px] sm:min-w-[240px] md:min-w-[280px] lg:min-w-[320px] xl:min-w-[360px] mr-6"
     >
-      <div className="flex flex-col gap-4 md:gap-6 lg:gap-8 h-full">
-        <div className="aspect-[16/9] overflow-hidden rounded-lg shadow-lg group">
+      <div className="flex flex-col gap-4 md:gap-5 lg:gap-6 h-full">
+        <div className="aspect-[16/9] overflow-hidden rounded-lg shadow-lg group" style={{
+          maxHeight: '220px',
+          maxWidth: '100%'
+        }}>
           <img 
             src={product.detailImage}
             alt={`${product.name} detail`}
             className="furniture-image-wide w-full h-full object-cover transition-transform duration-300 hover:scale-105"
+            loading="lazy"
             style={{
-              minHeight: '180px',
-              objectPosition: 'center center'
+              objectPosition: 'center center',
+              maxHeight: '220px',
+              width: '100%',
+              height: '100%'
             }}
           />
         </div>
         
-        <div className="flex gap-3 md:gap-4 lg:gap-6">
-          <div className="w-16 h-16 md:w-20 md:h-20 lg:w-24 lg:h-24 overflow-hidden rounded-lg flex-shrink-0 shadow-md">
+        <div className="flex gap-3 md:gap-4">
+          <div className="w-12 h-12 md:w-14 md:h-14 lg:w-16 lg:h-16 overflow-hidden rounded-lg flex-shrink-0 shadow-md">
             <img 
               src={product.designerImage}
               alt={product.designer}
               className="w-full h-full object-cover"
+              loading="lazy"
               style={{
                 objectPosition: 'center center'
               }}
             />
           </div>
           <div className="flex-1 min-w-0">
-            <div className="text-xl md:text-2xl lg:text-3xl font-normal text-gray-900 mb-2 truncate" style={{
+            <div className="text-lg md:text-xl lg:text-2xl xl:text-3xl font-normal text-gray-900 mb-2 truncate" style={{
               fontFamily: 'Inter, sans-serif',
               fontWeight: 400
             }}>
               {product.designer}
             </div>
-            <div className="text-sm md:text-base text-gray-500 mb-3 md:mb-4" style={{
+            <div className="text-sm md:text-base text-gray-500 mb-2 md:mb-3" style={{
               fontFamily: 'Inter, sans-serif',
-              fontSize: '16px'
+              fontSize: '14px'
             }}>
               designed by
             </div>
@@ -131,7 +144,7 @@ const ProductShowcaseSection = () => {
               className="text-black hover:text-gray-700 transition-colors duration-200 flex items-center group"
               style={{
                 fontFamily: 'Inter, sans-serif',
-                fontSize: 'clamp(14px, 1.5vw, 16px)'
+                fontSize: 'clamp(13px, 1.1vw, 16px)'
               }}
             >
               Find out more
@@ -160,19 +173,18 @@ const ProductShowcaseSection = () => {
   });
 
   return (
-    <section className="section-seamless bg-white py-16 md:py-24" style={{
+    <section className="section-seamless bg-white py-16 md:py-20 lg:py-24" style={{
       fontFamily: 'Inter, sans-serif',
       fontSize: '16px',
       lineHeight: 1.7,
       color: '#525459',
       WebkitFontSmoothing: 'antialiased',
       boxSizing: 'border-box',
-      WebkitTapHighlightColor: 'transparent',
-      padding: '64px 0'
+      WebkitTapHighlightColor: 'transparent'
     }}>
       {/* Intro Section */}
-      <div className="intro max-w-none mx-auto text-center mb-16 md:mb-24 px-4 md:px-8 lg:px-16" style={{
-        paddingBottom: '32px'
+      <div className="intro max-w-none mx-auto text-center mb-12 md:mb-16 lg:mb-20 px-4 md:px-6 lg:px-8" style={{
+        paddingBottom: '24px'
       }}>
         <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-light mb-6 md:mb-8 text-slate-900 tracking-tight" style={{
           fontFamily: 'Inter, sans-serif',
@@ -231,7 +243,7 @@ const ProductShowcaseSection = () => {
           className="absolute left-4 md:left-6 lg:left-8 top-1/2 -translate-y-1/2 z-10 bg-white/90 hover:bg-white p-3 rounded-full shadow-lg transition-all duration-200 disabled:opacity-50"
           disabled={currentSlide === 0}
         >
-          <ChevronLeft className="w-5 h-5 md:w-6 md:h-6 text-gray-800" />
+          <ChevronLeft className="w-6 h-6 md:w-8 md:h-8 text-gray-800" />
         </button>
         
         <button 
@@ -239,7 +251,7 @@ const ProductShowcaseSection = () => {
           className="absolute right-4 md:right-6 lg:right-8 top-1/2 -translate-y-1/2 z-10 bg-white/90 hover:bg-white p-3 rounded-full shadow-lg transition-all duration-200 disabled:opacity-50"
           disabled={currentSlide === slides.length - 1}
         >
-          <ChevronRight className="w-5 h-5 md:w-6 md:h-6 text-gray-800" />
+          <ChevronRight className="w-6 h-6 md:w-8 md:h-8 text-gray-800" />
         </button>
       </div>
     </section>
