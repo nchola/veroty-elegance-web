@@ -34,122 +34,122 @@ const MansorySection = () => {
   const luxuryFurnitureItems = [
     {
       id: '1',
-      img: 'https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=800&q=80',
-      url: '#',
+      img: '/src/assets/furniture/chair-1.jpg',
+      url: '/products/elegance-chair',
       height: getRandomHeight()
     },
     {
       id: '2',
-      img: 'https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=800&q=80',
-      url: '#',
+      img: '/src/assets/furniture/table-1.jpg',
+      url: '/products/modern-dining-table',
       height: getRandomHeight()
     },
     {
       id: '3',
-      img: 'https://images.unsplash.com/photo-1506439773649-6e0eb8cfb237?w=800&q=80',
-      url: '#',
+      img: '/src/assets/furniture/chair-2.jpg',
+      url: '/products/comfort-lounge',
       height: getRandomHeight()
     },
     {
       id: '4',
-      img: 'https://images.unsplash.com/photo-1567538096630-e0c55bd6374c?w=800&q=80',
-      url: '#',
+      img: '/src/assets/furniture/table-2.jpg',
+      url: '/products/executive-desk',
       height: getRandomHeight()
     },
     {
       id: '5',
-      img: 'https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=800&q=80',
-      url: '#',
+      img: '/src/assets/furniture/bench-1.jpg',
+      url: '/products/garden-bench',
       height: getRandomHeight()
     },
     {
       id: '6',
-      img: 'https://images.unsplash.com/photo-1631679706909-1844bbd07221?w=800&q=80',
-      url: '#',
+      img: '/src/assets/furniture/chair-3.jpg',
+      url: '/products/studio-chair',
       height: getRandomHeight()
     },
     {
       id: '7',
-      img: 'https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=800&q=80',
-      url: '#',
+      img: '/src/assets/furniture/chair-4.jpg',
+      url: '/products/designer-chair',
       height: getRandomHeight()
     },
     {
       id: '8',
-      img: 'https://images.unsplash.com/photo-1540932239986-30128078f3c5?w=800&q=80',
-      url: '#',
+      img: '/src/assets/furniture/bench-2.jpg',
+      url: '/products/modern-bench',
       height: getRandomHeight()
     },
     {
       id: '9',
-      img: 'https://images.unsplash.com/photo-1506439773649-6e0eb8cfb237?w=800&q=80',
-      url: '#',
+      img: '/src/assets/furniture/chair-1.jpg',
+      url: '/products/elegance-chair-2',
       height: getRandomHeight()
     },
     {
       id: '10',
-      img: 'https://images.unsplash.com/photo-1567538096630-e0c55bd6374c?w=800&q=80',
-      url: '#',
+      img: '/src/assets/furniture/table-1.jpg',
+      url: '/products/modern-dining-table-2',
       height: getRandomHeight()
     },
     {
       id: '11',
-      img: 'https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=800&q=80',
-      url: '#',
+      img: '/src/assets/furniture/chair-2.jpg',
+      url: '/products/comfort-lounge-2',
       height: getRandomHeight()
     },
     {
       id: '12',
-      img: 'https://images.unsplash.com/photo-1631679706909-1844bbd07221?w=800&q=80',
-      url: '#',
+      img: '/src/assets/furniture/table-2.jpg',
+      url: '/products/executive-desk-2',
       height: getRandomHeight()
     },
     {
       id: '13',
-      img: 'https://images.unsplash.com/photo-1540932239986-30128078f3c5?w=800&q=80',
-      url: '#',
+      img: '/src/assets/furniture/bench-1.jpg',
+      url: '/products/garden-bench-2',
       height: getRandomHeight()
     },
     {
       id: '14',
-      img: 'https://images.unsplash.com/photo-1506439773649-6e0eb8cfb237?w=800&q=80',
-      url: '#',
+      img: '/src/assets/furniture/chair-3.jpg',
+      url: '/products/studio-chair-2',
       height: getRandomHeight()
     },
     {
       id: '15',
-      img: 'https://images.unsplash.com/photo-1567538096630-e0c55bd6374c?w=800&q=80',
-      url: '#',
+      img: '/src/assets/furniture/chair-4.jpg',
+      url: '/products/designer-chair-2',
       height: getRandomHeight()
     },
     {
       id: '16',
-      img: 'https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=800&q=80',
-      url: '#',
+      img: '/src/assets/furniture/bench-2.jpg',
+      url: '/products/modern-bench-2',
       height: getRandomHeight()
     },
     {
       id: '17',
-      img: 'https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=800&q=80',
-      url: '#',
+      img: '/src/assets/furniture/chair-1.jpg',
+      url: '/products/elegance-chair-3',
       height: getRandomHeight()
     },
     {
       id: '18',
-      img: 'https://images.unsplash.com/photo-1631679706909-1844bbd07221?w=800&q=80',
-      url: '#',
+      img: '/src/assets/furniture/table-1.jpg',
+      url: '/products/modern-dining-table-3',
       height: getRandomHeight()
     },
     {
       id: '19',
-      img: 'https://images.unsplash.com/photo-1540932239986-30128078f3c5?w=800&q=80',
-      url: '#',
+      img: '/src/assets/furniture/chair-2.jpg',
+      url: '/products/comfort-lounge-3',
       height: getRandomHeight()
     },
     {
       id: '20',
-      img: 'https://images.unsplash.com/photo-1506439773649-6e0eb8cfb237?w=800&q=80',
-      url: '#',
+      img: '/src/assets/furniture/table-2.jpg',
+      url: '/products/executive-desk-3',
       height: getRandomHeight()
     }
   ];

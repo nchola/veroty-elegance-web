@@ -13,61 +13,63 @@ interface Product {
 const AllProducts = () => {
   const [products] = useState<Product[]>([
     {
-      id: "CS2040",
-      family: "ABREY",
-      model: "CS2040",
-      description: "Wooden chair with upholstered seat and backrest",
-      image: "https://images.unsplash.com/photo-1506439773649-6e0eb8cfb237?ixlib=rb-4.0.3&auto=format&fit=crop&w=436&h=320&q=80"
-    },
-    {
-      id: "CS2041",
-      family: "ABREY",
-      model: "CS2041",
-      description: "Upholstered armchair with wooden base",
-      image: "https://images.unsplash.com/photo-1567538096630-e0c55bd6374c?ixlib=rb-4.0.3&auto=format&fit=crop&w=436&h=320&q=80"
-    },
-    {
-      id: "CS2095",
-      family: "ADÈL",
-      model: "CS2095", 
-      description: "Wooden chair with a padded seat and backrest",
-      image: "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?ixlib=rb-4.0.3&auto=format&fit=crop&w=436&h=320&q=80"
-    },
-    {
-      id: "CS2099",
-      family: "ADÈL",
-      model: "CS2099",
-      description: "Wooden armchair, padded",
-      image: "https://images.unsplash.com/photo-1549497538-303791108f95?ixlib=rb-4.0.3&auto=format&fit=crop&w=436&h=320&q=80"
-    },
-    {
-      id: "CS2202",
-      family: "ADÈL",
-      model: "CS2202",
-      description: "Wooden armchair in wood and Vienna straw",
-      image: "https://images.unsplash.com/photo-1506439773649-6e0eb8cfb237?ixlib=rb-4.0.3&auto=format&fit=crop&w=436&h=320&q=80"
-    },
-    {
-      id: "CS1452-A",
-      family: "AIDA",
-      model: "CS1452-A",
-      description: "Chair with metal frame and comfort padding",
-      image: "https://images.unsplash.com/photo-1567538096630-e0c55bd6374c?ixlib=rb-4.0.3&auto=format&fit=crop&w=436&h=320&q=80"
-    },
-    {
-      id: "CS2247",
-      family: "ANIME",
-      model: "CS2247",
-      description: "Wooden chair with upholstered seat and backrest",
-      image: "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?ixlib=rb-4.0.3&auto=format&fit=crop&w=436&h=320&q=80",
+      id: "EL001",
+      family: "ELEGANCE",
+      model: "Chair Premium",
+      description: "Premium leather chair with sophisticated design",
+      image: "/src/assets/furniture/chair-1.jpg",
       isNew: true
     },
     {
-      id: "CS2249",
-      family: "FAY",
-      model: "CS2249",
-      description: "Padded chair with a metal base",
-      image: "https://images.unsplash.com/photo-1549497538-303791108f95?ixlib=rb-4.0.3&auto=format&fit=crop&w=436&h=320&q=80",
+      id: "MD002",
+      family: "MODERN",
+      model: "Dining Table",
+      description: "Scandinavian-inspired oak dining table",
+      image: "/src/assets/furniture/table-1.jpg"
+    },
+    {
+      id: "CL003",
+      family: "COMFORT",
+      model: "Lounge Chair",
+      description: "Ergonomic lounge chair with premium upholstery",
+      image: "/src/assets/furniture/chair-2.jpg",
+      isNew: true
+    },
+    {
+      id: "EX004",
+      family: "EXECUTIVE",
+      model: "Professional Desk",
+      description: "Professional workspace desk with clean lines",
+      image: "/src/assets/furniture/table-2.jpg"
+    },
+    {
+      id: "GD005",
+      family: "GARDEN",
+      model: "Outdoor Bench",
+      description: "Outdoor seating solution for modern landscapes",
+      image: "/src/assets/furniture/bench-1.jpg"
+    },
+    {
+      id: "ST006",
+      family: "STUDIO",
+      model: "Minimalist Chair",
+      description: "Minimalist design chair for contemporary spaces",
+      image: "/src/assets/furniture/chair-3.jpg",
+      isNew: true
+    },
+    {
+      id: "DS007",
+      family: "DESIGNER",
+      model: "Artistic Chair",
+      description: "Artistic chair with bold contemporary styling",
+      image: "/src/assets/furniture/chair-4.jpg"
+    },
+    {
+      id: "MB008",
+      family: "MODERN",
+      model: "Versatile Bench",
+      description: "Versatile bench for indoor and outdoor use",
+      image: "/src/assets/furniture/bench-2.jpg",
       isNew: true
     }
   ]);
@@ -115,7 +117,7 @@ const AllProducts = () => {
                     <img 
                       src={product.image}
                       alt={`${product.model} ${product.family}`}
-                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                      className="furniture-image h-full transition-transform duration-500 group-hover:scale-105"
                     />
                   </div>
                   

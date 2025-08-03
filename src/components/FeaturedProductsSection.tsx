@@ -14,49 +14,49 @@ const FeaturedProductsSection = () => {
   const featuredProducts = [
     {
       id: 1,
-      name: "sophia",
-      subtitle: "Find out more",
-      image: "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=800&q=80",
+      name: "elegance chair",
+      subtitle: "Premium Collection",
+      image: "/src/assets/furniture/chair-1.jpg",
       height: getRandomHeight()
     },
     {
       id: 2,
-      name: "oleandro chair",
-      subtitle: "Design: Archirivolto",
+      name: "modern dining table",
+      subtitle: "Handcrafted Series",
       description: "Find out more",
-      image: "https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=800&q=80",
+      image: "/src/assets/furniture/table-1.jpg",
       height: getRandomHeight()
     },
     {
       id: 3,
-      name: "oleandro",
-      subtitle: "create your version",
+      name: "comfort lounge",
+      subtitle: "Designer Edition",
       description: "Find out more",
-      image: "https://images.unsplash.com/photo-1506439773649-6e0eb8cfb237?w=800&q=80",
+      image: "/src/assets/furniture/chair-2.jpg",
       height: getRandomHeight()
     },
     {
       id: 4,
-      name: "kitchen collection",
-      subtitle: "Modern sophistication",
+      name: "executive desk",
+      subtitle: "Professional Line",
       description: "Find out more",
-      image: "https://images.unsplash.com/photo-1567538096630-e0c55bd6374c?w=800&q=80",
+      image: "/src/assets/furniture/table-2.jpg",
       height: getRandomHeight()
     },
     {
       id: 5,
-      name: "dining essence",
-      subtitle: "Elegant compositions",
+      name: "garden bench",
+      subtitle: "Outdoor Collection",
       description: "Find out more", 
-      image: "https://images.unsplash.com/photo-1631679706909-1844bbd07221?w=800&q=80",
+      image: "/src/assets/furniture/bench-1.jpg",
       height: getRandomHeight()
     },
     {
       id: 6,
-      name: "contemporary living",
-      subtitle: "Timeless design",
+      name: "studio chair",
+      subtitle: "Minimalist Design",
       description: "Find out more",
-      image: "https://images.unsplash.com/photo-1540932239986-30128078f3c5?w=800&q=80",
+      image: "/src/assets/furniture/chair-3.jpg",
       height: getRandomHeight()
     }
   ];
@@ -95,7 +95,7 @@ const FeaturedProductsSection = () => {
                 <img
                   src={product.image}
                   alt={product.name}
-                  className="w-full h-full object-cover"
+                  className="furniture-image-wide h-full"
                 />
                 <div className="absolute inset-0 bg-gradient-to-r from-black/20 to-transparent lg:hidden"></div>
               </div>
@@ -162,7 +162,7 @@ const FeaturedProductsSection = () => {
                 <img
                   src={product.image}
                   alt={product.name}
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                  className="furniture-image h-full group-hover:scale-105 transition-transform duration-500"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                   <div className="absolute bottom-6 left-6 right-6 text-white">
