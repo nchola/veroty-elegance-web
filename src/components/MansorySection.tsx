@@ -1,28 +1,32 @@
 import { ChevronDown } from 'lucide-react';
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState, useCallback } from 'react';
 import Masonry from '@/Animations/Masonry/Masonry';
 import ScrollVelocity from '@/Animations/ScrollVelocity/ScrollVelocity';
 
-
-// Fungsi untuk tinggi random antara 180–400px
+// Fungsi untuk tinggi random antara 180–400px (seperti sebelumnya)
 function getRandomHeight() {
   return Math.floor(Math.random() * 220) + 180;
 }
 
 const MansorySection = () => {
+  const [visibleItems, setVisibleItems] = useState(12); // Mulai dengan 12 items
+  const [isLoading, setIsLoading] = useState(false);
+  const masonryRef = useRef<HTMLDivElement>(null);
+  const observerRef = useRef<HTMLDivElement>(null);
+
   useEffect(() => {
     // Adjusted parallax effect with reduced multiplier
     const handleScroll = () => {
       const scrolled = window.pageYOffset;
       const hero = document.querySelector('.hero-background');
       if (hero) {
-        // Reduced parallax multiplier from 0.5 to 0.2 to prevent image from moving too fast
         (hero as HTMLElement).style.transform = `translateY(${scrolled * 0.2}px)`;
       }
     };
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+
   const scrollToNext = () => {
     const nextSection = document.querySelector('#brand-intro');
     nextSection?.scrollIntoView({
@@ -30,7 +34,7 @@ const MansorySection = () => {
     });
   };
 
-  // Luxury furniture images data - tinggi random
+  // Luxury furniture images data dengan tinggi random (seperti sebelumnya)
   const luxuryFurnitureItems = [
     {
       id: '1',
@@ -154,6 +158,42 @@ const MansorySection = () => {
     }
   ];
 
+  // Natural infinite scroll dengan Intersection Observer
+  const loadMoreItems = useCallback(() => {
+    if (isLoading || visibleItems >= luxuryFurnitureItems.length) return;
+    
+    setIsLoading(true);
+    
+    // Simulate loading delay untuk natural feel
+    setTimeout(() => {
+      setVisibleItems(prev => Math.min(prev + 6, luxuryFurnitureItems.length));
+      setIsLoading(false);
+    }, 800);
+  }, [isLoading, visibleItems, luxuryFurnitureItems.length]);
+
+  // Intersection Observer untuk natural infinite scroll
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting && !isLoading) {
+            loadMoreItems();
+          }
+        });
+      },
+      {
+        rootMargin: '100px', // Trigger 100px sebelum mencapai bottom
+        threshold: 0.1
+      }
+    );
+
+    if (observerRef.current) {
+      observer.observe(observerRef.current);
+    }
+
+    return () => observer.disconnect();
+  }, [loadMoreItems, isLoading]);
+
   // Auto-scroll on hover logic
   const scrollRef = useRef<HTMLDivElement>(null);
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
@@ -161,8 +201,8 @@ const MansorySection = () => {
     if (!container) return;
     const { top, height } = container.getBoundingClientRect();
     const mouseY = e.clientY - top;
-    const threshold = 60; // px dari atas/bawah untuk trigger scroll
-    const scrollSpeed = 10; // px per event
+    const threshold = 60;
+    const scrollSpeed = 10;
     if (mouseY < threshold) {
       container.scrollBy({ top: -scrollSpeed, behavior: 'smooth' });
     } else if (mouseY > height - threshold) {
@@ -170,13 +210,13 @@ const MansorySection = () => {
     }
   };
 
-  // Mobile-first auto-scroll with 3-second idle detection
+  // Mobile-first auto-scroll dengan natural loading
   useEffect(() => {
     const container = scrollRef.current;
     if (!container) return;
     
-    let direction = 1; // 1: down, -1: up
-    const scrollStep = 1; // px per interval
+    let direction = 1;
+    const scrollStep = 1;
     let idleTimer: NodeJS.Timeout;
     let scrollInterval: NodeJS.Timeout;
     let isUserInteracting = false;
@@ -189,6 +229,10 @@ const MansorySection = () => {
         if (direction === 1) {
           if (container.scrollTop + container.clientHeight >= container.scrollHeight - 10) {
             direction = -1;
+            // Natural load more items jika mencapai bottom
+            if (visibleItems < luxuryFurnitureItems.length && !isLoading) {
+              loadMoreItems();
+            }
           } else {
             container.scrollBy({ top: scrollStep, behavior: 'smooth' });
           }
@@ -214,16 +258,14 @@ const MansorySection = () => {
       idleTimer = setTimeout(() => {
         isUserInteracting = false;
         startAutoScroll();
-      }, 3000); // 3 seconds idle
+      }, 3000);
     };
     
-    // Event listeners for user interaction
     const events = ['touchstart', 'touchmove', 'touchend', 'scroll', 'mouseenter', 'mousemove'];
     events.forEach(event => {
       container.addEventListener(event, resetIdleTimer, { passive: true });
     });
     
-    // Start auto scroll initially after 3 seconds
     idleTimer = setTimeout(() => {
       isUserInteracting = false;
       startAutoScroll();
@@ -236,9 +278,13 @@ const MansorySection = () => {
         container.removeEventListener(event, resetIdleTimer);
       });
     };
-  }, []);
+  }, [visibleItems, isLoading, loadMoreItems]);
 
-  return <section id="masonry" className="section-seamless bg-white py-6">
+  // Items yang akan ditampilkan
+  const displayItems = luxuryFurnitureItems.slice(0, visibleItems);
+
+  return (
+    <section id="masonry" className="section-seamless bg-white py-6">
       {/* Section Header */}
       <div className="container mx-auto px-4 mb-12 text-center">
         <h2 className="text-heading-1 mb-6 text-primary">
@@ -254,36 +300,52 @@ const MansorySection = () => {
           scrollerClassName="text-2xl md:text-4xl"
         />
       </div>
-      {/* <div className="absolute bottom-20 left-0 right-0 z-30">
-        <ScrollVelocity
-          texts={["Luxury Premium Elegance Excellence"]}
-          velocity={30}
-          className="text-white/30 font-serif italic"
-          scrollerClassName="text-3xl md:text-5xl"
-        />
-      </div> */}
 
-      {/* Masonry Grid */}
+      {/* Masonry Grid dengan Natural Infinite Scroll */}
       <div className="container mx-auto px-4">
         <div
           ref={scrollRef}
-          className="max-h-[80vh] overflow-y-auto w-full scrollbar-none bg-white rounded-[30px]"
+          className="max-h-[100vh] overflow-y-auto w-full scrollbar-none bg-white rounded-[30px]"
           onMouseMove={handleMouseMove}
           style={{ scrollbarWidth: 'none' }}
         >
-          <div className="h-[900px] w-full bg-white rounded-[30px]">
-            <Masonry items={luxuryFurnitureItems} ease="power3.out" duration={1.0} stagger={0.2} animateFrom="random" scaleOnHover={true} hoverScale={1.05} blurToFocus={true} colorShiftOnHover={true} />
+          <div 
+            className="w-full bg-white rounded-[30px]"
+            ref={masonryRef}
+          >
+            <Masonry 
+              items={displayItems} 
+              ease="power2.out" 
+              duration={1.6} 
+              stagger={0.13} 
+              animateFrom="random" 
+              scaleOnHover={true} 
+              hoverScale={1.05} 
+              blurToFocus={true} 
+              colorShiftOnHover={true} 
+            />
           </div>
         </div>
       </div>
 
-      {/* Scroll Indicator */}
-      <div className="flex justify-center mt-12" onClick={scrollToNext}>
-        <div className="text-primary animate-bounce cursor-pointer hover:text-gold transition-colors">
-          
+      {/* Natural Loading Indicator */}
+      {visibleItems < luxuryFurnitureItems.length && (
+        <div 
+          ref={observerRef}
+          className="flex justify-center mt-8 py-4"
+        >
+          {isLoading ? (
+            <div className="flex items-center space-x-2 text-gray-500">
+              <div className="w-4 h-4 border-2 border-gray-300 border-t-gold rounded-full animate-spin"></div>
+              <span className="text-sm">Loading more items...</span>
+            </div>
+          ) : (
+            <div className="w-1 h-1 bg-gray-300 rounded-full"></div>
+          )}
         </div>
-      </div>
-    </section>;
+      )}
+    </section>
+  );
 };
 
 export default MansorySection;

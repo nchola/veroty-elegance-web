@@ -6,6 +6,7 @@ import MansorySection from '@/components/MansorySection';
 import BrandIntroSection from '@/components/BrandIntroSection';
 import ProductShowcaseSection from '@/components/ProductShowcaseSection';
 import FeaturedProductsSection from '@/components/FeaturedProductsSection';
+import SwitchingChair from '@/components/SwitchingChair';
 import TestimonialSection from '@/components/TestimonialSection';
 import InspirationSection from '@/components/CTASection';
 import FooterSection from '@/components/FooterSection';
@@ -81,7 +82,8 @@ const Index = () => {
         <MansorySection />
         <BrandIntroSection />
         <ProductShowcaseSection />
-        <FeaturedProductsSection />
+        {/* <FeaturedProductsSection /> */}
+        <SwitchingChair />
         <InspirationSection />
         <TestimonialSection />
         <FooterSection />

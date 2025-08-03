@@ -1,5 +1,5 @@
 /*
-	Installed from https://reactbits.dev/ts/tailwind/
+	Ultra Stable Masonry - No Height Management, No Recalculation
 */
 
 import React, {
@@ -70,6 +70,13 @@ interface Item {
   height: number;
 }
 
+interface GridItem extends Item {
+  x: number;
+  y: number;
+  w: number;
+  h: number;
+}
+
 interface MasonryProps {
   items: Item[];
   ease?: string;
@@ -85,8 +92,8 @@ interface MasonryProps {
 const Masonry: React.FC<MasonryProps> = ({
   items,
   ease = "power3.out",
-  duration = 3,
-  stagger = 0.08,
+  duration = 0.6,
+  stagger = 0.05,
   animateFrom = "bottom",
   scaleOnHover = true,
   hoverScale = 0.95,
@@ -106,168 +113,187 @@ const Masonry: React.FC<MasonryProps> = ({
 
   const [containerRef, { width }] = useMeasure<HTMLDivElement>();
   const [imagesReady, setImagesReady] = useState(false);
-  const [isRevealed, setIsRevealed] = useState(false);
-
-  const getInitialPosition = (item: any) => {
-    const containerRect = containerRef.current?.getBoundingClientRect();
-    if (!containerRect) return { x: item.x, y: item.y };
-
-    let direction = animateFrom;
-    if (animateFrom === "random") {
-      const dirs = ["top", "bottom", "left", "right"];
-      direction = dirs[
-        Math.floor(Math.random() * dirs.length)
-      ] as typeof animateFrom;
-    }
-
-    switch (direction) {
-      case "top":
-        return { x: item.x, y: -200 };
-      case "bottom":
-        return { x: item.x, y: window.innerHeight + 200 };
-      case "left":
-        return { x: -200, y: item.y };
-      case "right":
-        return { x: window.innerWidth + 200, y: item.y };
-      case "center":
-        return {
-          x: containerRect.width / 2 - item.w / 2,
-          y: containerRect.height / 2 - item.h / 2,
-        };
-      default:
-        return { x: item.x, y: item.y + 100 };
-    }
-  };
+  const [isInitialized, setIsInitialized] = useState(false);
 
   useEffect(() => {
     preloadImages(items.map((i) => i.img)).then(() => setImagesReady(true));
   }, [items]);
 
-  // IntersectionObserver untuk reveal saat section masuk viewport
-  useEffect(() => {
-    const node = containerRef.current;
-    if (!node) return;
-    const observer = new window.IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) setIsRevealed(true);
-      },
-      { threshold: 0.2 }
-    );
-    observer.observe(node);
-    return () => observer.disconnect();
-  }, [containerRef]);
+  // Ultra stable grid calculation - sekali hitung, langsung final
+  const grid = useMemo<GridItem[]>(() => {
+    if (!width || items.length === 0) return [];
 
-  const grid = useMemo(() => {
-    if (!width) return [];
-    const colHeights = new Array(columns).fill(0);
     const gap = 16;
     const totalGaps = (columns - 1) * gap;
     const columnWidth = (width - totalGaps) / columns;
+    const colHeights = new Array(columns).fill(0);
 
-    return items.map((child) => {
+    const calculatedGrid = items.map((child) => {
       const col = colHeights.indexOf(Math.min(...colHeights));
       const x = col * (columnWidth + gap);
       const height = child.height / 2;
       const y = colHeights[col];
 
       colHeights[col] += height + gap;
+
       return { ...child, x, y, w: columnWidth, h: height };
     });
-  }, [columns, items, width]);
+
+    // Set container height sekali saja
+    const maxHeight = Math.max(...colHeights);
+    if (containerRef.current && !isInitialized) {
+      containerRef.current.style.height = `${maxHeight}px`;
+      setIsInitialized(true);
+    }
+
+    return calculatedGrid;
+  }, [columns, items, width, isInitialized]);
 
   const hasMounted = useRef(false);
 
   useLayoutEffect(() => {
-    if (!imagesReady || !isRevealed) return;
+    if (!imagesReady || !isInitialized) return;
 
-    grid.forEach((item, index) => {
-      const selector = `[data-key="${item.id}"]`;
-      const animProps = { x: item.x, y: item.y, width: item.w, height: item.h };
-
-      if (!hasMounted.current) {
-        const start = getInitialPosition(item);
-        gsap.fromTo(
-          selector,
-          {
-            opacity: 0,
-            x: start.x,
-            y: start.y,
-            width: item.w,
-            height: item.h,
-            ...(blurToFocus && { filter: "blur(10px)" }),
-          },
-          {
-            opacity: 1,
-            ...animProps,
-            ...(blurToFocus && { filter: "blur(0px)" }),
-            duration: 0.7,
-            ease: "power3.out",
-            delay: index * stagger,
+    // Satu kali setup, tidak ada recalculation
+    if (!hasMounted.current) {
+      grid.forEach((item, index) => {
+        const selector = `[data-key="${item.id}"]`;
+        
+        // Calculate initial position based on animateFrom prop
+        let initialX = item.x;
+        let initialY = item.y;
+        
+        if (animateFrom === "bottom") {
+          initialY = window.innerHeight + 100;
+        } else if (animateFrom === "top") {
+          initialY = -200;
+        } else if (animateFrom === "left") {
+          initialX = -200;
+        } else if (animateFrom === "right") {
+          initialX = window.innerWidth + 200;
+        } else if (animateFrom === "center") {
+          const containerRect = containerRef.current?.getBoundingClientRect();
+          if (containerRect) {
+            initialX = containerRect.width / 2 - item.w / 2;
+            initialY = containerRect.height / 2 - item.h / 2;
           }
-        );
-      } else {
-        gsap.to(selector, {
-          ...animProps,
-          duration,
-          ease,
-          overwrite: "auto",
+        }
+        
+        // Set posisi awal langsung
+        gsap.set(selector, {
+          x: initialX,
+          y: initialY,
+          width: item.w,
+          height: item.h,
+          opacity: 0,
+          scale: 0.9,
+          ...(blurToFocus && { filter: "blur(8px)" }),
         });
-      }
-    });
 
-    hasMounted.current = true;
-  }, [grid, imagesReady, isRevealed, stagger, animateFrom, blurToFocus, duration, ease]);
+        // Animasi reveal dengan properti yang dinamis
+        gsap.to(selector, {
+          x: item.x,
+          y: item.y,
+          opacity: 1,
+          scale: 1,
+          ...(blurToFocus && { filter: "blur(0px)" }),
+          duration: duration,
+          ease: ease,
+          delay: index * stagger,
+        });
+      });
 
-  const handleMouseEnter = (id: string, element: HTMLElement) => {
+      hasMounted.current = true;
+    }
+  }, [grid, imagesReady, isInitialized, stagger, animateFrom, blurToFocus, duration, ease]);
+
+  const handleMouseEnter = (e: React.MouseEvent, item: GridItem) => {
+    const element = e.currentTarget as HTMLElement;
+    const selector = `[data-key="${item.id}"]`;
+
     if (scaleOnHover) {
-      gsap.to(`[data-key="${id}"]`, {
+      gsap.to(selector, {
         scale: hoverScale,
         duration: 0.3,
         ease: "power2.out"
       });
     }
+
     if (colorShiftOnHover) {
       const overlay = element.querySelector(".color-overlay") as HTMLElement;
-      if (overlay) gsap.to(overlay, { opacity: 0.3, duration: 0.3 });
+      if (overlay) {
+        gsap.to(overlay, {
+          opacity: 0.3,
+          duration: 0.3,
+        });
+      }
     }
   };
 
-  const handleMouseLeave = (id: string, element: HTMLElement) => {
+  const handleMouseLeave = (e: React.MouseEvent, item: GridItem) => {
+    const element = e.currentTarget as HTMLElement;
+    const selector = `[data-key="${item.id}"]`;
+
     if (scaleOnHover) {
-      gsap.to(`[data-key="${id}"]`, {
+      gsap.to(selector, {
         scale: 1,
         duration: 0.3,
         ease: "power2.out"
       });
     }
+
     if (colorShiftOnHover) {
       const overlay = element.querySelector(".color-overlay") as HTMLElement;
-      if (overlay) gsap.to(overlay, { opacity: 0, duration: 0.3 });
+      if (overlay) {
+        gsap.to(overlay, {
+          opacity: 0,
+          duration: 0.3,
+        });
+      }
     }
   };
 
   return (
-    <div ref={containerRef} className="relative w-full h-full">
-      {grid.map((item) => (
-        <div
-          key={item.id}
-          data-key={item.id}
-          className="absolute box-content"
-          style={{ willChange: "transform, width, height, opacity" }}
-          onClick={() => window.open(item.url, "_blank", "noopener")}
-          onMouseEnter={(e) => handleMouseEnter(item.id, e.currentTarget)}
-          onMouseLeave={(e) => handleMouseLeave(item.id, e.currentTarget)}
-        >
+    <div 
+      ref={containerRef} 
+      className="relative w-full"
+      style={{ 
+        minHeight: '400px',
+        position: 'relative'
+      }}
+    >
+      {grid.map((item) => {
+        return (
           <div
-            className="relative w-full h-full bg-cover bg-center rounded-[15px] shadow-[0px_10px_50px_-10px_rgba(0,0,0,0.2)] uppercase text-[10px] leading-[10px]"
-            style={{ backgroundImage: `url(${item.img})` }}
+            key={item.id}
+            data-key={item.id}
+            className="absolute box-content cursor-pointer"
+            style={{ 
+              willChange: "transform, width, height, opacity",
+              zIndex: 1
+            }}
+            onClick={() => window.open(item.url, "_blank", "noopener")}
+            onMouseEnter={(e) => handleMouseEnter(e, item)}
+            onMouseLeave={(e) => handleMouseLeave(e, item)}
           >
-            {colorShiftOnHover && (
-              <div className="color-overlay absolute inset-0 rounded-[10px] bg-gradient-to-tr from-pink-500/50 to-sky-500/50 opacity-0 pointer-events-none" />
-            )}
+            <div
+              className="relative w-full h-full bg-cover bg-center rounded-[15px] shadow-[0px_10px_50px_-10px_rgba(0,0,0,0.2)] overflow-hidden"
+              style={{ backgroundImage: `url(${item.img})` }}
+            >
+              {colorShiftOnHover && (
+                <div className="color-overlay absolute inset-0 rounded-[15px] bg-gradient-to-tr from-pink-500/50 to-sky-500/50 opacity-0 pointer-events-none" />
+              )}
+              
+              {/* Hover overlay for better UX */}
+              <div className="absolute inset-0 bg-black/0 hover:bg-black/20 transition-all duration-300 rounded-[15px] flex items-center justify-center">
+                <div className="opacity-0 hover:opacity-100 transition-opacity duration-300 text-white text-sm font-medium">
+                  View Details
+                </div>
+              </div>
+            </div>
           </div>
-        </div>
-      ))}
+        );
+      })}
     </div>
   );
 };
