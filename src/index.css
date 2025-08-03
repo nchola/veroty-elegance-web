@@ -779,6 +779,100 @@ img {
   background: linear-gradient(135deg, rgba(26,26,26,0.6) 0%, rgba(26,26,26,0.3) 100%);
 }
 
+/* Mobile-first responsive image system with proper viewport scaling */
+.furniture-image {
+  @apply w-full h-full object-cover;
+  object-position: center top;
+  min-height: 280px;
+}
+
+.furniture-image-wide {
+  @apply w-full h-full object-cover;
+  object-position: center center;
+  min-height: 180px;
+}
+
+.furniture-image-square {
+  @apply w-full h-full object-cover;
+  object-position: center top;
+  min-height: 160px;
+}
+
+/* Responsive breakpoints for proper image scaling at all zoom levels */
+@media (min-width: 640px) {
+  .furniture-image {
+    min-height: 320px;
+  }
+  .furniture-image-wide {
+    min-height: 200px;
+  }
+  .furniture-image-square {
+    min-height: 180px;
+  }
+}
+
+@media (min-width: 768px) {
+  .furniture-image {
+    min-height: 400px;
+  }
+  .furniture-image-wide {
+    min-height: 240px;
+  }
+  .furniture-image-square {
+    min-height: 200px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .furniture-image {
+    min-height: 480px;
+  }
+  .furniture-image-wide {
+    min-height: 280px;
+  }
+  .furniture-image-square {
+    min-height: 220px;
+  }
+}
+
+@media (min-width: 1280px) {
+  .furniture-image {
+    min-height: 520px;
+  }
+  .furniture-image-wide {
+    min-height: 320px;
+  }
+  .furniture-image-square {
+    min-height: 240px;
+  }
+}
+
+/* Ensure proper scaling at different zoom levels and high-DPI displays */
+@media (min-width: 1536px) {
+  .furniture-image {
+    min-height: 600px;
+  }
+  .furniture-image-wide {
+    min-height: 360px;
+  }
+  .furniture-image-square {
+    min-height: 280px;
+  }
+}
+
+/* High zoom/large screen optimization */
+@media (min-width: 1920px) {
+  .furniture-image {
+    min-height: 720px;
+  }
+  .furniture-image-wide {
+    min-height: 400px;
+  }
+  .furniture-image-square {
+    min-height: 320px;
+  }
+}
+
 /* Animation Enhancements */
 .animate-duration-1s {
   animation-duration: 1s;

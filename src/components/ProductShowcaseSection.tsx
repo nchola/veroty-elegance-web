@@ -45,31 +45,35 @@ const ProductShowcaseSection = () => {
   const renderProductCard = (product, index) => (
     <div 
       key={`product-${index}`}
-      className="min-w-[320px] md:min-w-[400px] lg:min-w-[480px] mr-4"
+      className="min-w-[280px] sm:min-w-[320px] md:min-w-[400px] lg:min-w-[480px] xl:min-w-[520px] mr-4"
     >
-      <div className="relative aspect-[3/4] overflow-hidden">
+      <div className="relative aspect-[3/4] overflow-hidden rounded-lg shadow-lg group">
         <img 
           src={product.image}
           alt={product.name}
-          className="furniture-image h-full transition-transform duration-300 hover:scale-105"
+          className="furniture-image w-full h-full object-cover object-center transition-transform duration-300 hover:scale-105"
+          style={{
+            minHeight: '350px',
+            objectPosition: 'center top'
+          }}
         />
-        <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-6 md:p-8">
+        <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-4 md:p-6 lg:p-8">
           <div className="text-white">
-            <div className="text-2xl md:text-3xl font-normal mb-2" style={{
+            <div className="text-xl md:text-2xl lg:text-3xl font-normal mb-2" style={{
               fontFamily: 'Inter, sans-serif',
               fontWeight: 400
             }}>
               {product.name}
             </div>
-            <div className="text-base text-white/80 mb-4" style={{
+            <div className="text-sm md:text-base text-white/80 mb-3 md:mb-4" style={{
               fontFamily: 'Inter, sans-serif',
               fontSize: '16px'
             }}>
               designed by {product.designer}
             </div>
-            <div className="text-sm md:text-base text-white/90 leading-relaxed" style={{
+            <div className="text-xs md:text-sm lg:text-base text-white/90 leading-relaxed" style={{
               fontFamily: 'Inter, sans-serif',
-              fontSize: '16px',
+              fontSize: 'clamp(14px, 1.5vw, 16px)',
               lineHeight: 1.7
             }}>
               {product.description}
@@ -83,33 +87,40 @@ const ProductShowcaseSection = () => {
   const renderDesignerCard = (product, index) => (
     <div 
       key={`designer-${index}`}
-      className="min-w-[320px] md:min-w-[400px] lg:min-w-[480px] mr-4"
+      className="min-w-[280px] sm:min-w-[320px] md:min-w-[400px] lg:min-w-[480px] xl:min-w-[520px] mr-4"
     >
-      <div className="flex flex-col gap-6 md:gap-8 h-full">
-        <div className="aspect-[16/9] overflow-hidden">
+      <div className="flex flex-col gap-4 md:gap-6 lg:gap-8 h-full">
+        <div className="aspect-[16/9] overflow-hidden rounded-lg shadow-lg group">
           <img 
             src={product.detailImage}
             alt={`${product.name} detail`}
-            className="furniture-image-wide h-full transition-transform duration-300 hover:scale-105"
+            className="furniture-image-wide w-full h-full object-cover transition-transform duration-300 hover:scale-105"
+            style={{
+              minHeight: '180px',
+              objectPosition: 'center center'
+            }}
           />
         </div>
         
-        <div className="flex gap-4 md:gap-6">
-          <div className="w-20 h-20 md:w-24 md:h-24 overflow-hidden rounded-lg flex-shrink-0">
+        <div className="flex gap-3 md:gap-4 lg:gap-6">
+          <div className="w-16 h-16 md:w-20 md:h-20 lg:w-24 lg:h-24 overflow-hidden rounded-lg flex-shrink-0 shadow-md">
             <img 
               src={product.designerImage}
               alt={product.designer}
               className="w-full h-full object-cover"
+              style={{
+                objectPosition: 'center center'
+              }}
             />
           </div>
-          <div className="flex-1">
-            <div className="text-2xl md:text-3xl font-normal text-gray-900 mb-2" style={{
+          <div className="flex-1 min-w-0">
+            <div className="text-xl md:text-2xl lg:text-3xl font-normal text-gray-900 mb-2 truncate" style={{
               fontFamily: 'Inter, sans-serif',
               fontWeight: 400
             }}>
               {product.designer}
             </div>
-            <div className="text-base text-gray-500 mb-4" style={{
+            <div className="text-sm md:text-base text-gray-500 mb-3 md:mb-4" style={{
               fontFamily: 'Inter, sans-serif',
               fontSize: '16px'
             }}>
@@ -120,12 +131,12 @@ const ProductShowcaseSection = () => {
               className="text-black hover:text-gray-700 transition-colors duration-200 flex items-center group"
               style={{
                 fontFamily: 'Inter, sans-serif',
-                fontSize: '16px'
+                fontSize: 'clamp(14px, 1.5vw, 16px)'
               }}
             >
               Find out more
               <svg 
-                className="w-4 h-4 ml-2 text-red-500 group-hover:translate-x-1 transition-transform duration-200" 
+                className="w-3 h-3 md:w-4 md:h-4 ml-2 text-red-500 group-hover:translate-x-1 transition-transform duration-200 flex-shrink-0" 
                 fill="currentColor" 
                 viewBox="0 0 20 20"
               >
@@ -159,6 +170,45 @@ const ProductShowcaseSection = () => {
       WebkitTapHighlightColor: 'transparent',
       padding: '64px 0'
     }}>
+      {/* Intro Section */}
+      <div className="intro max-w-none mx-auto text-center mb-16 md:mb-24 px-4 md:px-8 lg:px-16" style={{
+        paddingBottom: '32px'
+      }}>
+        <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-light mb-6 md:mb-8 text-slate-900 tracking-tight" style={{
+          fontFamily: 'Inter, sans-serif',
+          fontSize: 'clamp(2rem, 5vw, 3.5rem)',
+          fontWeight: 400,
+          marginBottom: '24px'
+        }}>
+          Living Room Furniture System
+        </h2>
+        <div className="text-base md:text-lg lg:text-xl leading-relaxed text-slate-600 max-w-4xl mx-auto" style={{
+          fontFamily: 'Inter, sans-serif',
+          fontSize: '18px',
+          lineHeight: 1.7
+        }}>
+          <p className="mb-8">
+            A modular sideboard programme with three or four doors, designed to offer maximum compositional freedom.
+            Seven door options, five base types and the possibility of adding a ceramic top allow for bespoke solutions to suit every style.
+          </p>
+          <div className="inline-flex items-center group">
+            <a 
+              href="/all-products" 
+              className="text-slate-900 font-medium hover:text-slate-600 transition-colors duration-300 relative"
+              style={{
+                fontFamily: 'Inter, sans-serif'
+              }}
+            >
+              Discover the selection
+              <span className="absolute bottom-0 left-0 w-full h-0.5 bg-slate-900 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></span>
+            </a>
+            <svg className="w-4 h-4 ml-2 text-red-500 group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+            </svg>
+          </div>
+        </div>
+      </div>
+
       <div className="relative">
         <div className="overflow-hidden">
           <div 
