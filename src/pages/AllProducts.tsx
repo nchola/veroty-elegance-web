@@ -76,6 +76,26 @@ const AllProducts = () => {
 
   return (
     <div className="min-h-screen bg-white">
+      <style dangerouslySetInnerHTML={{
+        __html: `
+          .furniture-image {
+            object-fit: contain !important;
+            object-position: center center !important;
+            max-width: 100% !important;
+            max-height: 100% !important;
+            width: auto !important;
+            height: auto !important;
+          }
+          
+          .product-card .aspect-\\[4\\/3\\] {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem;
+          }
+        `
+      }} />
+      
       <Header />
       
       {/* Full-Bleed Hero Section */}
@@ -85,6 +105,9 @@ const AllProducts = () => {
           src="https://images.unsplash.com/photo-1586023492125-27b2c045efd7?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&h=1080&q=80"
           alt="All Products"
           className="w-full h-full object-cover"
+          style={{
+            objectPosition: 'center 95%'
+          }}
         />
         <div className="absolute inset-0 z-20 flex items-center justify-center">
           <div className="text-center text-white">
@@ -113,33 +136,33 @@ const AllProducts = () => {
                     </div>
                   )}
                   
-                  <div className="aspect-[4/3] bg-gradient-to-br from-gray-50 to-gray-100 overflow-hidden">
+                  <div className="aspect-[4/3] bg-gradient-to-br from-gray-50 to-gray-100 overflow-hidden flex items-center justify-center p-4">
                     <img 
                       src={product.image}
                       alt={`${product.model} ${product.family}`}
-                      className="furniture-image w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                      className="furniture-image transition-transform duration-500 group-hover:scale-105"
                       style={{
-                        objectPosition: 'center 30%', // Fokus ke bagian atas gambar
-                        minHeight: '100%',
-                        minWidth: '100%'
+                        objectFit: 'contain',
+                        objectPosition: 'center center',
+                        maxWidth: '100%',
+                        maxHeight: '100%',
+                        width: 'auto',
+                        height: 'auto'
                       }}
                       onLoad={(e) => {
                         const img = e.target as HTMLImageElement;
                         const container = img.parentElement;
                         if (container) {
-                          const imgRatio = img.naturalHeight / img.naturalWidth;
-                          const containerRatio = 4/3; // aspect-[4/3]
+                          // Pastikan gambar selalu menggunakan contain untuk menghindari cropping
+                          img.style.objectFit = 'contain';
+                          img.style.objectPosition = 'center center';
+                          img.style.maxWidth = '100%';
+                          img.style.maxHeight = '100%';
+                          img.style.width = 'auto';
+                          img.style.height = 'auto';
                           
-                          // Jika gambar lebih tinggi dari container, gunakan object-contain
-                          if (imgRatio > containerRatio) {
-                            img.style.objectFit = 'contain';
-                            img.style.objectPosition = 'center center';
-                            container.style.background = 'linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%)';
-                          } else {
-                            // Jika gambar lebih lebar, gunakan object-cover dengan positioning yang tepat
-                            img.style.objectFit = 'cover';
-                            img.style.objectPosition = 'center 25%';
-                          }
+                          // Background gradient yang konsisten
+                          container.style.background = 'linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%)';
                         }
                       }}
                     />

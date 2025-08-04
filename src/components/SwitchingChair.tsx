@@ -1,7 +1,7 @@
 
 const SwitchingChair = () => {
   return (
-    <section id="switching-chair" className="section-seamless bg-gradient-to-br from-gray-50 to-white py-20 md:py-32 relative z-10 overflow-hidden">
+    <section id="switching-chair" className="section-seamless bg-white py-20 md:py-16 relative z-10 overflow-hidden">
       {/* Background Pattern */}
       <div className="absolute inset-0 opacity-5">
         <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(circle_at_1px_1px,rgba(0,0,0,0.1)_1px,transparent_0)] bg-[length:20px_20px]"></div>
@@ -11,7 +11,7 @@ const SwitchingChair = () => {
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
           {/* Video Section - Left Side */}
           <div className="order-2 lg:order-1 relative">
-            <div className="relative mx-auto max-w-sm lg:max-w-md">
+            <div className="relative mx-auto max-w-xs lg:max-w-sm">
               {/* Video Container with Portrait Ratio */}
               <div className="relative aspect-[9/16] bg-gradient-to-br from-gray-100 to-gray-200 rounded-2xl overflow-hidden shadow-2xl">
                 <video 
