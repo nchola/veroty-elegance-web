@@ -16,7 +16,7 @@ const FeaturedProductsSection = () => {
       id: 1,
       name: "elegance chair",
       subtitle: "Premium Collection",
-      image: "/src/assets/furniture/chair-1.jpg",
+      image: "https://i.pinimg.com/1200x/80/d2/6d/80d26d9e1dceb2e323a90492b7eb45f4.jpg",
       height: getRandomHeight()
     },
     {
@@ -24,7 +24,7 @@ const FeaturedProductsSection = () => {
       name: "modern dining table",
       subtitle: "Handcrafted Series",
       description: "Find out more",
-      image: "/src/assets/furniture/table-1.jpg",
+      image: "https://i.pinimg.com/736x/0d/21/8b/0d218bb08727f3ca6e837ff78f6ce370.jpg",
       height: getRandomHeight()
     },
     {
@@ -32,7 +32,7 @@ const FeaturedProductsSection = () => {
       name: "comfort lounge",
       subtitle: "Designer Edition",
       description: "Find out more",
-      image: "/src/assets/furniture/chair-2.jpg",
+      image: "https://i.pinimg.com/736x/13/08/61/130861e2b75178a1d4b71004048245e3.jpg",
       height: getRandomHeight()
     },
     {
@@ -40,7 +40,7 @@ const FeaturedProductsSection = () => {
       name: "executive desk",
       subtitle: "Professional Line",
       description: "Find out more",
-      image: "/src/assets/furniture/table-2.jpg",
+      image: "https://i.pinimg.com/736x/84/09/10/84091029223bf84ff71ca3df1ad7cc7a.jpg",
       height: getRandomHeight()
     },
     {
@@ -48,7 +48,7 @@ const FeaturedProductsSection = () => {
       name: "garden bench",
       subtitle: "Outdoor Collection",
       description: "Find out more", 
-      image: "/src/assets/furniture/bench-1.jpg",
+      image: "https://i.pinimg.com/1200x/a6/e4/4c/a6e44c09867933e449f3f9b7d7a1a7a6.jpg",
       height: getRandomHeight()
     },
     {
@@ -56,7 +56,7 @@ const FeaturedProductsSection = () => {
       name: "studio chair",
       subtitle: "Minimalist Design",
       description: "Find out more",
-      image: "/src/assets/furniture/chair-3.jpg",
+      image: "https://i.pinimg.com/1200x/21/00/d5/2100d5ac1ac3ce911b4989f6a87782ef.jpg",
       height: getRandomHeight()
     }
   ];

@@ -100,12 +100,13 @@ const StoryIntroSection = () => {
       {/* New Promotional Sections */}
       <section className="section m-2024-columns bg-white" style={{
         ...commonStyles,
-        padding: '64px 0'
+        padding: '16px 0',
+        objectPosition: 'center 75%'
       }}>
         <div className="columns--2">
           <div className="flex flex-col lg:flex-row gap-8 max-w-7xl mx-auto px-4 md:px-6 lg:px-8">
             <PromotionalBox
-              imageSrc="/src/assets/furniture/table-1.jpg"
+              imageSrc="https://i.pinimg.com/1200x/21/00/d5/2100d5ac1ac3ce911b4989f6a87782ef.jpg"
               imageAlt="Salone del Mobile 2025"
               title="salone del mobile 2025"
               description="Discover the new design for your living space at Salone del Mobile."
@@ -114,10 +115,10 @@ const StoryIntroSection = () => {
             />
             
             <PromotionalBox
-              imageSrc="/src/assets/furniture/chair-1.jpg"
-              imageAlt="Borbonese x Calligaris"
-              title="borbonese x calligaris"
-              description="An exclusive collaboration: the iconic OP suede by Borbonese meets Calligaris design."
+              imageSrc="https://i.pinimg.com/1200x/a6/e4/4c/a6e44c09867933e449f3f9b7d7a1a7a6.jpg"
+              imageAlt="Borbonese x veroty"
+              title="borbonese x veroty"
+              description="An exclusive collaboration: the iconic OP suede by Borbonese meets veroty design."
               linkText="Discover more"
               linkHref="/calligaris-x-borbonese"
             />

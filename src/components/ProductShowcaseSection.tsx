@@ -10,27 +10,27 @@ const ProductShowcaseSection = () => {
       name: "Glen",
       designer: "Gino Carollo",
       description: "A chair with a strong identity, where the geometric precision of the lines blends seamlessly with the softness of its curves, ensuring comfort, visual balance, and timeless elegance.",
-      image: "/src/assets/furniture/chair-1.jpg",
-      designerImage: "/src/assets/furniture/chair-2.jpg",
-      detailImage: "/src/assets/furniture/chair-3.jpg"
+      image: "https://i.pinimg.com/1200x/80/d2/6d/80d26d9e1dceb2e323a90492b7eb45f4.jpg",
+      designerImage: "https://i.pinimg.com/736x/13/08/61/130861e2b75178a1d4b71004048245e3.jpg",
+      detailImage: "https://i.pinimg.com/1200x/21/00/d5/2100d5ac1ac3ce911b4989f6a87782ef.jpg"
     },
     {
       id: 2,
       name: "Sandy",
       designer: "Gabriele & Oscar Buratti",
       description: "A table with an elegant and versatile design, featuring distinctive drop-shaped legs that enhance every type of top and pair stylishly with all chairs in the Veroty collection.",
-      image: "/src/assets/furniture/table-1.jpg",
-      designerImage: "/src/assets/furniture/table-2.jpg",
-      detailImage: "/src/assets/furniture/bench-1.jpg"
+      image: "https://i.pinimg.com/736x/0d/21/8b/0d218bb08727f3ca6e837ff78f6ce370.jpg",
+      designerImage: "https://i.pinimg.com/736x/84/09/10/84091029223bf84ff71ca3df1ad7cc7a.jpg",
+      detailImage: "https://i.pinimg.com/1200x/a6/e4/4c/a6e44c09867933e449f3f9b7d7a1a7a6.jpg"
     },
     {
       id: 3,
       name: "Vanilla",
       designer: "Mask Design Studio",
       description: "A refined chair, with armchair-like proportions and fashion-inspired details such as fabric ruching and a belt-like band around the backrest.",
-      image: "/src/assets/furniture/chair-4.jpg",
-      designerImage: "/src/assets/furniture/bench-2.jpg",
-      detailImage: "/src/assets/furniture/chair-2.jpg"
+      image: "https://i.pinimg.com/1200x/d9/1e/23/d91e23be5f418397016a9ac020ae6d0f.jpg",
+      designerImage: "https://i.pinimg.com/736x/e5/28/8c/e5288c1381500f9f56adeaf35bdd1060.jpg",
+      detailImage: "https://i.pinimg.com/736x/13/08/61/130861e2b75178a1d4b71004048245e3.jpg"
     }
   ];
 
