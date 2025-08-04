@@ -113,13 +113,14 @@ const Masonry: React.FC<MasonryProps> = ({
 
   const [containerRef, { width }] = useMeasure<HTMLDivElement>();
   const [imagesReady, setImagesReady] = useState(false);
-  const [isInitialized, setIsInitialized] = useState(false);
+  const [hasAnimated, setHasAnimated] = useState(false);
 
   useEffect(() => {
+    setHasAnimated(false); // Reset animation state when items change
     preloadImages(items.map((i) => i.img)).then(() => setImagesReady(true));
   }, [items]);
 
-  // Ultra stable grid calculation - sekali hitung, langsung final
+  // Stable grid calculation without imagesReady dependency
   const grid = useMemo<GridItem[]>(() => {
     if (!width || items.length === 0) return [];
 
@@ -128,7 +129,7 @@ const Masonry: React.FC<MasonryProps> = ({
     const columnWidth = (width - totalGaps) / columns;
     const colHeights = new Array(columns).fill(0);
 
-    const calculatedGrid = items.map((child) => {
+    return items.map((child) => {
       const col = colHeights.indexOf(Math.min(...colHeights));
       const x = col * (columnWidth + gap);
       const height = child.height / 2;
@@ -138,25 +139,31 @@ const Masonry: React.FC<MasonryProps> = ({
 
       return { ...child, x, y, w: columnWidth, h: height };
     });
+  }, [columns, items, width]);
 
-    // Dynamic container height management
+  // Separate effect for container height - no re-render triggers
+  useEffect(() => {
+    if (!imagesReady || grid.length === 0) return;
+    
+    const gap = 16;
+    const totalGaps = (columns - 1) * gap;
+    const columnWidth = (width - totalGaps) / columns;
+    const colHeights = new Array(columns).fill(0);
+
+    grid.forEach((item) => {
+      const col = colHeights.indexOf(Math.min(...colHeights));
+      colHeights[col] += item.height / 2 + gap;
+    });
+
     const maxHeight = Math.max(...colHeights);
-    if (containerRef.current && imagesReady) {
-      requestAnimationFrame(() => {
-        if (containerRef.current) {
-          containerRef.current.style.height = `${maxHeight}px`;
-          containerRef.current.style.transition = 'height 0.3s ease-out';
-        }
-      });
+    if (containerRef.current) {
+      containerRef.current.style.height = `${maxHeight}px`;
+      containerRef.current.style.transition = 'height 0.3s ease-out';
     }
-
-    return calculatedGrid;
-  }, [columns, items, width, imagesReady]);
-
-  const hasMounted = useRef(false);
+  }, [grid, columns, width, imagesReady]);
 
   useLayoutEffect(() => {
-    if (!imagesReady || grid.length === 0) return;
+    if (!imagesReady || grid.length === 0 || hasAnimated) return;
 
     // Clear previous animations
     gsap.killTweensOf("[data-key]");
@@ -223,9 +230,10 @@ const Masonry: React.FC<MasonryProps> = ({
         duration: duration * 0.8,
         ease: ease,
         delay: index * stagger,
+        onComplete: index === grid.length - 1 ? () => setHasAnimated(true) : undefined,
       });
     });
-  }, [grid, imagesReady, stagger, animateFrom, blurToFocus, duration, ease]);
+  }, [grid, imagesReady, stagger, animateFrom, blurToFocus, duration, ease, hasAnimated]);
 
   const handleMouseEnter = (e: React.MouseEvent, item: GridItem) => {
     const element = e.currentTarget as HTMLElement;
