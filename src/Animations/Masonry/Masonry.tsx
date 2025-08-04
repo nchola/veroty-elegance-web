@@ -113,14 +113,20 @@ const Masonry: React.FC<MasonryProps> = ({
 
   const [containerRef, { width }] = useMeasure<HTMLDivElement>();
   const [imagesReady, setImagesReady] = useState(false);
-  const [hasAnimated, setHasAnimated] = useState(false);
+  const animationComplete = useRef(false);
+  const lastItemsHash = useRef<string>('');
 
   useEffect(() => {
-    setHasAnimated(false); // Reset animation state when items change
-    preloadImages(items.map((i) => i.img)).then(() => setImagesReady(true));
+    const itemsHash = items.map(i => i.id).join(',');
+    if (itemsHash !== lastItemsHash.current) {
+      lastItemsHash.current = itemsHash;
+      animationComplete.current = false;
+      setImagesReady(false);
+      preloadImages(items.map((i) => i.img)).then(() => setImagesReady(true));
+    }
   }, [items]);
 
-  // Stable grid calculation without imagesReady dependency
+  // Completely stable grid - no re-calculation triggers
   const grid = useMemo<GridItem[]>(() => {
     if (!width || items.length === 0) return [];
 
@@ -141,13 +147,11 @@ const Masonry: React.FC<MasonryProps> = ({
     });
   }, [columns, items, width]);
 
-  // Separate effect for container height - no re-render triggers
+  // ONE-TIME container height setup
   useEffect(() => {
-    if (!imagesReady || grid.length === 0) return;
+    if (!imagesReady || grid.length === 0 || !containerRef.current) return;
     
     const gap = 16;
-    const totalGaps = (columns - 1) * gap;
-    const columnWidth = (width - totalGaps) / columns;
     const colHeights = new Array(columns).fill(0);
 
     grid.forEach((item) => {
@@ -156,16 +160,14 @@ const Masonry: React.FC<MasonryProps> = ({
     });
 
     const maxHeight = Math.max(...colHeights);
-    if (containerRef.current) {
-      containerRef.current.style.height = `${maxHeight}px`;
-      containerRef.current.style.transition = 'height 0.3s ease-out';
-    }
-  }, [grid, columns, width, imagesReady]);
+    containerRef.current.style.height = `${maxHeight}px`;
+  }, [grid, columns, imagesReady]);
 
+  // SINGLE-FIRE animation effect
   useLayoutEffect(() => {
-    if (!imagesReady || grid.length === 0 || hasAnimated) return;
+    if (!imagesReady || grid.length === 0 || animationComplete.current) return;
 
-    // Clear previous animations
+    // Kill any existing animations
     gsap.killTweensOf("[data-key]");
     
     grid.forEach((item, index) => {
@@ -173,7 +175,7 @@ const Masonry: React.FC<MasonryProps> = ({
       const element = document.querySelector(selector);
       if (!element) return;
       
-      // Calculate initial position based on animateFrom prop
+      // Calculate initial position
       let initialX = item.x;
       let initialY = item.y;
       
@@ -204,7 +206,7 @@ const Masonry: React.FC<MasonryProps> = ({
         }
       }
       
-      // Set exact positioning and dimensions
+      // Set initial state
       gsap.set(selector, {
         position: "absolute",
         left: 0,
@@ -219,7 +221,7 @@ const Masonry: React.FC<MasonryProps> = ({
         ...(blurToFocus && { filter: "blur(12px)" }),
       });
 
-      // Smooth reveal animation with proper timing
+      // ONE-TIME reveal animation
       gsap.to(selector, {
         x: item.x,
         y: item.y,
@@ -230,10 +232,12 @@ const Masonry: React.FC<MasonryProps> = ({
         duration: duration * 0.8,
         ease: ease,
         delay: index * stagger,
-        onComplete: index === grid.length - 1 ? () => setHasAnimated(true) : undefined,
+        onComplete: index === grid.length - 1 ? () => {
+          animationComplete.current = true;
+        } : undefined,
       });
     });
-  }, [grid, imagesReady, stagger, animateFrom, blurToFocus, duration, ease, hasAnimated]);
+  }, [imagesReady, grid.length]); // Minimal dependencies
 
   const handleMouseEnter = (e: React.MouseEvent, item: GridItem) => {
     const element = e.currentTarget as HTMLElement;
