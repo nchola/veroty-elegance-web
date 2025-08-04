@@ -2,6 +2,7 @@ import { ChevronDown } from 'lucide-react';
 import { useEffect, useRef, useState, useCallback } from 'react';
 import Masonry from '@/Animations/Masonry/Masonry';
 import ScrollVelocity from '@/Animations/ScrollVelocity/ScrollVelocity';
+import { throttle } from '@/utils/performance';
 
 // Fungsi untuk tinggi random antara 180–400px (seperti sebelumnya)
 function getRandomHeight() {
@@ -15,15 +16,16 @@ const MansorySection = () => {
   const observerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    // Adjusted parallax effect with reduced multiplier
-    const handleScroll = () => {
+    // Throttled parallax effect for better performance
+    const handleScroll = throttle(() => {
       const scrolled = window.pageYOffset;
       const hero = document.querySelector('.hero-background');
       if (hero) {
-        (hero as HTMLElement).style.transform = `translateY(${scrolled * 0.2}px)`;
+        (hero as HTMLElement).style.transform = `translate3d(0, ${scrolled * 0.2}px, 0)`;
       }
-    };
-    window.addEventListener('scroll', handleScroll);
+    }, 16); // ~60fps
+    
+    window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
@@ -164,11 +166,11 @@ const MansorySection = () => {
     
     setIsLoading(true);
     
-    // Simulate loading delay untuk natural feel
+    // Reduced loading delay for better UX
     setTimeout(() => {
-      setVisibleItems(prev => Math.min(prev + 6, luxuryFurnitureItems.length));
+      setVisibleItems(prev => Math.min(prev + 4, luxuryFurnitureItems.length)); // Load 4 instead of 6
       setIsLoading(false);
-    }, 800);
+    }, 300); // Reduced from 800ms to 300ms
   }, [isLoading, visibleItems, luxuryFurnitureItems.length]);
 
   // Intersection Observer untuk natural infinite scroll
@@ -182,7 +184,7 @@ const MansorySection = () => {
         });
       },
       {
-        rootMargin: '100px', // Trigger 100px sebelum mencapai bottom
+        rootMargin: '200px', // Increased from 100px for earlier loading
         threshold: 0.1
       }
     );

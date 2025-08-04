@@ -3,6 +3,7 @@ import { ChevronDown, ChevronLeft, ChevronRight } from 'lucide-react';
 import { useEffect, useRef, useState } from 'react';
 import { ScrollVelocity } from '@/Animations/ScrollVelocity/ScrollVelocity';
 import TextPressure from '@/Animations/TextAnimations/TextPressure/TextPressure';
+import { useLazyVideo } from '@/hooks/useLazyVideo';
 
 const videos = [
   '/mainhero.mp4',
@@ -10,9 +11,23 @@ const videos = [
   '/mainhero3.mp4'
 ];
 
+// Preload critical first video
+const preloadFirstVideo = () => {
+  const link = document.createElement('link');
+  link.rel = 'preload';
+  link.as = 'video';
+  link.href = videos[0];
+  document.head.appendChild(link);
+};
+
 const VideoHeroSection = () => {
   const [activeIndex, setActiveIndex] = useState(0);
   const intervalRef = useRef<NodeJS.Timeout | null>(null);
+
+  // Preload first video immediately
+  useEffect(() => {
+    preloadFirstVideo();
+  }, []);
 
   // Auto-slide every 8 seconds
   useEffect(() => {
@@ -75,17 +90,26 @@ const VideoHeroSection = () => {
       <div className="absolute top-0 left-0 right-0 h-40 bg-gradient-to-b from-black/99 via-black/95 to-transparent pointer-events-none z-35" />
 
       <div className="video-background absolute inset-0 bg-black">
-        {videos.map((src, idx) => (
-          <video
-            key={src}
-            src={src}
-            autoPlay
-            muted
-            loop
-            playsInline
-            className={`w-full h-full object-cover absolute inset-0 transition-opacity duration-700 ${idx === activeIndex ? 'opacity-100 z-10' : 'opacity-0 z-0'}`}
-          />
-        ))}
+        {videos.map((src, idx) => {
+          const shouldPreload = idx === 0; // Only preload first video
+          const shouldLoad = idx <= activeIndex + 1; // Load current and next video
+          
+          return (
+            <video
+              key={src}
+              src={shouldLoad ? src : undefined}
+              autoPlay={shouldLoad}
+              muted
+              loop
+              playsInline
+              preload={shouldPreload ? 'auto' : 'none'}
+              className={`w-full h-full object-cover absolute inset-0 transition-opacity duration-700 ${
+                idx === activeIndex ? 'opacity-100 z-10' : 'opacity-0 z-0'
+              }`}
+              style={{ willChange: idx === activeIndex ? 'opacity' : 'auto' }}
+            />
+          );
+        })}
         <div className="video-overlay absolute inset-0 bg-black bg-opacity-60"></div>
         
         {/* Smooth transition gradient at bottom */}

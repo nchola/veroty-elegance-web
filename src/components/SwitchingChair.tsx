@@ -1,5 +1,11 @@
 
+import { useLazyVideo } from '@/hooks/useLazyVideo';
+
 const SwitchingChair = () => {
+  const { videoProps, isLoaded } = useLazyVideo('/switchSofa.mp4', {
+    rootMargin: '200px', // Load when 200px away
+    preload: false // Don't preload since it's below fold
+  });
   return (
     <section id="switching-chair" className="section-seamless bg-white py-20 md:py-16 relative z-10 overflow-hidden">
       {/* Background Pattern */}
@@ -14,13 +20,19 @@ const SwitchingChair = () => {
             <div className="relative mx-auto max-w-xs lg:max-w-sm">
               {/* Video Container with Portrait Ratio */}
               <div className="relative aspect-[9/16] bg-gradient-to-br from-gray-100 to-gray-200 rounded-2xl overflow-hidden shadow-2xl">
+                {!isLoaded && (
+                  <div className="absolute inset-0 flex items-center justify-center bg-gray-200 animate-pulse">
+                    <div className="w-12 h-12 border-4 border-gold/30 border-t-gold rounded-full animate-spin"></div>
+                  </div>
+                )}
                 <video 
-                  src="/switchSofa.mp4" 
-                  autoPlay 
+                  {...videoProps}
+                  autoPlay={isLoaded}
                   muted 
                   loop 
                   playsInline 
                   className="w-full h-full object-cover"
+                  style={{ opacity: isLoaded ? 1 : 0, transition: 'opacity 0.3s ease-in-out' }}
                 />
                 
                 {/* Video Border Glow Effect */}

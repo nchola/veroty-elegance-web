@@ -51,8 +51,13 @@ const useMeasure = <T extends HTMLElement>() => {
 };
 
 const preloadImages = async (urls: string[]): Promise<void> => {
+  // Only preload first batch of images for better performance
+  const priorityUrls = urls.slice(0, 6); // First 6 images
+  const deferredUrls = urls.slice(6); // Rest load lazily
+  
+  // Load priority images immediately
   await Promise.all(
-    urls.map(
+    priorityUrls.map(
       (src) =>
         new Promise<void>((resolve) => {
           const img = new Image();
@@ -61,6 +66,14 @@ const preloadImages = async (urls: string[]): Promise<void> => {
         })
     )
   );
+  
+  // Load remaining images with delay to not block initial render
+  setTimeout(() => {
+    deferredUrls.forEach((src) => {
+      const img = new Image();
+      img.src = src;
+    });
+  }, 1000);
 };
 
 interface Item {
@@ -313,7 +326,12 @@ const Masonry: React.FC<MasonryProps> = ({
           >
             <div
               className="relative w-full h-full bg-cover bg-center rounded-[15px] shadow-[0px_10px_50px_-10px_rgba(0,0,0,0.2)] overflow-hidden"
-              style={{ backgroundImage: `url(${item.img})` }}
+              style={{ 
+                backgroundImage: `url(${item.img})`,
+                backgroundSize: 'cover',
+                backgroundPosition: 'center',
+                willChange: 'transform'
+              }}
             >
               {colorShiftOnHover && (
                 <div className="color-overlay absolute inset-0 rounded-[15px] bg-gradient-to-tr from-pink-500/50 to-sky-500/50 opacity-0 pointer-events-none" />
