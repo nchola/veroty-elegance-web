@@ -328,21 +328,12 @@ const MansorySection = () => {
         </div>
       </div>
 
-      {/* Natural Loading Indicator */}
+      {/* Hidden observer for infinite scroll */}
       {visibleItems < luxuryFurnitureItems.length && (
         <div 
           ref={observerRef}
-          className="flex justify-center mt-8 py-4"
-        >
-          {isLoading ? (
-            <div className="flex items-center space-x-2 text-gray-500">
-              <div className="w-4 h-4 border-2 border-gray-300 border-t-gold rounded-full animate-spin"></div>
-              <span className="text-sm">Loading more items...</span>
-            </div>
-          ) : (
-            <div className="w-1 h-1 bg-gray-300 rounded-full"></div>
-          )}
-        </div>
+          className="w-1 h-1 opacity-0 pointer-events-none"
+        />
       )}
     </section>
   );
