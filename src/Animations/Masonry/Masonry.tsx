@@ -139,73 +139,93 @@ const Masonry: React.FC<MasonryProps> = ({
       return { ...child, x, y, w: columnWidth, h: height };
     });
 
-    // Set container height sekali saja
+    // Dynamic container height management
     const maxHeight = Math.max(...colHeights);
-    if (containerRef.current && !isInitialized) {
-      containerRef.current.style.height = `${maxHeight}px`;
-      setIsInitialized(true);
+    if (containerRef.current && imagesReady) {
+      requestAnimationFrame(() => {
+        if (containerRef.current) {
+          containerRef.current.style.height = `${maxHeight}px`;
+          containerRef.current.style.transition = 'height 0.3s ease-out';
+        }
+      });
     }
 
     return calculatedGrid;
-  }, [columns, items, width, isInitialized]);
+  }, [columns, items, width, imagesReady]);
 
   const hasMounted = useRef(false);
 
   useLayoutEffect(() => {
-    if (!imagesReady || !isInitialized) return;
+    if (!imagesReady || grid.length === 0) return;
 
-    // Satu kali setup, tidak ada recalculation
-    if (!hasMounted.current) {
-      grid.forEach((item, index) => {
-        const selector = `[data-key="${item.id}"]`;
-        
-        // Calculate initial position based on animateFrom prop
-        let initialX = item.x;
-        let initialY = item.y;
-        
-        if (animateFrom === "bottom") {
-          initialY = window.innerHeight + 100;
-        } else if (animateFrom === "top") {
-          initialY = -200;
-        } else if (animateFrom === "left") {
-          initialX = -200;
-        } else if (animateFrom === "right") {
-          initialX = window.innerWidth + 200;
-        } else if (animateFrom === "center") {
-          const containerRect = containerRef.current?.getBoundingClientRect();
-          if (containerRect) {
-            initialX = containerRect.width / 2 - item.w / 2;
-            initialY = containerRect.height / 2 - item.h / 2;
-          }
+    // Clear previous animations
+    gsap.killTweensOf("[data-key]");
+    
+    grid.forEach((item, index) => {
+      const selector = `[data-key="${item.id}"]`;
+      const element = document.querySelector(selector);
+      if (!element) return;
+      
+      // Calculate initial position based on animateFrom prop
+      let initialX = item.x;
+      let initialY = item.y;
+      
+      if (animateFrom === "bottom") {
+        initialY = window.innerHeight + 100;
+      } else if (animateFrom === "top") {
+        initialY = -200;
+      } else if (animateFrom === "left") {
+        initialX = -200;
+      } else if (animateFrom === "right") {
+        initialX = window.innerWidth + 200;
+      } else if (animateFrom === "center") {
+        const containerRect = containerRef.current?.getBoundingClientRect();
+        if (containerRect) {
+          initialX = containerRect.width / 2 - item.w / 2;
+          initialY = containerRect.height / 2 - item.h / 2;
         }
-        
-        // Set posisi awal langsung
-        gsap.set(selector, {
-          x: initialX,
-          y: initialY,
-          width: item.w,
-          height: item.h,
-          opacity: 0,
-          scale: 0.9,
-          ...(blurToFocus && { filter: "blur(8px)" }),
-        });
-
-        // Animasi reveal dengan properti yang dinamis
-        gsap.to(selector, {
-          x: item.x,
-          y: item.y,
-          opacity: 1,
-          scale: 1,
-          ...(blurToFocus && { filter: "blur(0px)" }),
-          duration: duration,
-          ease: ease,
-          delay: index * stagger,
-        });
+      } else if (animateFrom === "random") {
+        const randomDirection = Math.random();
+        if (randomDirection < 0.25) {
+          initialY = window.innerHeight + 100;
+        } else if (randomDirection < 0.5) {
+          initialY = -200;
+        } else if (randomDirection < 0.75) {
+          initialX = -200;
+        } else {
+          initialX = window.innerWidth + 200;
+        }
+      }
+      
+      // Set exact positioning and dimensions
+      gsap.set(selector, {
+        position: "absolute",
+        left: 0,
+        top: 0,
+        x: initialX,
+        y: initialY,
+        width: item.w,
+        height: item.h,
+        opacity: 0,
+        scale: 0.85,
+        rotationY: 15,
+        ...(blurToFocus && { filter: "blur(12px)" }),
       });
 
-      hasMounted.current = true;
-    }
-  }, [grid, imagesReady, isInitialized, stagger, animateFrom, blurToFocus, duration, ease]);
+      // Smooth reveal animation with proper timing
+      gsap.to(selector, {
+        x: item.x,
+        y: item.y,
+        opacity: 1,
+        scale: 1,
+        rotationY: 0,
+        ...(blurToFocus && { filter: "blur(0px)" }),
+        duration: duration * 0.8,
+        ease: ease,
+        delay: index * stagger,
+      });
+    });
+  }, [grid, imagesReady, stagger, animateFrom, blurToFocus, duration, ease]);
 
   const handleMouseEnter = (e: React.MouseEvent, item: GridItem) => {
     const element = e.currentTarget as HTMLElement;
@@ -256,10 +276,11 @@ const Masonry: React.FC<MasonryProps> = ({
   return (
     <div 
       ref={containerRef} 
-      className="relative w-full"
+      className="relative w-full overflow-hidden"
       style={{ 
-        minHeight: '400px',
-        position: 'relative'
+        minHeight: imagesReady ? 'auto' : '400px',
+        position: 'relative',
+        contain: 'layout style'
       }}
     >
       {grid.map((item) => {
@@ -267,10 +288,12 @@ const Masonry: React.FC<MasonryProps> = ({
           <div
             key={item.id}
             data-key={item.id}
-            className="absolute box-content cursor-pointer"
+            className="absolute cursor-pointer"
             style={{ 
-              willChange: "transform, width, height, opacity",
-              zIndex: 1
+              willChange: "transform, opacity, filter",
+              backfaceVisibility: "hidden",
+              zIndex: 1,
+              transformOrigin: "center center"
             }}
             onClick={() => window.open(item.url, "_blank", "noopener")}
             onMouseEnter={(e) => handleMouseEnter(e, item)}
