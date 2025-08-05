@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import Header from '@/components/Header';
 import VideoHeroSection from '@/components/VideoHeroSection';
 import StoryIntroSection from '@/components/StoryIntroSection';
@@ -10,20 +10,9 @@ import SwitchingChair from '@/components/SwitchingChair';
 import TestimonialSection from '@/components/TestimonialSection';
 import InspirationSection from '@/components/CTASection';
 import FooterSection from '@/components/FooterSection';
-import { throttle } from '@/utils/performance';
 
 const Index = () => {
-  const [scrollProgress, setScrollProgress] = useState(0);
-
   useEffect(() => {
-    // Scroll progress tracking (throttled for performance)
-    const updateScrollProgress = throttle(() => {
-      const scrollTop = window.scrollY;
-      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
-      const progress = (scrollTop / docHeight) * 100;
-      setScrollProgress(Math.min(progress, 100));
-    }, 16); // 60fps
-
     // Scroll Reveal Animation
     const observerOptions = {
       threshold: 0.1,
@@ -77,62 +66,26 @@ const Index = () => {
       });
     });
 
-    // Add scroll progress listener
-    window.addEventListener('scroll', updateScrollProgress);
-    updateScrollProgress(); // Initial call
-
     // Cleanup
     return () => {
       observer.disconnect();
       floatObserver.disconnect();
-      window.removeEventListener('scroll', updateScrollProgress);
     };
   }, []);
 
   return (
     <div className="min-h-screen bg-white">
-      {/* Scroll Progress Indicator */}
-      <div 
-        className="scroll-progress" 
-        style={{ width: `${scrollProgress}%` }}
-      />
-      
       <Header />
-      
-      {/* Scroll Curtain Sections */}
-      <div className="scroll-curtain-section" data-section="hero">
+      <div className="full-bleed section-seamless">
         <VideoHeroSection />
-      </div>
-      
-      <div className="scroll-curtain-section" data-section="story">
         <StoryIntroSection />
-      </div>
-      
-      <div className="scroll-curtain-section" data-section="masonry">
         <MansorySection />
-      </div>
-      
-      <div className="scroll-curtain-section" data-section="brand">
         <BrandIntroSection />
-      </div>
-      
-      <div className="scroll-curtain-section" data-section="showcase">
         <ProductShowcaseSection />
-      </div>
-      
-      <div className="scroll-curtain-section" data-section="switching">
+        {/* <FeaturedProductsSection /> */}
         <SwitchingChair />
-      </div>
-      
-      <div className="scroll-curtain-section" data-section="cta">
         <InspirationSection />
-      </div>
-      
-      <div className="scroll-curtain-section" data-section="testimonial">
         <TestimonialSection />
-      </div>
-      
-      <div className="scroll-curtain-section" data-section="footer">
         <FooterSection />
       </div>
     </div>
