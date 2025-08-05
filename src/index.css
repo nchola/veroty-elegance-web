@@ -460,6 +460,71 @@ img {
   border-color: var(--color-gold);
 }
 
+/* ===== SCROLL CURTAIN EFFECT ===== */
+/* Smooth scroll behavior */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Scroll curtain section base */
+.scroll-curtain-section {
+  position: sticky;
+  top: 64px; /* Header height adjustment */
+  height: 100vh;
+  will-change: transform;
+  contain: layout style paint;
+}
+
+/* Critical: margin for curtain effect */
+.scroll-curtain-section:not(:first-child) {
+  margin-top: 100vh;
+}
+
+/* Z-index management for stacking */
+.scroll-curtain-section {
+  --section-z-index: 40;
+  z-index: var(--section-z-index);
+}
+
+.scroll-curtain-section[data-section="hero"] { --section-z-index: 50; }
+.scroll-curtain-section[data-section="story"] { --section-z-index: 45; }
+.scroll-curtain-section[data-section="masonry"] { --section-z-index: 40; }
+.scroll-curtain-section[data-section="brand"] { --section-z-index: 35; }
+.scroll-curtain-section[data-section="showcase"] { --section-z-index: 30; }
+.scroll-curtain-section[data-section="switching"] { --section-z-index: 25; }
+.scroll-curtain-section[data-section="cta"] { --section-z-index: 20; }
+.scroll-curtain-section[data-section="testimonial"] { --section-z-index: 15; }
+.scroll-curtain-section[data-section="footer"] { --section-z-index: 10; }
+
+/* Progress indicator */
+.scroll-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--color-gold), var(--primary));
+  z-index: 100;
+  transition: width 0.1s ease-out;
+}
+
+/* Mobile adjustments */
+@media (max-width: 768px) {
+  .scroll-curtain-section {
+    top: 56px; /* Smaller header on mobile */
+  }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  
+  .scroll-curtain-section {
+    will-change: auto;
+  }
+}
+
 /* Animations */
 @keyframes fadeInUp {
   from {
